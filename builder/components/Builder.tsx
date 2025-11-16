@@ -3,6 +3,7 @@ import { ViewNode, ViewDefinition, ComponentMetadata, BuilderState } from '../ty
 import { getComponentById } from '../core/autoComponentRegistry';
 import { Toolbar } from './Toolbar';
 import { ComponentCatalog } from './ComponentCatalog';
+import { TemplateGallery } from './TemplateGallery';
 import { Canvas } from './Canvas';
 import { PropertiesPanel } from './PropertiesPanel';
 import '../styles/Builder.css';
@@ -15,6 +16,7 @@ export const Builder: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewDefinition | null>(null);
   const [selectedNode, setSelectedNode] = useState<ViewNode | null>(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [leftTab, setLeftTab] = useState<'components' | 'templates'>('components');
 
   useEffect(() => {
     const initialView: ViewDefinition = {
@@ -147,11 +149,59 @@ export const Builder: React.FC = () => {
 
       <div className="builder-content">
         <div className="builder-sidebar left">
-          <ComponentCatalog
-            onSelectComponent={(component) => {
-              console.log('Component selected:', component);
-            }}
-          />
+          <div style={{
+            display: 'flex',
+            borderBottom: '1px solid #e5e7eb',
+            backgroundColor: 'white'
+          }}>
+            <button
+              onClick={() => setLeftTab('components')}
+              style={{
+                flex: 1,
+                padding: '0.75rem',
+                border: 'none',
+                backgroundColor: leftTab === 'components' ? 'white' : '#f9fafb',
+                borderBottom: leftTab === 'components' ? '2px solid #3b82f6' : 'none',
+                color: leftTab === 'components' ? '#3b82f6' : '#6b7280',
+                fontWeight: leftTab === 'components' ? 600 : 400,
+                fontSize: '0.875rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              ⚛️ Components
+            </button>
+            <button
+              onClick={() => setLeftTab('templates')}
+              style={{
+                flex: 1,
+                padding: '0.75rem',
+                border: 'none',
+                backgroundColor: leftTab === 'templates' ? 'white' : '#f9fafb',
+                borderBottom: leftTab === 'templates' ? '2px solid #3b82f6' : 'none',
+                color: leftTab === 'templates' ? '#3b82f6' : '#6b7280',
+                fontWeight: leftTab === 'templates' ? 600 : 400,
+                fontSize: '0.875rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              📚 Templates
+            </button>
+          </div>
+          {leftTab === 'components' ? (
+            <ComponentCatalog
+              onSelectComponent={(component) => {
+                console.log('Component selected:', component);
+              }}
+            />
+          ) : (
+            <TemplateGallery
+              onSelectTemplate={(template) => {
+                console.log('Template selected:', template);
+              }}
+            />
+          )}
         </div>
 
         <div className="builder-main">

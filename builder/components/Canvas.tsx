@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ViewNode, ComponentMetadata } from '../types';
+import { ViewNode } from '../types';
 import { getComponentById } from '../core/autoComponentRegistry';
+import { ComponentRenderer } from './ComponentRenderer';
 
 interface CanvasProps {
   root: ViewNode | null;
@@ -27,9 +28,12 @@ export const Canvas: React.FC<CanvasProps> = ({
     e.stopPropagation();
 
     const componentId = e.dataTransfer.getData('componentId');
+    const templateData = e.dataTransfer.getData('template');
 
     if (componentId) {
       onAddComponent(componentId, targetNodeId);
+    } else if (templateData) {
+      console.log('Template drop support coming soon');
     }
 
     setDragOverNodeId(null);
@@ -62,55 +66,105 @@ export const Canvas: React.FC<CanvasProps> = ({
     return (
       <div
         key={node.id}
-        className={`canvas-node ${isSelected ? 'selected' : ''} ${isDragOver ? 'drag-over' : ''}`}
-        style={{ marginLeft: `${depth * 20}px` }}
-        onClick={(e) => {
-          e.stopPropagation();
-          onSelectNode(node);
+        style={{
+          marginBottom: '1rem',
+          position: 'relative'
         }}
-        onDrop={(e) => handleDrop(e, node.id)}
-        onDragOver={(e) => handleDragOver(e, node.id)}
-        onDragLeave={handleDragLeave}
       >
-        <div className="canvas-node-header">
-          <span className="canvas-node-icon">
-            {component?.category === 'atoms' && '⚛️'}
-            {component?.category === 'molecules' && '🧬'}
-            {component?.category === 'organisms' && '🦠'}
-            {component?.category === 'advanced' && '⚡'}
-            {component?.category === 'interactions' && '🎯'}
-          </span>
-          <span className="canvas-node-name">{component?.name || node.componentId || 'Unknown'}</span>
-          <span className="canvas-node-id">#{node.id.slice(-6)}</span>
-          <button
-            className="canvas-node-delete"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (confirm(`Delete ${component?.name || 'component'}?`)) {
-                onDeleteNode(node.id);
-                if (isSelected) {
-                  onSelectNode(null);
-                }
-              }
-            }}
-          >
-            ×
-          </button>
-        </div>
-
-        {node.children && node.children.length > 0 && (
-          <div className="canvas-node-children">
-            {node.children.map((child) => renderNode(child, depth + 1))}
-          </div>
-        )}
-
         <div
-          className="canvas-node-dropzone"
+          className={`canvas-node-wrapper ${isSelected ? 'selected' : ''} ${isDragOver ? 'drag-over' : ''}`}
+          style={{
+            border: isSelected ? '3px solid #3b82f6' : isDragOver ? '2px dashed #f59e0b' : '2px solid transparent',
+            borderRadius: '0.5rem',
+            padding: '0.5rem',
+            backgroundColor: isSelected ? '#eff6ff' : 'transparent',
+            transition: 'all 0.2s',
+            position: 'relative'
+          }}
           onDrop={(e) => handleDrop(e, node.id)}
           onDragOver={(e) => handleDragOver(e, node.id)}
           onDragLeave={handleDragLeave}
         >
-          Drop components here
+          {isSelected && (
+            <div style={{
+              position: 'absolute',
+              top: '-2rem',
+              left: '0',
+              right: '0',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '0.25rem 0.5rem',
+              backgroundColor: '#3b82f6',
+              color: 'white',
+              borderRadius: '0.375rem 0.375rem 0 0',
+              fontSize: '0.75rem',
+              fontWeight: 500,
+              zIndex: 10
+            }}>
+              <span>{component?.name || 'Component'} #{node.id.slice(-6)}</span>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (confirm(`Delete ${component?.name || 'component'}?`)) {
+                    onDeleteNode(node.id);
+                    onSelectNode(null);
+                  }
+                }}
+                style={{
+                  background: 'rgba(255,255,255,0.2)',
+                  border: 'none',
+                  color: 'white',
+                  padding: '0.125rem 0.5rem',
+                  borderRadius: '0.25rem',
+                  cursor: 'pointer',
+                  fontSize: '0.75rem',
+                  fontWeight: 600
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+
+          <div
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelectNode(node);
+            }}
+          >
+            <ComponentRenderer
+              node={node}
+              isSelected={isSelected}
+            />
+          </div>
+
+          {node.children && node.children.length > 0 && (
+            <div style={{ marginTop: '0.5rem', paddingLeft: '1rem', borderLeft: '2px solid #e5e7eb' }}>
+              {node.children.map(child => renderNode(child, depth + 1))}
+            </div>
+          )}
+
+          {(!node.children || node.children.length === 0) && (
+            <div
+              onDrop={(e) => handleDrop(e, node.id)}
+              onDragOver={(e) => handleDragOver(e, node.id)}
+              onDragLeave={handleDragLeave}
+              style={{
+                marginTop: '0.5rem',
+                padding: '1rem',
+                border: '2px dashed #d1d5db',
+                borderRadius: '0.375rem',
+                textAlign: 'center',
+                color: '#9ca3af',
+                fontSize: '0.75rem',
+                backgroundColor: isDragOver ? '#fef3c7' : 'transparent',
+                transition: 'all 0.2s'
+              }}
+            >
+              Drop components here
+            </div>
+          )}
         </div>
       </div>
     );
@@ -122,17 +176,58 @@ export const Canvas: React.FC<CanvasProps> = ({
       onDrop={(e) => handleDrop(e)}
       onDragOver={(e) => handleDragOver(e)}
       onDragLeave={handleDragLeave}
+      style={{
+        backgroundColor: 'white',
+        borderRadius: '0.5rem',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+        minHeight: 'calc(100vh - 5rem)',
+        display: 'flex',
+        flexDirection: 'column'
+      }}
     >
-      <div className="canvas-header">
-        <h3>Canvas</h3>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '1rem 1.5rem',
+        borderBottom: '1px solid #e5e7eb'
+      }}>
+        <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600, color: '#1f2937' }}>
+          Canvas Preview
+        </h3>
+        <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>
+          {root?.children?.length || 0} components
+        </div>
       </div>
 
-      <div className={`canvas-content ${canvasIsDragOver ? 'drag-over' : ''}`}>
+      <div style={{
+        flex: 1,
+        padding: '1.5rem',
+        overflowY: 'auto',
+        backgroundColor: canvasIsDragOver ? '#fef3c7' : '#fafafa',
+        transition: 'background-color 0.2s'
+      }}>
         {root && root.children && root.children.length > 0 ? (
-          root.children.map(child => renderNode(child))
+          <div>
+            {root.children.map(child => renderNode(child))}
+          </div>
         ) : (
-          <div className="canvas-empty">
-            <p>Drag components here to start building</p>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '400px',
+            color: '#9ca3af',
+            textAlign: 'center'
+          }}>
+            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>📦</div>
+            <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.25rem', color: '#6b7280' }}>
+              Canvas is empty
+            </h3>
+            <p style={{ margin: 0, fontSize: '0.875rem' }}>
+              Drag components or templates here to start building
+            </p>
           </div>
         )}
       </div>
