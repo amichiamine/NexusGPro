@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { ViewConfig } from '../types';
+import { ViewConfig, ViewDefinition } from '../types';
 import { viewBuilder } from '../core/ViewBuilder';
 import { ExportManager } from '../core/ExportManager';
 import { importParser } from '../core/ImportParser';
 import { defaultPathResolver } from '../utils/pathResolver';
+import { viewNodeToComponentNode } from '../utils/typeAdapters';
 
 interface ToolbarProps {
-  currentView: ViewConfig | null;
+  currentView: ViewConfig | ViewDefinition | null;
   isDirty: boolean;
   onViewChange: () => void;
 }
@@ -40,7 +41,21 @@ export const Toolbar: React.FC<ToolbarProps> = ({ currentView, isDirty, onViewCh
   const handleExport = (format: 'html' | 'php' | 'json') => {
     if (!currentView) return;
 
-    exportManager.downloadAsFile(currentView, format);
+    const viewConfig: ViewConfig = 'rootNode' in currentView ? {
+      id: currentView.id,
+      name: currentView.name,
+      description: currentView.description || '',
+      root: viewNodeToComponentNode(currentView.rootNode),
+      metadata: currentView.metadata,
+      settings: {
+        format: 'html',
+        includeStyles: true,
+        minify: false,
+        portable: true
+      }
+    } : currentView;
+
+    exportManager.downloadAsFile(viewConfig, format);
     setShowExportModal(false);
   };
 

@@ -44,12 +44,12 @@ export const ComponentCatalog: React.FC<ComponentCatalogProps> = ({ onSelectComp
         />
       </div>
 
-      <div className="catalog-filters">
+      <div className="catalog-categories">
         {categories.map(cat => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+            className={`category-btn ${selectedCategory === cat ? 'active' : ''}`}
           >
             {cat === 'all' ? 'Tous' : cat} ({cat === 'all' ? categoryCounts.all : categoryCounts[cat] || 0})
           </button>
@@ -73,14 +73,11 @@ export const ComponentCatalog: React.FC<ComponentCatalogProps> = ({ onSelectComp
               }}
             >
               <div className="catalog-item-header">
-                <span className="catalog-item-name">{component.name}</span>
-                <span className="catalog-item-category">{component.category}</span>
+                <h4>{component.name}</h4>
+                <span className={`catalog-badge ${component.category}`}>{component.category}</span>
               </div>
               {component.description && (
                 <p className="catalog-item-description">{component.description}</p>
-              )}
-              {component.hasStyles && (
-                <span className="catalog-item-has-styles">CSS</span>
               )}
             </div>
           ))
