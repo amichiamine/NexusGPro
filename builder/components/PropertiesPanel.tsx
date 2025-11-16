@@ -1,70 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { ComponentNode, PropDefinition } from '../types';
-import { ComponentRegistry } from '../core/ComponentRegistry';
-import { viewBuilder } from '../core/ViewBuilder';
+import React from 'react';
+import type { ViewNode, ComponentMetadata } from '../types';
+import { getComponentById } from '../core/componentRegistry';
 
 interface PropertiesPanelProps {
-  node: ComponentNode | null;
+  selectedNode: ViewNode | null;
+  onUpdateNode: (nodeId: string, updates: Partial<ViewNode>) => void;
 }
 
-export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({ node }) => {
-  const [localProps, setLocalProps] = useState<Record<string, any>>({});
-  const [localStyles, setLocalStyles] = useState<Record<string, string>>({});
-  const [localClassName, setLocalClassName] = useState('');
-
-  useEffect(() => {
-    if (node) {
-      setLocalProps(node.props || {});
-      setLocalStyles(node.styles || {});
-      setLocalClassName(node.className || '');
-    }
-  }, [node]);
-
-  if (!node) {
+export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({
+  selectedNode,
+  onUpdateNode
+}) => {
+  if (!selectedNode) {
     return (
-      <div className="properties-panel">
-        <div className="properties-empty">
-          <p>Select a component to edit properties</p>
-        </div>
+      <div className="properties-panel empty">
+        <p>Sélectionnez un élément pour éditer ses propriétés</p>
       </div>
     );
   }
 
-  const componentDef = ComponentRegistry.getComponent(node.name);
+  const component = selectedNode.componentId ? getComponentById(selectedNode.componentId) : null;
 
   const handlePropChange = (propName: string, value: any) => {
-    const updated = { ...localProps, [propName]: value };
-    setLocalProps(updated);
-    viewBuilder.updateComponent(node.id, { props: updated });
+    onUpdateNode(selectedNode.id, {
+      props: {
+        ...selectedNode.props,
+        [propName]: value
+      }
+    });
   };
 
-  const handleStyleChange = (styleName: string, value: string) => {
-    const updated = { ...localStyles, [styleName]: value };
-    setLocalStyles(updated);
-    viewBuilder.updateComponent(node.id, { styles: updated });
-  };
+  const renderPropEditor = (propName: string, propDef: any) => {
+    const currentValue = selectedNode.props[propName];
 
-  const handleClassNameChange = (value: string) => {
-    setLocalClassName(value);
-    viewBuilder.updateComponent(node.id, { className: value });
-  };
-
-  const renderPropInput = (prop: PropDefinition) => {
-    const value = localProps[prop.name];
-
-    switch (prop.type) {
+    switch (propDef.type) {
       case 'string':
-        if (prop.options && prop.options.length > 0) {
+        if (propDef.options) {
           return (
             <select
-              value={value || prop.defaultValue || ''}
-              onChange={(e) => handlePropChange(prop.name, e.target.value)}
-              className="prop-select"
+              value={currentValue || propDef.default || ''}
+              onChange={(e) => handlePropChange(propName, e.target.value)}
             >
-              {prop.options.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
+              {propDef.options.map((opt: string) => (
+                <option key={opt} value={opt}>{opt}</option>
               ))}
             </select>
           );
@@ -72,10 +50,18 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({ node }) => {
         return (
           <input
             type="text"
-            value={value || ''}
-            onChange={(e) => handlePropChange(prop.name, e.target.value)}
-            placeholder={prop.defaultValue}
-            className="prop-input"
+            value={currentValue || propDef.default || ''}
+            onChange={(e) => handlePropChange(propName, e.target.value)}
+            placeholder={propDef.description}
+          />
+        );
+
+      case 'boolean':
+        return (
+          <input
+            type="checkbox"
+            checked={currentValue !== undefined ? currentValue : propDef.default}
+            onChange={(e) => handlePropChange(propName, e.target.checked)}
           />
         );
 
@@ -83,37 +69,33 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({ node }) => {
         return (
           <input
             type="number"
-            value={value || prop.defaultValue || 0}
-            onChange={(e) => handlePropChange(prop.name, parseFloat(e.target.value))}
-            className="prop-input"
+            value={currentValue || propDef.default || 0}
+            onChange={(e) => handlePropChange(propName, parseFloat(e.target.value))}
           />
         );
 
-      case 'boolean':
+      case 'ReactNode':
         return (
-          <label className="prop-checkbox">
-            <input
-              type="checkbox"
-              checked={value || prop.defaultValue || false}
-              onChange={(e) => handlePropChange(prop.name, e.target.checked)}
-            />
-            <span>{prop.description}</span>
-          </label>
+          <textarea
+            value={currentValue || propDef.default || ''}
+            onChange={(e) => handlePropChange(propName, e.target.value)}
+            rows={3}
+            placeholder={propDef.description}
+          />
         );
 
       case 'array':
         return (
           <textarea
-            value={value ? JSON.stringify(value, null, 2) : '[]'}
+            value={currentValue ? JSON.stringify(currentValue, null, 2) : '[]'}
             onChange={(e) => {
               try {
                 const parsed = JSON.parse(e.target.value);
-                handlePropChange(prop.name, parsed);
+                handlePropChange(propName, parsed);
               } catch (err) {
                 console.error('Invalid JSON');
               }
             }}
-            className="prop-textarea"
             rows={4}
           />
         );
@@ -121,28 +103,16 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({ node }) => {
       case 'object':
         return (
           <textarea
-            value={value ? JSON.stringify(value, null, 2) : '{}'}
+            value={currentValue ? JSON.stringify(currentValue, null, 2) : '{}'}
             onChange={(e) => {
               try {
                 const parsed = JSON.parse(e.target.value);
-                handlePropChange(prop.name, parsed);
+                handlePropChange(propName, parsed);
               } catch (err) {
                 console.error('Invalid JSON');
               }
             }}
-            className="prop-textarea"
             rows={4}
-          />
-        );
-
-      case 'node':
-        return (
-          <textarea
-            value={value || ''}
-            onChange={(e) => handlePropChange(prop.name, e.target.value)}
-            placeholder="Enter content..."
-            className="prop-textarea"
-            rows={3}
           />
         );
 
@@ -150,9 +120,8 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({ node }) => {
         return (
           <input
             type="text"
-            value={value || ''}
-            onChange={(e) => handlePropChange(prop.name, e.target.value)}
-            className="prop-input"
+            value={currentValue || propDef.default || ''}
+            onChange={(e) => handlePropChange(propName, e.target.value)}
           />
         );
     }
@@ -160,138 +129,59 @@ export const PropertiesPanel: React.FC<PropertiesPanelProps> = ({ node }) => {
 
   return (
     <div className="properties-panel">
-      <div className="properties-header">
-        <h3>Properties</h3>
-        <span className="properties-component-name">{node.name}</span>
-      </div>
+      <h3>Propriétés</h3>
 
-      <div className="properties-content">
-        <div className="properties-section">
-          <h4>Basic</h4>
-          <div className="prop-group">
-            <label>ID</label>
-            <input
-              type="text"
-              value={node.id}
-              disabled
-              className="prop-input disabled"
-            />
-          </div>
-          <div className="prop-group">
-            <label>Class Name</label>
-            <input
-              type="text"
-              value={localClassName}
-              onChange={(e) => handleClassNameChange(e.target.value)}
-              placeholder="custom-class"
-              className="prop-input"
-            />
-          </div>
+      <div className="properties-section">
+        <h4>Général</h4>
+        <div className="property-field">
+          <label>Type</label>
+          <span>{selectedNode.type}</span>
         </div>
-
-        {componentDef && componentDef.props.length > 0 && (
-          <div className="properties-section">
-            <h4>Component Props</h4>
-            {componentDef.props.map((prop) => (
-              <div key={prop.name} className="prop-group">
-                <label>
-                  {prop.name}
-                  {prop.required && <span className="required">*</span>}
-                </label>
-                {prop.description && (
-                  <p className="prop-description">{prop.description}</p>
-                )}
-                {renderPropInput(prop)}
-              </div>
-            ))}
+        {component && (
+          <div className="property-field">
+            <label>Composant</label>
+            <span>{component.name}</span>
           </div>
         )}
+      </div>
 
-        <div className="properties-section">
-          <h4>Styles</h4>
-          <div className="prop-group">
-            <label>Width</label>
-            <input
-              type="text"
-              value={localStyles.width || ''}
-              onChange={(e) => handleStyleChange('width', e.target.value)}
-              placeholder="auto"
-              className="prop-input"
-            />
-          </div>
-          <div className="prop-group">
-            <label>Height</label>
-            <input
-              type="text"
-              value={localStyles.height || ''}
-              onChange={(e) => handleStyleChange('height', e.target.value)}
-              placeholder="auto"
-              className="prop-input"
-            />
-          </div>
-          <div className="prop-group">
-            <label>Margin</label>
-            <input
-              type="text"
-              value={localStyles.margin || ''}
-              onChange={(e) => handleStyleChange('margin', e.target.value)}
-              placeholder="0"
-              className="prop-input"
-            />
-          </div>
-          <div className="prop-group">
-            <label>Padding</label>
-            <input
-              type="text"
-              value={localStyles.padding || ''}
-              onChange={(e) => handleStyleChange('padding', e.target.value)}
-              placeholder="0"
-              className="prop-input"
-            />
-          </div>
-          <div className="prop-group">
-            <label>Background</label>
-            <input
-              type="text"
-              value={localStyles.background || ''}
-              onChange={(e) => handleStyleChange('background', e.target.value)}
-              placeholder="transparent"
-              className="prop-input"
-            />
-          </div>
-          <div className="prop-group">
-            <label>Color</label>
-            <input
-              type="text"
-              value={localStyles.color || ''}
-              onChange={(e) => handleStyleChange('color', e.target.value)}
-              placeholder="inherit"
-              className="prop-input"
-            />
-          </div>
+      <div className="properties-section">
+        <h4>Attributs HTML</h4>
+        <div className="property-field">
+          <label>className</label>
+          <input
+            type="text"
+            value={selectedNode.props.className || ''}
+            onChange={(e) => handlePropChange('className', e.target.value)}
+          />
         </div>
-
-        <div className="properties-section">
-          <h4>Advanced</h4>
-          <div className="prop-group">
-            <label>Custom Styles (JSON)</label>
-            <textarea
-              value={JSON.stringify(localStyles, null, 2)}
-              onChange={(e) => {
-                try {
-                  const parsed = JSON.parse(e.target.value);
-                  setLocalStyles(parsed);
-                  viewBuilder.updateComponent(node.id, { styles: parsed });
-                } catch (err) {
-                  console.error('Invalid JSON');
-                }
-              }}
-              className="prop-textarea"
-              rows={6}
-            />
-          </div>
+        <div className="property-field">
+          <label>id</label>
+          <input
+            type="text"
+            value={selectedNode.props.id || ''}
+            onChange={(e) => handlePropChange('id', e.target.value)}
+          />
         </div>
       </div>
+
+      {component && component.props && Object.keys(component.props).length > 0 && (
+        <div className="properties-section">
+          <h4>Props du composant</h4>
+          {Object.entries(component.props).map(([propName, propDef]) => (
+            <div key={propName} className="property-field">
+              <label>
+                {propName}
+                {propDef.required && <span className="required">*</span>}
+              </label>
+              {propDef.description && (
+                <small className="property-description">{propDef.description}</small>
+              )}
+              {renderPropEditor(propName, propDef)}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

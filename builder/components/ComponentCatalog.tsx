@@ -1,113 +1,86 @@
-import React, { useState, useMemo } from 'react';
-import { ComponentDefinition } from '../types';
-import { ComponentRegistry } from '../core/ComponentRegistry';
+import React, { useState } from 'react';
+import type { ComponentMetadata, ComponentCategory } from '../types';
+import { getAllComponents } from '../core/componentRegistry';
 
 interface ComponentCatalogProps {
-  onSelectComponent: (component: ComponentDefinition) => void;
+  onSelectComponent: (component: ComponentMetadata) => void;
 }
 
 export const ComponentCatalog: React.FC<ComponentCatalogProps> = ({ onSelectComponent }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'atom' | 'molecule' | 'organism'>('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<ComponentCategory | 'all'>('all');
 
-  const components = useMemo(() => {
-    let filtered = ComponentRegistry.getAllComponents();
+  const components = getAllComponents();
 
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(c => c.category === selectedCategory);
-    }
+  const categories: Array<ComponentCategory | 'all'> = ['all', 'atoms', 'molecules', 'organisms', 'advanced', 'interactions'];
 
-    if (searchQuery) {
-      filtered = ComponentRegistry.searchComponents(searchQuery);
-      if (selectedCategory !== 'all') {
-        filtered = filtered.filter(c => c.category === selectedCategory);
-      }
-    }
+  const filteredComponents = components.filter(comp => {
+    const matchesSearch = comp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         comp.description?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || comp.category === selectedCategory;
 
-    return filtered;
-  }, [searchQuery, selectedCategory]);
+    return matchesSearch && matchesCategory;
+  });
 
-  const categoryCounts = useMemo(() => {
-    const all = ComponentRegistry.getAllComponents();
-    return {
-      all: all.length,
-      atom: all.filter(c => c.category === 'atom').length,
-      molecule: all.filter(c => c.category === 'molecule').length,
-      organism: all.filter(c => c.category === 'organism').length
-    };
-  }, []);
+  const categoryCounts = {
+    all: components.length,
+    atoms: components.filter(c => c.category === 'atoms').length,
+    molecules: components.filter(c => c.category === 'molecules').length,
+    organisms: components.filter(c => c.category === 'organisms').length,
+    advanced: components.filter(c => c.category === 'advanced').length,
+    interactions: components.filter(c => c.category === 'interactions').length
+  };
 
   return (
     <div className="component-catalog">
       <div className="catalog-header">
-        <h3>Components</h3>
+        <h3>Composants ({components.length})</h3>
         <input
           type="text"
-          placeholder="Search components..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Rechercher..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="catalog-search"
         />
       </div>
 
-      <div className="catalog-categories">
-        <button
-          className={`category-btn ${selectedCategory === 'all' ? 'active' : ''}`}
-          onClick={() => setSelectedCategory('all')}
-        >
-          All ({categoryCounts.all})
-        </button>
-        <button
-          className={`category-btn ${selectedCategory === 'atom' ? 'active' : ''}`}
-          onClick={() => setSelectedCategory('atom')}
-        >
-          Atoms ({categoryCounts.atom})
-        </button>
-        <button
-          className={`category-btn ${selectedCategory === 'molecule' ? 'active' : ''}`}
-          onClick={() => setSelectedCategory('molecule')}
-        >
-          Molecules ({categoryCounts.molecule})
-        </button>
-        <button
-          className={`category-btn ${selectedCategory === 'organism' ? 'active' : ''}`}
-          onClick={() => setSelectedCategory('organism')}
-        >
-          Organisms ({categoryCounts.organism})
-        </button>
+      <div className="catalog-filters">
+        {categories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+          >
+            {cat === 'all' ? 'Tous' : cat} ({cat === 'all' ? categoryCounts.all : categoryCounts[cat] || 0})
+          </button>
+        ))}
       </div>
 
       <div className="catalog-list">
-        {components.length === 0 ? (
+        {filteredComponents.length === 0 ? (
           <div className="catalog-empty">
-            <p>No components found</p>
+            <p>Aucun composant trouvé</p>
           </div>
         ) : (
-          components.map((component) => (
+          filteredComponents.map(component => (
             <div
-              key={component.name}
+              key={component.id}
               className="catalog-item"
+              onClick={() => onSelectComponent(component)}
               draggable
               onDragStart={(e) => {
-                e.dataTransfer.setData('component', JSON.stringify(component));
+                e.dataTransfer.setData('componentId', component.id);
               }}
-              onClick={() => onSelectComponent(component)}
             >
               <div className="catalog-item-header">
-                <h4>{component.name}</h4>
-                <span className={`catalog-badge ${component.category}`}>
-                  {component.category}
-                </span>
+                <span className="catalog-item-name">{component.name}</span>
+                <span className="catalog-item-category">{component.category}</span>
               </div>
-              <p className="catalog-item-description">{component.description}</p>
-              {component.tags && component.tags.length > 0 && (
-                <div className="catalog-item-tags">
-                  {component.tags.map((tag) => (
-                    <span key={tag} className="catalog-tag">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+              {component.description && (
+                <p className="catalog-item-description">{component.description}</p>
+              )}
+              {component.hasStyles && (
+                <span className="catalog-item-has-styles">CSS</span>
               )}
             </div>
           ))
