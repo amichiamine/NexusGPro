@@ -1,0 +1,453 @@
+/* ==========================================================================
+   Slider Component Styles
+   ========================================================================== */
+
+.ng-slider {
+  @apply ng-flex ng-flex-col ng-gap-3 ng-relative;
+}
+
+.ng-slider--full-width {
+  @apply ng-w-full;
+}
+
+/* Label wrapper */
+.ng-slider__label-wrapper {
+  @apply ng-flex ng-flex-col ng-gap-1;
+}
+
+.ng-slider__label {
+  @apply ng-flex ng-items-center ng-justify-between;
+  @apply ng-text-sm ng-font-medium ng-text-neutral-900;
+}
+
+.ng-slider__value {
+  @apply ng-text-xs ng-text-neutral-600 ng-font-normal ng-ml-2;
+}
+
+.ng-slider__description {
+  @apply ng-text-xs ng-text-neutral-600 ng-m-0;
+}
+
+/* Container principal */
+.ng-slider__container {
+  @apply ng-relative ng-flex ng-items-center;
+}
+
+/* Track */
+.ng-slider__track {
+  @apply ng-relative ng-w-full ng-bg-neutral-200 ng-rounded-full;
+  @apply ng-transition-all ng-duration-200;
+}
+
+/* Tailles du track */
+.ng-slider--sm .ng-slider__track {
+  @apply ng-h-2;
+}
+
+.ng-slider--md .ng-slider__track {
+  @apply ng-h-3;
+}
+
+.ng-slider--lg .ng-slider__track {
+  @apply ng-h-4;
+}
+
+/* Vertical orientation */
+.ng-slider--vertical {
+  @apply ng-w-6;
+}
+
+.ng-slider--vertical .ng-slider__track {
+  @apply ng-h-full ng-w-3 ng-flex-col;
+}
+
+.ng-slider--vertical .ng-slider__thumb {
+  @apply ng-top-auto ng-left-1/2 ng-transform ng--translate-x-1/2;
+}
+
+/* Track actif (partie colorée) */
+.ng-slider__track-active {
+  @apply ng-h-full ng-bg-primary-600 ng-rounded-full;
+  @apply ng-transition-all ng-duration-150;
+}
+
+.ng-slider--range .ng-slider__track-active {
+  /* En mode range, on utilise un gradient ou une approche différente */
+  background: linear-gradient(
+    90deg,
+    var(--slider-track-active, #3b82f6) 0%,
+    var(--slider-track-active, #3b82f6) var(--slider-progress, 50%),
+    var(--slider-track-inactive, #e5e7eb) var(--slider-progress, 50%),
+    var(--slider-track-inactive, #e5e7eb) 100%
+  );
+}
+
+/* Input caché (pour accessibilité) */
+.ng-slider__input {
+  @apply ng-absolute ng-inset-0 ng-w-full ng-h-full ng-opacity-0;
+  @apply ng-cursor-pointer ng-appearance-none ng-bg-transparent;
+}
+
+.ng-slider__input:disabled {
+  @apply ng-cursor-not-allowed;
+}
+
+/* Thumb (curseur) */
+.ng-slider__thumb {
+  @apply ng-absolute ng-top-1/2 ng-left-0 ng-transform ng--translate-x-1/2 ng--translate-y-1/2;
+  @apply ng-w-5 ng-h-5 ng-bg-white ng-border-2 ng-border-primary-600;
+  @apply ng-rounded-full ng-shadow-lg ng-cursor-grab;
+  @apply ng-transition-all ng-duration-150 ng-z-10;
+}
+
+.ng-slider--sm .ng-slider__thumb {
+  @apply ng-w-4 ng-h-4;
+}
+
+.ng-slider--lg .ng-slider__thumb {
+  @apply ng-w-6 ng-h-6;
+}
+
+/* États du thumb */
+.ng-slider__thumb:hover {
+  @apply ng-shadow-xl ng-scale-110;
+}
+
+.ng-slider__thumb:active {
+  @apply ng-cursor-grabbing;
+}
+
+.ng-slider__thumb:focus {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2;
+}
+
+/* Disabled state */
+.ng-slider--disabled .ng-slider__track {
+  @apply ng-bg-neutral-200 ng-opacity-60;
+}
+
+.ng-slider--disabled .ng-slider__thumb {
+  @apply ng-bg-neutral-300 ng-border-neutral-400 ng-cursor-not-allowed;
+  @apply ng-shadow-none;
+}
+
+/* Variantes */
+.ng-slider--filled .ng-slider__track {
+  @apply ng-bg-neutral-100;
+}
+
+.ng-slider--minimal .ng-slider__track {
+  @apply ng-bg-transparent;
+}
+
+.ng-slider--minimal .ng-slider__thumb {
+  @apply ng-shadow-md;
+}
+
+.ng-slider--gradient .ng-slider__track-active {
+  background: linear-gradient(
+    90deg,
+    var(--slider-gradient-start, #3b82f6),
+    var(--slider-gradient-end, #1d4ed8)
+  );
+}
+
+/* Marks (ticks) */
+.ng-slider__marks {
+  @apply ng-absolute ng-inset-0 ng-flex ng-items-end ng-pb-4;
+}
+
+.ng-slider--vertical .ng-slider__marks {
+  @apply ng-items-start ng-pt-4;
+}
+
+.ng-slider__mark {
+  @apply ng-absolute ng-flex ng-flex-col ng-items-center ng-gap-1;
+  @apply ng-text-xs ng-text-neutral-500;
+}
+
+.ng-slider__mark--disabled {
+  @apply ng-opacity-40;
+}
+
+.ng-slider__mark--active {
+  @apply ng-text-primary-600;
+}
+
+.ng-slider__mark-line {
+  @apply ng-w-0.5 ng-h-2 ng-bg-current ng-relative;
+}
+
+.ng-slider__mark-label {
+  @apply ng-font-medium ng-whitespace-nowrap;
+}
+
+/* Tooltip */
+.ng-slider__tooltip {
+  @apply ng-absolute ng-px-2 ng-py-1 ng-bg-neutral-900 ng-text-white;
+  @apply ng-text-xs ng-font-medium ng-rounded ng-shadow-lg;
+  @apply ng-whitespace-nowrap ng-z-20;
+  @apply ng-transition-opacity ng-duration-150;
+}
+
+.ng-slider__tooltip--top {
+  @apply ng-bottom-full ng-left-1/2 ng-transform ng--translate-x-1/2 ng-mb-2;
+}
+
+.ng-slider__tooltip--bottom {
+  @apply ng-top-full ng-left-1/2 ng-transform ng--translate-x-1/2 ng-mt-2;
+}
+
+.ng-slider__tooltip--left {
+  @apply ng-right-full ng-top-1/2 ng-transform ng--translate-y-1/2 ng-mr-2;
+}
+
+.ng-slider__tooltip--right {
+  @apply ng-left-full ng-top-1/2 ng-transform ng--translate-y-1/2 ng-ml-2;
+}
+
+/* États interactifs */
+.ng-slider:not(.ng-slider--disabled):hover .ng-slider__track {
+  @apply ng-shadow-sm;
+}
+
+.ng-slider:not(.ng-slider--disabled):hover .ng-slider__thumb {
+  @apply ng-shadow-xl;
+}
+
+/* Focus states */
+.ng-slider__input:focus-visible + .ng-slider__thumb {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2;
+}
+
+.ng-slider__input:focus-visible ~ .ng-slider__track {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2;
+}
+
+/* Animation de transition pour les range sliders */
+@keyframes slider-progress {
+  from {
+    --slider-progress: 0%;
+  }
+  to {
+    --slider-progress: 50%;
+  }
+}
+
+.ng-slider--range.ng-slider--animating .ng-slider__track-active {
+  animation: slider-progress 200ms ease-out;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ng-slider__label {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-slider__description {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-slider__value {
+  @apply ng-text-neutral-300;
+}
+
+[data-theme="dark"] .ng-slider__track {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-slider--filled .ng-slider__track {
+  @apply ng-bg-neutral-600;
+}
+
+[data-theme="dark"] .ng-slider__thumb {
+  @apply ng-bg-neutral-800 ng-border-neutral-600;
+}
+
+[data-theme="dark"] .ng-slider__tooltip {
+  @apply ng-bg-neutral-800 ng-text-neutral-100 ng-border ng-border-neutral-600;
+}
+
+[data-theme="dark"] .ng-slider__mark {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-slider__mark--active {
+  @apply ng-text-primary-400;
+}
+
+[data-theme="dark"] .ng-slider--disabled .ng-slider__track {
+  @apply ng-bg-neutral-800 ng-opacity-40;
+}
+
+[data-theme="dark"] .ng-slider--disabled .ng-slider__thumb {
+  @apply ng-bg-neutral-700 ng-border-neutral-700;
+}
+
+/* RTL support */
+[dir="rtl"] .ng-slider__thumb {
+  @apply ng-left-auto ng-right-0;
+  transform: translateX(50%) translateY(-50%);
+}
+
+[dir="rtl"] .ng-slider__tooltip--left {
+  @apply ng-right-auto ng-left-full ng-ml-2 ng-mr-0;
+}
+
+[dir="rtl"] .ng-slider__tooltip--right {
+  @apply ng-left-auto ng-right-full ng-mr-2 ng-ml-0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ng-slider__label {
+    @apply ng-text-xs;
+  }
+
+  .ng-slider__description {
+    @apply ng-text-xs;
+  }
+
+  .ng-slider__value {
+    @apply ng-text-xs;
+  }
+
+  .ng-slider__mark {
+    @apply ng-text-xs;
+  }
+
+  .ng-slider__tooltip {
+    @apply ng-text-xs;
+  }
+
+  .ng-slider--sm .ng-slider__thumb {
+    @apply ng-w-5 ng-h-5;
+  }
+
+  .ng-slider--md .ng-slider__thumb {
+    @apply ng-w-6 ng-h-6;
+  }
+
+  .ng-slider--lg .ng-slider__thumb {
+    @apply ng-w-7 ng-h-7;
+  }
+}
+
+/* États de validation */
+.ng-slider--error .ng-slider__track {
+  @apply ng-bg-error-50 ng-border-error-200;
+}
+
+.ng-slider--error .ng-slider__thumb {
+  @apply ng-border-error-500;
+}
+
+.ng-slider--error .ng-slider__track-active {
+  @apply ng-bg-error-500;
+}
+
+.ng-slider--success .ng-slider__track-active {
+  @apply ng-bg-success-500;
+}
+
+/* Performance optimizations */
+.ng-slider__thumb {
+  will-change: transform;
+}
+
+.ng-slider__track-active {
+  will-change: width;
+}
+
+.ng-slider--vertical .ng-slider__track-active {
+  will-change: height;
+}
+
+/* Smooth scrolling pour mobile */
+@media (hover: none) and (pointer: coarse) {
+  .ng-slider__thumb:hover {
+    @apply ng-scale-100 ng-shadow-lg;
+  }
+}
+
+/* Accessibilité améliorée */
+.ng-slider__input {
+  /* Permet le focus clavier */
+  outline: none;
+}
+
+.ng-slider__input:focus-visible {
+  /* Style de focus personnalisé */
+  outline: 2px solid var(--slider-focus-color, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* Animations personnalisées */
+@keyframes slider-thumb-pop {
+  0% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-50%) scale(1.2);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-50%) scale(1);
+  }
+}
+
+.ng-slider__thumb.ng-slider__thumb--activated {
+  animation: slider-thumb-pop 200ms ease-out;
+}
+
+/* Grille de valeurs pour les modes discrétisés */
+.ng-slider--discrete .ng-slider__track::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent calc(10% - 1px),
+    currentColor calc(10% - 1px),
+    currentColor 10%
+  );
+  opacity: 0.3;
+}
+
+/* États de chargement */
+.ng-slider--loading .ng-slider__thumb {
+  @apply ng-animate-pulse;
+}
+
+.ng-slider--loading .ng-slider__track-active {
+  @apply ng-animate-pulse;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-slider__thumb,
+  .ng-slider__track,
+  .ng-slider__track-active,
+  .ng-slider__tooltip {
+    @apply ng-transition-none;
+  }
+
+  .ng-slider__thumb.ng-slider__thumb--activated {
+    animation: none;
+  }
+
+  .ng-slider--range.ng-slider--animating .ng-slider__track-active {
+    animation: none;
+  }
+}
+
+/* Styles pour les couleurs personnalisées */
+.ng-slider--custom-color .ng-slider__thumb {
+  border-color: var(--slider-custom-color, #3b82f6);
+}
+
+.ng-slider--custom-color .ng-slider__track-active {
+  background: var(--slider-custom-color, #3b82f6);
+}

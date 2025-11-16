@@ -1,0 +1,700 @@
+/**
+ * CTASection Component - Modern Styles
+ * 
+ * Comprehensive styling system for CTASection component with:
+ * - CSS Variables theming system
+ * - Responsive mobile-first design
+ * - 5 background variants
+ * - 3 layout arrangements
+ * - 3 positioning modes
+ * - Dark mode support
+ * - Smooth animations
+ * - Accessibility features
+ * 
+ * @author MiniMax Agent
+ * @version 1.0.0
+ */
+
+/* ============================================================================
+   CSS VARIABLES - THEME SYSTEM
+   ============================================================================ */
+
+:root {
+  /* Primary Colors */
+  --cta-section-primary-bg: #3B82F6;
+  --cta-section-primary-text: #FFFFFF;
+  --cta-section-primary-hover: #2563EB;
+  --cta-section-primary-border: #2563EB;
+  
+  /* Secondary Colors */
+  --cta-section-secondary-bg: #F8FAFC;
+  --cta-section-secondary-text: #1E293B;
+  --cta-section-secondary-hover: #E2E8F0;
+  --cta-section-secondary-border: #CBD5E1;
+  
+  /* Gradient Background */
+  --cta-section-gradient-start: #667EEA;
+  --cta-section-gradient-end: #764BA2;
+  
+  /* Dark Theme */
+  --cta-section-dark-bg: #0F172A;
+  --cta-section-dark-text: #F1F5F9;
+  --cta-section-dark-hover: #1E293B;
+  --cta-section-dark-border: #334155;
+  
+  /* Light Theme */
+  --cta-section-light-bg: #FFFFFF;
+  --cta-section-light-text: #1E293B;
+  --cta-section-light-hover: #F8FAFC;
+  --cta-section-light-border: #E2E8F0;
+  
+  /* Text Colors */
+  --cta-section-title-color: var(--cta-section-dark-text);
+  --cta-section-subtitle-color: #64748B;
+  --cta-section-description-color: #475569;
+  
+  /* Spacing System */
+  --cta-section-padding-xs: 1rem;
+  --cta-section-padding-sm: 1.5rem;
+  --cta-section-padding-md: 2rem;
+  --cta-section-padding-lg: 3rem;
+  --cta-section-padding-xl: 4rem;
+  
+  /* Layout Spacing */
+  --cta-section-gap-xs: 0.75rem;
+  --cta-section-gap-sm: 1rem;
+  --cta-section-gap-md: 1.5rem;
+  --cta-section-gap-lg: 2rem;
+  --cta-section-gap-xl: 3rem;
+  
+  /* Typography */
+  --cta-section-title-font-size: 2.5rem;
+  --cta-section-title-font-weight: 700;
+  --cta-section-title-line-height: 1.2;
+  --cta-section-title-letter-spacing: -0.025em;
+  
+  --cta-section-subtitle-font-size: 1.25rem;
+  --cta-section-subtitle-font-weight: 500;
+  --cta-section-subtitle-line-height: 1.4;
+  
+  --cta-section-description-font-size: 1.125rem;
+  --cta-section-description-font-weight: 400;
+  --cta-section-description-line-height: 1.6;
+  
+  /* Button Sizes */
+  --cta-section-button-xs-font-size: 0.75rem;
+  --cta-section-button-xs-padding-y: 0.375rem;
+  --cta-section-button-xs-padding-x: 0.75rem;
+  
+  --cta-section-button-sm-font-size: 0.875rem;
+  --cta-section-button-sm-padding-y: 0.5rem;
+  --cta-section-button-sm-padding-x: 1rem;
+  
+  --cta-section-button-md-font-size: 1rem;
+  --cta-section-button-md-padding-y: 0.625rem;
+  --cta-section-button-md-padding-x: 1.25rem;
+  
+  --cta-section-button-lg-font-size: 1.125rem;
+  --cta-section-button-lg-padding-y: 0.75rem;
+  --cta-section-button-lg-padding-x: 1.5rem;
+  
+  --cta-section-button-xl-font-size: 1.25rem;
+  --cta-section-button-xl-padding-y: 0.875rem;
+  --cta-section-button-xl-padding-x: 2rem;
+  
+  /* Max Widths */
+  --cta-section-max-width-sm: 32rem;
+  --cta-section-max-width-md: 48rem;
+  --cta-section-max-width-lg: 64rem;
+  --cta-section-max-width-xl: 80rem;
+  --cta-section-max-width-full: 100%;
+  
+  /* Shadows */
+  --cta-section-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --cta-section-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --cta-section-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  
+  /* Border Radius */
+  --cta-section-radius-sm: 0.375rem;
+  --cta-section-radius-md: 0.5rem;
+  --cta-section-radius-lg: 0.75rem;
+  --cta-section-radius-xl: 1rem;
+  
+  /* Transitions */
+  --cta-section-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --cta-section-transition-fast: all 0.15s ease-in-out;
+  
+  /* Z-index layers */
+  --cta-section-z-decorative: 1;
+  --cta-section-z-content: 2;
+  --cta-section-z-background: 0;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+  --cta-section-title-color: var(--cta-section-dark-text);
+  --cta-section-subtitle-color: #94A3B8;
+  --cta-section-description-color: #CBD5E1;
+}
+
+/* ============================================================================
+   COMPONENT BASE STYLES
+   ============================================================================ */
+
+.cta-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20rem;
+  overflow: hidden;
+  transition: var(--cta-section-transition);
+}
+
+.cta-section__container {
+  position: relative;
+  z-index: var(--cta-section-z-content);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cta-section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--cta-section-gap-lg);
+}
+
+/* ============================================================================
+   BACKGROUND VARIANTS
+   ============================================================================ */
+
+.cta-section--background-primary {
+  background-color: var(--cta-section-primary-bg);
+  color: var(--cta-section-primary-text);
+}
+
+.cta-section--background-primary .cta-section__title,
+.cta-section--background-primary .cta-section__subtitle,
+.cta-section--background-primary .cta-section__description {
+  color: var(--cta-section-primary-text);
+}
+
+.cta-section--background-secondary {
+  background-color: var(--cta-section-secondary-bg);
+  color: var(--cta-section-secondary-text);
+}
+
+.cta-section--background-secondary .cta-section__title {
+  color: var(--cta-section-title-color);
+}
+
+.cta-section--background-secondary .cta-section__subtitle {
+  color: var(--cta-section-subtitle-color);
+}
+
+.cta-section--background-secondary .cta-section__description {
+  color: var(--cta-section-description-color);
+}
+
+.cta-section--background-gradient {
+  background: linear-gradient(135deg, var(--cta-section-gradient-start), var(--cta-section-gradient-end));
+  color: var(--cta-section-primary-text);
+}
+
+.cta-section--background-gradient .cta-section__title,
+.cta-section--background-gradient .cta-section__subtitle,
+.cta-section--background-gradient .cta-section__description {
+  color: var(--cta-section-primary-text);
+}
+
+.cta-section--background-dark {
+  background-color: var(--cta-section-dark-bg);
+  color: var(--cta-section-dark-text);
+}
+
+.cta-section--background-dark .cta-section__title,
+.cta-section--background-dark .cta-section__subtitle,
+.cta-section--background-dark .cta-section__description {
+  color: var(--cta-section-dark-text);
+}
+
+.cta-section--background-light {
+  background-color: var(--cta-section-light-bg);
+  color: var(--cta-section-light-text);
+}
+
+.cta-section--background-light .cta-section__title {
+  color: var(--cta-section-title-color);
+}
+
+.cta-section--background-light .cta-section__subtitle {
+  color: var(--cta-section-subtitle-color);
+}
+
+.cta-section--background-light .cta-section__description {
+  color: var(--cta-section-description-color);
+}
+
+/* Background Image */
+.cta-section--has-background-image {
+  background-color: var(--cta-section-dark-bg);
+}
+
+.cta-section__background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: var(--cta-section-z-background);
+}
+
+/* ============================================================================
+   LAYOUT VARIANTS
+   ============================================================================ */
+
+.cta-section--layout-single .cta-section__content {
+  max-width: 48rem;
+}
+
+.cta-section--layout-split .cta-section__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--cta-section-gap-xl);
+  text-align: left;
+}
+
+.cta-section--layout-stacked .cta-section__content {
+  text-align: center;
+  gap: var(--cta-section-gap-xl);
+}
+
+/* ============================================================================
+   POSITION VARIANTS
+   ============================================================================ */
+
+.cta-section--position-center .cta-section__content {
+  text-align: center;
+}
+
+.cta-section--position-left .cta-section__content {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.cta-section--position-right .cta-section__content {
+  text-align: right;
+  align-items: flex-end;
+}
+
+/* ============================================================================
+   PADDING VARIANTS
+   ============================================================================ */
+
+.cta-section--padding-none {
+  padding: 0;
+}
+
+.cta-section--padding-sm {
+  padding: var(--cta-section-padding-sm) 1rem;
+}
+
+.cta-section--padding-md {
+  padding: var(--cta-section-padding-md) 1rem;
+}
+
+.cta-section--padding-lg {
+  padding: var(--cta-section-padding-lg) 1rem;
+}
+
+.cta-section--padding-xl {
+  padding: var(--cta-section-padding-xl) 1rem;
+}
+
+/* ============================================================================
+   MAX WIDTH VARIANTS
+   ============================================================================ */
+
+.cta-section--max-width-sm .cta-section__container {
+  max-width: var(--cta-section-max-width-sm);
+}
+
+.cta-section--max-width-md .cta-section__container {
+  max-width: var(--cta-section-max-width-md);
+}
+
+.cta-section--max-width-lg .cta-section__container {
+  max-width: var(--cta-section-max-width-lg);
+}
+
+.cta-section--max-width-xl .cta-section__container {
+  max-width: var(--cta-section-max-width-xl);
+}
+
+.cta-section--max-width-full .cta-section__container {
+  max-width: var(--cta-section-max-width-full);
+}
+
+/* ============================================================================
+   CONTENT STYLES
+   ============================================================================ */
+
+.cta-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cta-section-gap-md);
+}
+
+.cta-section__subtitle {
+  font-size: var(--cta-section-subtitle-font-size);
+  font-weight: var(--cta-section-subtitle-font-weight);
+  line-height: var(--cta-section-subtitle-line-height);
+  margin: 0;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.cta-section__title {
+  font-size: var(--cta-section-title-font-size);
+  font-weight: var(--cta-section-title-font-weight);
+  line-height: var(--cta-section-title-line-height);
+  letter-spacing: var(--cta-section-title-letter-spacing);
+  margin: 0;
+}
+
+.cta-section__description {
+  font-size: var(--cta-section-description-font-size);
+  font-weight: var(--cta-section-description-font-weight);
+  line-height: var(--cta-section-description-line-height);
+  margin: 0;
+  opacity: 0.8;
+  max-width: 48rem;
+}
+
+/* ============================================================================
+   BUTTON STYLES
+   ============================================================================ */
+
+.cta-section__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cta-section-gap-md);
+  justify-content: center;
+  align-items: center;
+}
+
+.cta-section--position-left .cta-section__actions,
+.cta-section--position-right .cta-section__actions {
+  justify-content: flex-start;
+}
+
+.cta-section__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cta-section-gap-xs);
+  border: none;
+  border-radius: var(--cta-section-radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--cta-section-transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section__button:focus {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.cta-section__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Primary Button */
+.cta-section__button--primary {
+  background-color: var(--cta-section-primary-bg);
+  color: var(--cta-section-primary-text);
+  box-shadow: var(--cta-section-shadow-md);
+}
+
+.cta-section__button--primary:hover:not(:disabled) {
+  background-color: var(--cta-section-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--cta-section-shadow-lg);
+}
+
+/* Secondary Button */
+.cta-section__button--secondary {
+  background-color: transparent;
+  color: var(--cta-section-primary-text);
+  border: 2px solid currentColor;
+}
+
+.cta-section--background-secondary .cta-section__button--secondary,
+.cta-section--background-light .cta-section__button--secondary {
+  color: var(--cta-section-title-color);
+}
+
+.cta-section__button--secondary:hover:not(:disabled) {
+  background-color: currentColor;
+  color: var(--cta-section-primary-bg);
+}
+
+/* Button Sizes */
+.cta-section__button--xs {
+  font-size: var(--cta-section-button-xs-font-size);
+  padding: var(--cta-section-button-xs-padding-y) var(--cta-section-button-xs-padding-x);
+}
+
+.cta-section__button--sm {
+  font-size: var(--cta-section-button-sm-font-size);
+  padding: var(--cta-section-button-sm-padding-y) var(--cta-section-button-sm-padding-x);
+}
+
+.cta-section__button--md {
+  font-size: var(--cta-section-button-md-font-size);
+  padding: var(--cta-section-button-md-padding-y) var(--cta-section-button-md-padding-x);
+}
+
+.cta-section__button--lg {
+  font-size: var(--cta-section-button-lg-font-size);
+  padding: var(--cta-section-button-lg-padding-y) var(--cta-section-button-lg-padding-x);
+}
+
+.cta-section__button--xl {
+  font-size: var(--cta-section-button-xl-font-size);
+  padding: var(--cta-section-button-xl-padding-y) var(--cta-section-button-xl-padding-x);
+}
+
+/* Button Icons */
+.cta-section__button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cta-section__button-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spinner Animation */
+.cta-section__spinner {
+  width: 1rem;
+  height: 1rem;
+  animation: cta-section-spin 1s linear infinite;
+}
+
+.cta-section__spinner-circle {
+  stroke-dasharray: 31.416;
+  stroke-dashoffset: 31.416;
+  animation: cta-section-spinner-dash 1.5s ease-in-out infinite;
+}
+
+@keyframes cta-section-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cta-section-spinner-dash {
+  0% {
+    stroke-dashoffset: 31.416;
+  }
+  50% {
+    stroke-dashoffset: 15.708;
+  }
+  100% {
+    stroke-dashoffset: 31.416;
+  }
+}
+
+/* ============================================================================
+   DECORATIVE ELEMENTS
+   ============================================================================ */
+
+.cta-section__decorative {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: var(--cta-section-z-decorative);
+}
+
+.cta-section__decorative-element {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  animation: cta-section-float 6s ease-in-out infinite;
+}
+
+.cta-section__decorative-element--1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.cta-section__decorative-element--2 {
+  width: 150px;
+  height: 150px;
+  bottom: 15%;
+  left: 15%;
+  animation-delay: 2s;
+}
+
+.cta-section__decorative-element--3 {
+  width: 100px;
+  height: 100px;
+  top: 60%;
+  right: 30%;
+  animation-delay: 4s;
+}
+
+@keyframes cta-section-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+/* ============================================================================
+   CUSTOM CONTENT
+   ============================================================================ */
+
+.cta-section__custom-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--cta-section-gap-md);
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --cta-section-title-font-size: 2rem;
+    --cta-section-subtitle-font-size: 1.125rem;
+    --cta-section-description-font-size: 1rem;
+    --cta-section-padding-xs: 0.75rem;
+    --cta-section-padding-sm: 1rem;
+    --cta-section-padding-md: 1.5rem;
+    --cta-section-padding-lg: 2rem;
+    --cta-section-padding-xl: 2.5rem;
+  }
+  
+  .cta-section--layout-split .cta-section__content {
+    grid-template-columns: 1fr;
+    gap: var(--cta-section-gap-lg);
+    text-align: center;
+  }
+  
+  .cta-section__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--cta-section-gap-sm);
+  }
+  
+  .cta-section__button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .cta-section--position-left .cta-section__actions,
+  .cta-section--position-right .cta-section__actions {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .cta-section__decorative-element {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --cta-section-title-font-size: 1.75rem;
+    --cta-section-subtitle-font-size: 1rem;
+    --cta-section-description-font-size: 0.875rem;
+  }
+  
+  .cta-section__actions {
+    gap: var(--cta-section-gap-xs);
+  }
+  
+  .cta-section__button--xl {
+    font-size: var(--cta-section-button-lg-font-size);
+    padding: var(--cta-section-button-lg-padding-y) var(--cta-section-button-lg-padding-x);
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION SUPPORT
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-section,
+  .cta-section__button,
+  .cta-section__decorative-element,
+  .cta-section__spinner,
+  .cta-section__spinner-circle {
+    animation: none;
+    transition: none;
+  }
+  
+  .cta-section__decorative-element {
+    opacity: 0.3;
+  }
+}
+
+/* ============================================================================
+   HIGH CONTRAST MODE
+   ============================================================================ */
+
+@media (prefers-contrast: high) {
+  .cta-section__button {
+    border-width: 2px;
+  }
+  
+  .cta-section__decorative-element {
+    display: none;
+  }
+}
+
+/* ============================================================================
+   RTL SUPPORT
+   ============================================================================ */
+
+[dir="rtl"] .cta-section__actions {
+  justify-content: center;
+}
+
+[dir="rtl"] .cta-section--position-left .cta-section__actions,
+[dir="rtl"] .cta-section--position-right .cta-section__actions {
+  align-items: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .cta-section__button-icon {
+  order: -1;
+}

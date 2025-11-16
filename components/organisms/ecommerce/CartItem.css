@@ -1,0 +1,592 @@
+/* CartItem.css - Styles pour le composant CartItem */
+
+.ng-cart-item {
+  --ng-cart-item-padding: 1rem;
+  --ng-cart-item-border-radius: 0.75rem;
+  --ng-cart-item-bg-color: #ffffff;
+  --ng-cart-item-border-color: #e5e7eb;
+  --ng-cart-item-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ng-cart-item-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  display: flex;
+  gap: 1rem;
+  padding: var(--ng-cart-item-padding);
+  background-color: var(--ng-cart-item-bg-color);
+  border: 1px solid var(--ng-cart-item-border-color);
+  border-radius: var(--ng-cart-item-border-radius);
+  box-shadow: var(--ng-cart-item-shadow);
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.ng-cart-item:hover {
+  box-shadow: var(--ng-cart-item-shadow-hover);
+}
+
+.ng-cart-item--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ng-cart-item--loading {
+  pointer-events: none;
+}
+
+/* Image du produit */
+.ng-cart-item__image-container {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background-color: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ng-cart-item__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ng-cart-item__image-container:hover .ng-cart-item__image {
+  transform: scale(1.05);
+}
+
+.ng-cart-item__image--loading {
+  opacity: 0;
+}
+
+.ng-cart-item__image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
+}
+
+.ng-cart-item__image-placeholder-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: ng-cart-item-loading 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes ng-cart-item-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ng-cart-item__sale-badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  z-index: 1;
+}
+
+/* Contenu du produit */
+.ng-cart-item__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0; /* Pour permettre le text-overflow */
+}
+
+/* En-tête du produit */
+.ng-cart-item__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ng-cart-item__titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.ng-cart-item__title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.ng-cart-item__title-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #111827;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ng-cart-item__title-link:hover {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+.ng-cart-item__title-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+.ng-cart-item__description {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ng-cart-item__sku {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-family: monospace;
+}
+
+/* Informations de prix */
+.ng-cart-item__pricing {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ng-cart-item__prices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ng-cart-item__current-price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.ng-cart-item__original-price {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.ng-cart-item__discount {
+  font-size: 0.75rem;
+  color: #059669;
+  font-weight: 500;
+}
+
+.ng-cart-item__total-price {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.ng-cart-item__total-price strong {
+  color: #111827;
+  font-size: 1rem;
+}
+
+/* Variantes */
+.ng-cart-item__variants {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ng-cart-item__variant-toggle {
+  background: none;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: fit-content;
+}
+
+.ng-cart-item__variant-toggle:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.ng-cart-item__variant-toggle:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-cart-item__variants-content {
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+}
+
+.ng-cart-item__variant-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.ng-cart-item__variant-group:last-child {
+  margin-bottom: 0;
+}
+
+.ng-cart-item__variant-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  min-width: 3rem;
+}
+
+.ng-cart-item__variant-select {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: white;
+}
+
+.ng-cart-item__color-swatches {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ng-cart-item__color-swatch {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.ng-cart-item__color-swatch:hover {
+  transform: scale(1.1);
+  border-color: #9ca3af;
+}
+
+.ng-cart-item__color-swatch--active {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.ng-cart-item__color-swatch:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Informations de stock */
+.ng-cart-item__stock {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  display: inline-block;
+  width: fit-content;
+}
+
+.ng-cart-item__stock--low {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.ng-cart-item__stock--out {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Actions */
+.ng-cart-item__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Sélecteur de quantité */
+.ng-cart-item__quantity-selector {
+  display: flex;
+  align-items: center;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.ng-cart-item__quantity-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #374151;
+  transition: background-color 0.2s ease-in-out;
+  min-width: 2.5rem;
+}
+
+.ng-cart-item__quantity-btn:hover:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+.ng-cart-item__quantity-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-cart-item__quantity-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-cart-item__quantity-input {
+  width: 3rem;
+  text-align: center;
+  border: none;
+  background: none;
+  padding: 0.5rem 0.25rem;
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.ng-cart-item__quantity-input:focus {
+  outline: none;
+  background-color: white;
+}
+
+/* Boutons d'action */
+.ng-cart-item__action-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ng-cart-item__action-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+}
+
+.ng-cart-item__action-btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.ng-cart-item__action-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-cart-item__action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-cart-item__action-btn--wishlist:hover:not(:disabled) {
+  background-color: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.ng-cart-item__action-btn--duplicate:hover:not(:disabled) {
+  background-color: #ecfdf5;
+  border-color: #6ee7b7;
+}
+
+.ng-cart-item__action-btn--remove:hover:not(:disabled) {
+  background-color: #fef2f2;
+  border-color: #f87171;
+}
+
+.ng-cart-item__action-icon {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ng-cart-item {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .ng-cart-item__image-container {
+    width: 100%;
+    height: 200px;
+    align-self: center;
+  }
+  
+  .ng-cart-item__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .ng-cart-item__action-buttons {
+    justify-content: center;
+  }
+  
+  .ng-cart-item__pricing {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .ng-cart-item {
+    padding: 0.75rem;
+  }
+  
+  .ng-cart-item__image-container {
+    height: 160px;
+  }
+  
+  .ng-cart-item__title {
+    font-size: 0.875rem;
+  }
+  
+  .ng-cart-item__current-price {
+    font-size: 1rem;
+  }
+  
+  .ng-cart-item__quantity-selector {
+    justify-content: center;
+  }
+}
+
+/* États d'interaction avancés */
+.ng-cart-item__image-container:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-cart-item__action-icon {
+  transition: transform 0.2s ease-in-out;
+}
+
+.ng-cart-item__action-btn:hover .ng-cart-item__action-icon {
+  transform: scale(1.1);
+}
+
+/* Animation d'ajout au panier */
+@keyframes ng-cart-item-add-to-cart {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.ng-cart-item__action-btn--duplicate:active {
+  animation: ng-cart-item-add-to-cart 0.3s ease-in-out;
+}
+
+/* Accessibilité - Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ng-cart-item,
+  .ng-cart-item__image,
+  .ng-cart-item__action-icon,
+  .ng-cart-item__color-swatch,
+  .ng-cart-item__quantity-btn {
+    transition: none;
+  }
+  
+  .ng-cart-item__image-placeholder-icon {
+    animation: none;
+  }
+}
+
+/* Mode sombre (optionnel) */
+@media (prefers-color-scheme: dark) {
+  .ng-cart-item {
+    --ng-cart-item-bg-color: #1f2937;
+    --ng-cart-item-border-color: #374151;
+    --ng-cart-item-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --ng-cart-item-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ng-cart-item__title-link {
+    color: #f9fafb;
+  }
+  
+  .ng-cart-item__description,
+  .ng-cart-item__sku,
+  .ng-cart-item__total-price {
+    color: #d1d5db;
+  }
+  
+  .ng-cart-item__current-price {
+    color: #f9fafb;
+  }
+  
+  .ng-cart-item__total-price strong {
+    color: #f9fafb;
+  }
+  
+  .ng-cart-item__variant-toggle,
+  .ng-cart-item__action-btn,
+  .ng-cart-item__variant-select {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .ng-cart-item__variants-content {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+  
+  .ng-cart-item__quantity-selector {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+  
+  .ng-cart-item__quantity-btn:hover:not(:disabled) {
+    background-color: #4b5563;
+  }
+  
+  .ng-cart-item__quantity-input {
+    color: #f9fafb;
+  }
+}

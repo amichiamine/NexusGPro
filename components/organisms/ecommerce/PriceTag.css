@@ -1,0 +1,427 @@
+/* PriceTag.css - Styles pour le composant PriceTag */
+
+.ng-price-tag {
+  --ng-price-tag-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ng-price-tag-line-height: 1.2;
+  --ng-price-tag-letter-spacing: -0.025em;
+  
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  font-family: var(--ng-price-tag-font-family);
+  line-height: var(--ng-price-tag-line-height);
+  letter-spacing: var(--ng-price-tag-letter-spacing);
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Tailles */
+.ng-price-tag--xs {
+  font-size: 0.75rem;
+}
+
+.ng-price-tag--sm {
+  font-size: 0.875rem;
+}
+
+.ng-price-tag--md {
+  font-size: 1rem;
+}
+
+.ng-price-tag--lg {
+  font-size: 1.25rem;
+}
+
+.ng-price-tag--xl {
+  font-size: 1.5rem;
+}
+
+/* Variantes */
+.ng-price-tag--default {
+  color: #111827;
+}
+
+.ng-price-tag--sale {
+  color: #dc2626;
+}
+
+.ng-price-tag--discount {
+  color: #059669;
+}
+
+.ng-price-tag--compare {
+  color: #6b7280;
+}
+
+.ng-price-tag--free {
+  color: #059669;
+}
+
+/* Poids de police */
+.ng-price-tag--normal {
+  font-weight: 400;
+}
+
+.ng-price-tag--bold {
+  font-weight: 700;
+}
+
+.ng-price-tag--light {
+  font-weight: 300;
+}
+
+/* Positionnement */
+.ng-price-tag--start {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.ng-price-tag--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.ng-price-tag--end {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* Éléments de prix */
+.ng-price-tag__value {
+  position: relative;
+  font-weight: inherit;
+}
+
+.ng-price-tag__original {
+  text-decoration: line-through;
+  color: #9ca3af;
+  font-weight: 400;
+  position: relative;
+  margin-right: 0.5rem;
+}
+
+.ng-price-tag__discount {
+  background-color: #dc2626;
+  color: white;
+  font-size: 0.75em;
+  font-weight: 700;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  position: relative;
+  top: -0.1em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ng-price-tag__savings {
+  color: #059669;
+  font-size: 0.875em;
+  font-weight: 600;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+}
+
+.ng-price-tag__free-text {
+  font-weight: 600;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* États */
+.ng-price-tag--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-price-tag--loading {
+  position: relative;
+  min-width: 3ch;
+}
+
+.ng-price-tag--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  border-top-color: #3b82f6;
+  animation: ng-price-tag-spin 1s linear infinite;
+}
+
+@keyframes ng-price-tag-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Animations */
+.ng-price-tag--animate {
+  animation-duration: 0.6s;
+  animation-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  animation-fill-mode: both;
+}
+
+.ng-price-tag--animate-up {
+  animation-name: ng-price-tag-slide-up;
+}
+
+.ng-price-tag--animate-down {
+  animation-name: ng-price-tag-slide-down;
+}
+
+.ng-price-tag--animate-bounce {
+  animation-name: ng-price-tag-bounce;
+}
+
+@keyframes ng-price-tag-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-0.25rem) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ng-price-tag-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(0.25rem) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes ng-price-tag-bounce {
+  0%, 20%, 53%, 80%, 100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40%, 43% {
+    opacity: 1;
+    transform: translate3d(0, -30%, 0) scale(1.1);
+  }
+  70% {
+    transform: translate3d(0, -15%, 0) scale(1.05);
+  }
+  90% {
+    transform: translate3d(0, -4%, 0) scale(1.02);
+  }
+}
+
+/* États de survol interactifs */
+.ng-price-tag:not(.ng-price-tag--disabled):not(.ng-price-tag--loading) {
+  transition: all 0.2s ease-in-out;
+}
+
+.ng-price-tag:not(.ng-price-tag--disabled):not(.ng-price-tag--loading):hover {
+  transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .ng-price-tag {
+    font-size: 0.875em;
+  }
+  
+  .ng-price-tag--lg {
+    font-size: 1.125rem;
+  }
+  
+  .ng-price-tag--xl {
+    font-size: 1.375rem;
+  }
+  
+  .ng-price-tag__discount {
+    font-size: 0.625em;
+    padding: 0.1rem 0.25rem;
+  }
+}
+
+/* Variantes de prix spécialisées */
+.ng-price-tag--compare .ng-price-tag__value {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.ng-price-tag--compare .ng-price-tag__original {
+  color: #111827;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Styles pour les cartes de produits */
+.ng-price-tag--card {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+}
+
+.ng-price-tag--sale.ng-price-tag--card {
+  background-color: rgba(220, 38, 38, 0.1);
+  color: #dc2626;
+}
+
+.ng-price-tag--discount.ng-price-tag--card {
+  background-color: rgba(5, 150, 105, 0.1);
+  color: #059669;
+}
+
+/* Styles pour les badges de prix */
+.ng-price-tag--badge {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ng-price-tag--badge .ng-price-tag__discount {
+  margin-left: 0.25rem;
+  font-size: 0.625em;
+  padding: 0.1rem 0.25rem;
+}
+
+/* Animation de changement de prix */
+.ng-price-tag--price-change {
+  position: relative;
+  overflow: hidden;
+}
+
+.ng-price-tag--price-change::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.3),
+    transparent
+  );
+  animation: ng-price-tag-shimmer 2s infinite;
+}
+
+@keyframes ng-price-tag-shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Styles pour les listes de prix */
+.ng-price-tag--list {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+}
+
+.ng-price-tag--list .ng-price-tag__original {
+  margin-right: 0;
+  margin-bottom: 0.125rem;
+}
+
+/* Styles pour les tableaux de prix */
+.ng-price-tag--table {
+  font-feature-settings: "tnum" 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .ng-price-tag--default {
+    color: #f9fafb;
+  }
+  
+  .ng-price-tag--compare {
+    color: #9ca3af;
+  }
+  
+  .ng-price-tag__original {
+    color: #6b7280;
+  }
+  
+  .ng-price-tag--compare .ng-price-tag__value {
+    color: #9ca3af;
+  }
+  
+  .ng-price-tag--compare .ng-price-tag__original {
+    color: #f9fafb;
+  }
+  
+  .ng-price-tag--card {
+    background-color: rgba(31, 41, 55, 0.9);
+  }
+}
+
+/* Accessibilité - Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ng-price-tag,
+  .ng-price-tag--animate,
+  .ng-price-tag--price-change::before {
+    animation: none;
+    transition: none;
+  }
+  
+  .ng-price-tag:hover {
+    transform: none;
+  }
+}
+
+/* Focus states pour l'accessibilité */
+.ng-price-tag:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+.ng-price-tag--disabled:focus {
+  outline: none;
+}
+
+/* Print styles */
+@media print {
+  .ng-price-tag {
+    color: #000 !important;
+  }
+  
+  .ng-price-tag__discount {
+    background-color: transparent !important;
+    color: #dc2626 !important;
+  }
+  
+  .ng-price-tag--animate {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .ng-price-tag--sale {
+    color: #b91c1c;
+  }
+  
+  .ng-price-tag--discount {
+    color: #047857;
+  }
+  
+  .ng-price-tag__discount {
+    background-color: #b91c1c !important;
+    color: white !important;
+    border: 2px solid currentColor;
+  }
+}

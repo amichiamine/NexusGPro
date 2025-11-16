@@ -1,0 +1,346 @@
+/* ==========================================================================
+   Select Component Styles
+   ========================================================================== */
+
+.ng-select {
+  @apply ng-relative ng-flex ng-flex-col ng-gap-2;
+}
+
+.ng-select--full-width {
+  @apply ng-w-full;
+}
+
+/* Label wrapper */
+.ng-select__label-wrapper {
+  @apply ng-flex ng-flex-col ng-gap-1;
+}
+
+.ng-select__label {
+  @apply ng-text-sm ng-font-medium ng-text-neutral-900;
+}
+
+.ng-select__description {
+  @apply ng-text-xs ng-text-neutral-600 ng-m-0;
+}
+
+/* Container principal */
+.ng-select__container {
+  @apply ng-relative ng-flex ng-items-center;
+}
+
+/* Element select natif (caché) */
+.ng-select__element {
+  @apply ng-w-full ng-appearance-none ng-bg-transparent ng-border ng-border-neutral-300 ng-rounded-md;
+  @apply ng-pr-10 ng-pl-3 ng-py-2 ng-text-sm;
+  @apply ng-focus:ng-outline-none ng-focus:ng-ring-2 ng-focus:ng-ring-primary-500 ng-focus:ng-ring-offset-1;
+  @apply ng-transition-all ng-duration-200;
+}
+
+/* Tailles */
+.ng-select--sm .ng-select__element {
+  @apply ng-px-2 ng-py-1.5 ng-text-xs;
+}
+
+.ng-select--lg .ng-select__element {
+  @apply ng-px-4 ng-py-3 ng-text-base;
+}
+
+/* Variantes */
+.ng-select--default .ng-select__element {
+  @apply ng-bg-white ng-border-neutral-300;
+}
+
+.ng-select--filled .ng-select__element {
+  @apply ng-bg-neutral-100 ng-border-transparent;
+}
+
+.ng-select--outline .ng-select__element {
+  @apply ng-bg-white ng-border-2 ng-border-primary-500;
+}
+
+.ng-select--ghost .ng-select__element {
+  @apply ng-bg-transparent ng-border-transparent;
+}
+
+/* États */
+.ng-select--disabled .ng-select__element {
+  @apply ng-bg-neutral-100 ng-text-neutral-500 ng-cursor-not-allowed ng-opacity-60;
+}
+
+.ng-select--open .ng-select__element {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-1;
+}
+
+/* Icône de dropdown */
+.ng-select__icon-wrapper {
+  @apply ng-absolute ng-right-3 ng-flex ng-items-center ng-justify-center;
+  @apply ng-pointer-events-none ng-z-10;
+}
+
+/* Chevron icon */
+.ng-select__chevron {
+  @apply ng-text-neutral-500 ng-transition-transform ng-duration-200;
+}
+
+.ng-select--open .ng-select__chevron {
+  @apply ng-rotate-180;
+}
+
+/* Spinner de loading */
+.ng-select__spinner {
+  @apply ng-w-4 ng-h-4 ng-border-2 ng-border-neutral-300 ng-border-t-primary-600;
+  @apply ng-rounded-full ng-animate-spin;
+}
+
+/* Dropdown personnalisé */
+.ng-select__dropdown {
+  @apply ng-absolute ng-top-full ng-left-0 ng-right-0 ng-mt-1;
+  @apply ng-bg-white ng-border ng-border-neutral-200 ng-rounded-md;
+  @apply ng-shadow-lg ng-max-h-60 ng-overflow-y-auto ng-z-50;
+  @apply ng-py-1;
+}
+
+/* Option dans le dropdown */
+.ng-select__option {
+  @apply ng-w-full ng-flex ng-items-center ng-justify-between ng-px-3 ng-py-2 ng-text-sm;
+  @apply ng-text-left ng-transition-colors ng-duration-150;
+  @apply ng-hover:ng-bg-neutral-50 ng-focus:ng-outline-none ng-focus:ng-bg-neutral-50;
+}
+
+.ng-select__option--selected {
+  @apply ng-bg-primary-50 ng-text-primary-900;
+}
+
+.ng-select__option--focused {
+  @apply ng-bg-neutral-100;
+}
+
+.ng-select__option--disabled {
+  @apply ng-text-neutral-400 ng-cursor-not-allowed;
+}
+
+.ng-select__option--selected.ng-select__option--disabled {
+  @apply ng-bg-primary-100;
+}
+
+/* Contenu d'option */
+.ng-select__option-content {
+  @apply ng-flex ng-flex-col ng-gap-0.5;
+}
+
+.ng-select__option-label {
+  @apply ng-font-medium;
+}
+
+.ng-select__option-description {
+  @apply ng-text-xs ng-text-neutral-600 ng-font-normal;
+}
+
+/* Icône de sélection */
+.ng-select__check-icon {
+  @apply ng-text-primary-600 ng-flex-shrink-0;
+}
+
+/* États interactifs */
+.ng-select:not(.ng-select--disabled):hover .ng-select__element {
+  @apply ng-shadow-sm;
+}
+
+.ng-select--default:not(.ng-select--disabled):hover .ng-select__element {
+  @apply ng-border-neutral-400;
+}
+
+.ng-select--filled:not(.ng-select--disabled):hover .ng-select__element {
+  @apply ng-bg-neutral-200;
+}
+
+/* Focus visible */
+.ng-select__element:focus-visible {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ng-select__label {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-select__description {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-select__element {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-select--default .ng-select__element {
+  @apply ng-bg-neutral-800 ng-border-neutral-600;
+}
+
+[data-theme="dark"] .ng-select--filled .ng-select__element {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-select__dropdown {
+  @apply ng-bg-neutral-800 ng-border-neutral-600;
+}
+
+[data-theme="dark"] .ng-select__option {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-select__option:hover {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-select__option:focus {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-select__option--selected {
+  @apply ng-bg-primary-900 ng-text-primary-100;
+}
+
+[data-theme="dark"] .ng-select__option--selected:hover {
+  @apply ng-bg-primary-800;
+}
+
+[data-theme="dark"] .ng-select__option-description {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-select--default:not(.ng-select--disabled):hover .ng-select__element {
+  @apply ng-border-neutral-500;
+}
+
+[data-theme="dark"] .ng-select--filled:not(.ng-select--disabled):hover .ng-select__element {
+  @apply ng-bg-neutral-600;
+}
+
+/* Multiple select */
+.ng-select--multiple .ng-select__element {
+  @apply ng-py-2;
+}
+
+.ng-select--multiple .ng-select__dropdown {
+  @apply ng-max-h-none;
+}
+
+.ng-select--multiple .ng-select__option {
+  @apply ng-items-start;
+}
+
+.ng-select--multiple .ng-select__option-content {
+  @apply ng-flex-row ng-items-center ng-gap-3;
+}
+
+/* État de loading */
+.ng-select--loading .ng-select__element {
+  @apply ng-cursor-wait;
+}
+
+/* RTL support */
+[dir="rtl"] .ng-select__container {
+  @apply ng-flex-row-reverse;
+}
+
+[dir="rtl"] .ng-select__element {
+  @apply ng-pr-3 ng-pl-10;
+}
+
+[dir="rtl"] .ng-select__icon-wrapper {
+  @apply ng-left-3 ng-right-auto;
+}
+
+[dir="rtl"] .ng-select__dropdown {
+  @apply ng-left-auto ng-right-0;
+}
+
+/* Animations */
+@keyframes select-dropdown-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ng-select__dropdown {
+  animation: select-dropdown-enter 150ms ease-out;
+}
+
+/* Validation states */
+.ng-select--error .ng-select__element {
+  @apply ng-border-error-500;
+}
+
+.ng-select--error .ng-select__element:focus {
+  @apply ng-ring-error-500;
+}
+
+/* Success states */
+.ng-select--success .ng-select__element {
+  @apply ng-border-success-500;
+}
+
+.ng-select--success .ng-select__element:focus {
+  @apply ng-ring-success-500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ng-select__element {
+    @apply ng-text-sm;
+  }
+
+  .ng-select__dropdown {
+    @apply ng-max-h-48;
+  }
+
+  .ng-select__option {
+    @apply ng-px-2 ng-py-1.5;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-select__element,
+  .ng-select__chevron {
+    @apply ng-transition-none;
+  }
+
+  .ng-select__dropdown {
+    animation: none;
+  }
+}
+
+/* Custom scrollbar pour dropdown */
+.ng-select__dropdown::-webkit-scrollbar {
+  @apply ng-w-2;
+}
+
+.ng-select__dropdown::-webkit-scrollbar-track {
+  @apply ng-bg-neutral-100 ng-rounded-full;
+}
+
+.ng-select__dropdown::-webkit-scrollbar-thumb {
+  @apply ng-bg-neutral-300 ng-rounded-full;
+}
+
+.ng-select__dropdown::-webkit-scrollbar-thumb:hover {
+  @apply ng-bg-neutral-400;
+}
+
+[data-theme="dark"] .ng-select__dropdown::-webkit-scrollbar-track {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-select__dropdown::-webkit-scrollbar-thumb {
+  @apply ng-bg-neutral-600;
+}
+
+[data-theme="dark"] .ng-select__dropdown::-webkit-scrollbar-thumb:hover {
+  @apply ng-bg-neutral-500;
+}

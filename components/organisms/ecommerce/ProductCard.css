@@ -1,0 +1,632 @@
+/* ProductCard.css - Styles pour le composant ProductCard */
+
+.ng-product-card {
+  --ng-product-card-bg-color: #ffffff;
+  --ng-product-card-border-color: #e5e7eb;
+  --ng-product-card-border-radius: 0.75rem;
+  --ng-product-card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ng-product-card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  
+  background-color: var(--ng-product-card-bg-color);
+  border: 1px solid var(--ng-product-card-border-color);
+  border-radius: var(--ng-product-card-border-radius);
+  box-shadow: var(--ng-product-card-shadow);
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ng-product-card:hover {
+  box-shadow: var(--ng-product-card-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.ng-product-card--hovered {
+  transform: translateY(-2px);
+  box-shadow: var(--ng-product-card-shadow-hover);
+}
+
+.ng-product-card--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.ng-product-card--loading {
+  pointer-events: none;
+}
+
+.ng-product-card--out-of-stock {
+  opacity: 0.7;
+}
+
+.ng-product-card--low-stock {
+  border-left: 4px solid #f59e0b;
+}
+
+/* Layouts */
+.ng-product-card--compact {
+  max-width: 280px;
+}
+
+.ng-product-card--featured {
+  max-width: 350px;
+  border: 2px solid #3b82f6;
+}
+
+.ng-product-card--minimal {
+  box-shadow: none;
+  border: 1px solid #f3f4f6;
+}
+
+/* Image du produit */
+.ng-product-card__image-container {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #f9fafb;
+}
+
+.ng-product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.ng-product-card:hover .ng-product-card__image {
+  transform: scale(1.05);
+}
+
+.ng-product-card__image-container:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+/* Navigation des images */
+.ng-product-card__image-dots {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.25rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.ng-product-card__image-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ng-product-card__image-dot--active,
+.ng-product-card__image-dot:hover {
+  background-color: white;
+}
+
+/* Badges */
+.ng-product-card__badges {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 10;
+}
+
+.ng-product-card__badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.ng-product-card__badge--new {
+  background-color: #10b981;
+}
+
+.ng-product-card__badge--sale {
+  background-color: #dc2626;
+}
+
+.ng-product-card__badge--bestseller {
+  background-color: #f59e0b;
+  color: #1f2937;
+}
+
+.ng-product-card__badge--out-of-stock {
+  background-color: #6b7280;
+}
+
+.ng-product-card__badge--low-stock {
+  background-color: #f59e0b;
+  color: #1f2937;
+}
+
+/* Actions rapides */
+.ng-product-card__quick-actions {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateX(1rem);
+  transition: all 0.3s ease-in-out;
+}
+
+.ng-product-card:hover .ng-product-card__quick-actions,
+.ng-product-card--hovered .ng-product-card__quick-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ng-product-card__quick-action {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ng-product-card__quick-action:hover {
+  background-color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ng-product-card__quick-action:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-product-card__quick-action svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2;
+}
+
+.ng-product-card__quick-action--active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.ng-product-card__quick-action--add-to-cart {
+  background-color: #10b981;
+  color: white;
+}
+
+.ng-product-card__quick-action--add-to-cart:hover {
+  background-color: #059669;
+}
+
+/* Contenu du produit */
+.ng-product-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  flex: 1;
+}
+
+/* Rating */
+.ng-product-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ng-product-card__stars {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.ng-product-card__star {
+  width: 1rem;
+  height: 1rem;
+  color: #d1d5db;
+}
+
+.ng-product-card__star--filled {
+  color: #f59e0b;
+}
+
+.ng-product-card__review-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Titre */
+.ng-product-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+  flex: 1;
+}
+
+.ng-product-card__title-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #111827;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left;
+  width: 100%;
+}
+
+.ng-product-card__title-link:hover {
+  color: #3b82f6;
+}
+
+.ng-product-card__title-link:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+/* Description */
+.ng-product-card__description {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* SKU */
+.ng-product-card__sku {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-family: monospace;
+}
+
+/* Couleurs */
+.ng-product-card__colors {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.ng-product-card__color-swatch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.ng-product-card__color-swatch:hover {
+  transform: scale(1.1);
+  border-color: #9ca3af;
+}
+
+.ng-product-card__color-swatch--selected {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+}
+
+.ng-product-card__color-swatch:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-product-card__color-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  padding-left: 0.25rem;
+}
+
+/* Tailles */
+.ng-product-card__sizes {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.ng-product-card__size-option {
+  padding: 0.25rem 0.5rem;
+  border: 1px solid #d1d5db;
+  background-color: white;
+  color: #374151;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.ng-product-card__size-option:hover:not(:disabled) {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+.ng-product-card__size-option--selected {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+  color: white;
+}
+
+.ng-product-card__size-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.ng-product-card__size-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  padding-left: 0.25rem;
+}
+
+/* Prix */
+.ng-product-card__price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ng-product-card__savings {
+  font-size: 0.75rem;
+  color: #059669;
+  font-weight: 500;
+}
+
+/* Tags */
+.ng-product-card__tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.ng-product-card__tag {
+  padding: 0.125rem 0.5rem;
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-size: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+/* Bouton d'ajout au panier */
+.ng-product-card__add-to-cart {
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: auto;
+}
+
+.ng-product-card__add-to-cart:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.ng-product-card__add-to-cart:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Layouts spécifiques */
+.ng-product-card--compact .ng-product-card__content {
+  padding: 0.75rem;
+}
+
+.ng-product-card--compact .ng-product-card__title {
+  font-size: 0.875rem;
+}
+
+.ng-product-card--compact .ng-product-card__description {
+  display: none;
+}
+
+.ng-product-card--featured {
+  border: 2px solid #3b82f6;
+}
+
+.ng-product-card--featured .ng-product-card__image-container {
+  aspect-ratio: 4 / 3;
+}
+
+.ng-product-card--minimal {
+  box-shadow: none;
+  border: 1px solid #f3f4f6;
+}
+
+.ng-product-card--minimal .ng-product-card__quick-actions {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ng-product-card {
+    max-width: none;
+  }
+  
+  .ng-product-card__quick-actions {
+    opacity: 1;
+    transform: none;
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  
+  .ng-product-card__quick-action {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .ng-product-card__quick-action svg {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .ng-product-card__badges {
+    top: 0.25rem;
+    left: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ng-product-card__content {
+    padding: 0.75rem;
+  }
+  
+  .ng-product-card__colors {
+    justify-content: center;
+  }
+  
+  .ng-product-card__sizes {
+    justify-content: center;
+  }
+  
+  .ng-product-card__price-container {
+    justify-content: center;
+  }
+}
+
+/* Animation d'apparition */
+.ng-product-card {
+  animation: ng-product-card-fade-in 0.6s ease-out;
+}
+
+@keyframes ng-product-card-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* États d'interaction */
+.ng-product-card__color-swatch::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+}
+
+.ng-product-card__color-swatch:active::after {
+  width: 100%;
+  height: 100%;
+}
+
+/* Accessibilité - Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ng-product-card,
+  .ng-product-card__image,
+  .ng-product-card__quick-action,
+  .ng-product-card__color-swatch,
+  .ng-product-card__size-option,
+  .ng-product-card__add-to-cart {
+    transition: none;
+  }
+  
+  .ng-product-card:hover {
+    transform: none;
+  }
+  
+  .ng-product-card:hover .ng-product-card__quick-actions {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .ng-product-card {
+    animation: none;
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .ng-product-card {
+    --ng-product-card-bg-color: #1f2937;
+    --ng-product-card-border-color: #374151;
+    --ng-product-card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --ng-product-card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  }
+  
+  .ng-product-card__image-container {
+    background-color: #374151;
+  }
+  
+  .ng-product-card__title-link {
+    color: #f9fafb;
+  }
+  
+  .ng-product-card__description {
+    color: #d1d5db;
+  }
+  
+  .ng-product-card__review-count,
+  .ng-product-card__color-count,
+  .ng-product-card__size-count {
+    color: #9ca3af;
+  }
+  
+  .ng-product-card__sku {
+    color: #6b7280;
+  }
+  
+  .ng-product-card__size-option {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .ng-product-card__tag {
+    background-color: #374151;
+    color: #d1d5db;
+  }
+}

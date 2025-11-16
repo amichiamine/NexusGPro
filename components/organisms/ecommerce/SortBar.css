@@ -1,0 +1,561 @@
+/* SortBar.css - Styles pour le composant SortBar */
+
+.ng-sort-bar {
+  --ng-sort-bar-bg-color: #ffffff;
+  --ng-sort-bar-border-color: #e5e7eb;
+  --ng-sort-bar-border-radius: 0.75rem;
+  --ng-sort-bar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ng-sort-bar-padding: 1rem;
+  --ng-sort-bar-gap: 1rem;
+  
+  background-color: var(--ng-sort-bar-bg-color);
+  border: 1px solid var(--ng-sort-bar-border-color);
+  border-radius: var(--ng-sort-bar-border-radius);
+  box-shadow: var(--ng-sort-bar-shadow);
+  width: 100%;
+}
+
+.ng-sort-bar--loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.ng-sort-bar__container {
+  padding: var(--ng-sort-bar-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ng-sort-bar-gap);
+}
+
+/* Contrôles principaux */
+.ng-sort-bar__main {
+  display: flex;
+  align-items: center;
+  gap: var(--ng-sort-bar-gap);
+  flex-wrap: wrap;
+}
+
+/* Nombre de résultats */
+.ng-sort-bar__results {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  min-width: 8rem;
+}
+
+.ng-sort-bar__results-count {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.ng-sort-bar__results-filtered {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* Container de tri */
+.ng-sort-bar__sort-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 12rem;
+}
+
+.ng-sort-bar__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.ng-sort-bar__select-container {
+  position: relative;
+  flex: 1;
+  min-width: 10rem;
+}
+
+.ng-sort-bar__select {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: white;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.ng-sort-bar__select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-color: #3b82f6;
+}
+
+.ng-sort-bar__select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-sort-bar__select-arrow {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  color: #6b7280;
+  pointer-events: none;
+  stroke-width: 2;
+}
+
+.ng-sort-bar__option-icon {
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Toggle de direction */
+.ng-sort-bar__direction-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ng-sort-bar__direction-toggle {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.ng-sort-bar__direction-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  min-width: 5rem;
+  justify-content: center;
+}
+
+.ng-sort-bar__direction-btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+.ng-sort-bar__direction-btn--active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.ng-sort-bar__direction-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+  z-index: 1;
+  position: relative;
+}
+
+.ng-sort-bar__direction-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-sort-bar__direction-icon {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ng-sort-bar__direction-icon--desc {
+  transform: rotate(180deg);
+}
+
+.ng-sort-bar__direction-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Options de vue */
+.ng-sort-bar__view-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ng-sort-bar__view-options {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+.ng-sort-bar__view-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+}
+
+.ng-sort-bar__view-btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+  color: #374151;
+}
+
+.ng-sort-bar__view-btn--active {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.ng-sort-bar__view-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+  z-index: 1;
+  position: relative;
+}
+
+.ng-sort-bar__view-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-sort-bar__view-btn svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2;
+}
+
+/* Filtres */
+.ng-sort-bar__filters {
+  border-top: 1px solid #f3f4f6;
+  padding-top: var(--ng-sort-bar-gap);
+}
+
+.ng-sort-bar__filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.ng-sort-bar__filters-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.ng-sort-bar__clear-filters {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.ng-sort-bar__clear-filters:hover {
+  color: #1d4ed8;
+}
+
+.ng-sort-bar__filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ng-sort-bar__filter-btn {
+  background: none;
+  border: 1px solid #d1d5db;
+  padding: 0.375rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.ng-sort-bar__filter-btn:hover:not(:disabled) {
+  border-color: #3b82f6;
+  color: #374151;
+}
+
+.ng-sort-bar__filter-btn--active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.ng-sort-bar__filter-btn:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-sort-bar__filter-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-sort-bar__filter-count {
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.75rem;
+  font-size: 0.625rem;
+  font-weight: 600;
+}
+
+.ng-sort-bar__filter-btn--active .ng-sort-bar__filter-count {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Options avancées */
+.ng-sort-bar__advanced {
+  border-top: 1px solid #f3f4f6;
+  padding-top: var(--ng-sort-bar-gap);
+}
+
+.ng-sort-bar__advanced-toggle {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.ng-sort-bar__advanced-toggle:hover {
+  color: #1d4ed8;
+}
+
+.ng-sort-bar__advanced-arrow {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ng-sort-bar__advanced-arrow--open {
+  transform: rotate(180deg);
+}
+
+.ng-sort-bar__advanced-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.ng-sort-bar__advanced--open .ng-sort-bar__advanced-content {
+  max-height: 20rem;
+}
+
+/* Positionnement flottant */
+.ng-sort-bar--floating {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 20rem;
+  z-index: 40;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ng-sort-bar--floating {
+    position: static;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .ng-sort-bar {
+    --ng-sort-bar-padding: 0.75rem;
+  }
+  
+  .ng-sort-bar__main {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .ng-sort-bar__results {
+    align-items: center;
+    min-width: auto;
+  }
+  
+  .ng-sort-bar__results-count {
+    font-size: 1rem;
+  }
+  
+  .ng-sort-bar__sort-container,
+  .ng-sort-bar__direction-container {
+    min-width: auto;
+  }
+  
+  .ng-sort-bar__direction-toggle {
+    width: 100%;
+  }
+  
+  .ng-sort-bar__direction-btn {
+    flex: 1;
+  }
+  
+  .ng-sort-bar__view-container {
+    justify-content: center;
+  }
+  
+  .ng-sort-bar__filters {
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ng-sort-bar {
+    --ng-sort-bar-padding: 0.5rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .ng-sort-bar__filter-options {
+    justify-content: center;
+  }
+  
+  .ng-sort-bar__filter-btn {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+  }
+}
+
+/* États de focus et accessibilité */
+.ng-sort-bar__select:focus,
+.ng-sort-bar__direction-btn:focus,
+.ng-sort-bar__view-btn:focus,
+.ng-sort-bar__filter-btn:focus,
+.ng-sort-bar__clear-filters:focus,
+.ng-sort-bar__advanced-toggle:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Animation d'apparition */
+.ng-sort-bar {
+  animation: ng-sort-bar-fade-in 0.4s ease-out;
+}
+
+@keyframes ng-sort-bar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* États d'interaction */
+.ng-sort-bar__direction-btn:active,
+.ng-sort-bar__view-btn:active,
+.ng-sort-bar__filter-btn:active {
+  transform: scale(0.98);
+}
+
+/* Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ng-sort-bar__direction-icon,
+  .ng-sort-bar__view-btn,
+  .ng-sort-bar__filter-btn,
+  .ng-sort-bar__advanced-arrow,
+  .ng-sort-bar__advanced-content,
+  .ng-sort-bar {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .ng-sort-bar {
+    --ng-sort-bar-bg-color: #1f2937;
+    --ng-sort-bar-border-color: #374151;
+    --ng-sort-bar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .ng-sort-bar__label {
+    color: #d1d5db;
+  }
+  
+  .ng-sort-bar__results-count {
+    color: #f9fafb;
+  }
+  
+  .ng-sort-bar__results-filtered {
+    color: #9ca3af;
+  }
+  
+  .ng-sort-bar__select {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .ng-sort-bar__direction-toggle,
+  .ng-sort-bar__view-options {
+    border-color: #4b5563;
+  }
+  
+  .ng-sort-bar__direction-btn {
+    color: #9ca3af;
+  }
+  
+  .ng-sort-bar__direction-btn:hover:not(:disabled) {
+    background-color: #374151;
+    color: #f3f4f6;
+  }
+  
+  .ng-sort-bar__view-btn {
+    color: #9ca3af;
+  }
+  
+  .ng-sort-bar__view-btn:hover:not(:disabled) {
+    background-color: #374151;
+    color: #f3f4f6;
+  }
+  
+  .ng-sort-bar__filter-btn {
+    background-color: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+  }
+  
+  .ng-sort-bar__filter-btn:hover:not(:disabled) {
+    border-color: #3b82f6;
+    color: #f3f4f6;
+  }
+  
+  .ng-sort-bar__filters-title {
+    color: #d1d5db;
+  }
+}

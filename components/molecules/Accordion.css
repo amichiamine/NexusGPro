@@ -1,0 +1,407 @@
+/**
+ * Styles CSS pour le composant Accordion
+ * Utilise le système de variables CSS globales pour cohérence et theming
+ */
+
+/* === VARIABLES CSS === */
+:root {
+  /* Couleurs */
+  --accordion-header-bg: var(--white);
+  --accordion-header-bg-hover: var(--gray-50);
+  --accordion-header-bg-active: var(--gray-100);
+  --accordion-header-border: var(--gray-200);
+  --accordion-header-text: var(--gray-900);
+  --accordion-header-text-muted: var(--gray-600);
+  --accordion-chevron: var(--gray-400);
+  --accordion-chevron-hover: var(--gray-600);
+  --accordion-panel-bg: var(--white);
+  --accordion-panel-border: var(--gray-200);
+  --accordion-focus: var(--primary-500);
+
+  /* Tailles */
+  --accordion-padding: 16px;
+  --accordion-gap: 4px;
+  --accordion-border-radius: 6px;
+  --accordion-chevron-size: 16px;
+  --accordion-header-height: auto;
+  --accordion-transition: all 0.3s ease-in-out;
+
+  /* Espacements */
+  --accordion-item-gap: 8px;
+  --accordion-header-padding: var(--accordion-padding);
+  --accordion-panel-padding: var(--accordion-padding);
+}
+
+/* === COMPOSANT ACCORDION === */
+.accordion {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  gap: var(--accordion-item-gap);
+  
+  /* Style de base */
+  background-color: transparent;
+  
+  /* Accessibilité */
+  user-select: none;
+}
+
+/* === ÉLÉMENTS DE L'ACCORDION === */
+
+/* Item de l'accordion */
+.accordion__item {
+  border: 1px solid var(--accordion-header-border);
+  border-radius: var(--accordion-border-radius);
+  background-color: var(--accordion-header-bg);
+  overflow: hidden;
+  
+  /* Transitions */
+  transition: var(--accordion-transition);
+}
+
+.accordion__item--open {
+  border-color: var(--accordion-focus);
+}
+
+/* Header container */
+.accordion__header-container {
+  margin: 0;
+}
+
+/* Header (bouton) */
+.accordion__header {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  
+  /* Sizing */
+  padding: var(--accordion-header-padding);
+  min-height: var(--accordion-header-height);
+  
+  /* Style */
+  background-color: var(--accordion-header-bg);
+  color: var(--accordion-header-text);
+  border: none;
+  border-radius: 0;
+  
+  /* Typography */
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  line-height: var(--line-height-base);
+  text-align: left;
+  
+  /* Interactions */
+  cursor: pointer;
+  transition: var(--accordion-transition);
+  
+  /* Accessibilité */
+  outline: none;
+  
+  /* États */
+  &:hover:not(:disabled) {
+    background-color: var(--accordion-header-bg-hover);
+  }
+  
+  &:active:not(:disabled) {
+    background-color: var(--accordion-header-bg-active);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--accordion-focus);
+    outline-offset: -2px;
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+/* Titre de l'en-tête */
+.accordion__title {
+  flex: 1;
+  margin-right: 8px;
+  
+  /* Limite le texte à une ligne */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Chevron/icône */
+.accordion__chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--accordion-chevron-size);
+  height: var(--accordion-chevron-size);
+  color: var(--accordion-chevron);
+  font-size: 12px;
+  transition: transform 0.2s ease-in-out;
+  flex-shrink: 0;
+}
+
+.accordion__chevron--open {
+  transform: rotate(180deg);
+  color: var(--accordion-chevron-hover);
+}
+
+/* Panel (contenu) */
+.accordion__panel {
+  /* Layout */
+  overflow: hidden;
+  
+  /* Style */
+  background-color: var(--accordion-panel-bg);
+  border-top: 1px solid var(--accordion-panel-border);
+  
+  /* Animation */
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* États du panel */
+.accordion__panel--closed {
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.accordion__panel--open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Contenu du panel */
+.accordion__content {
+  padding: var(--accordion-panel-padding);
+  
+  /* Typography */
+  color: var(--gray-700);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+}
+
+/* === ÉTATS === */
+
+/* Accordion désactivé */
+.accordion--disabled {
+  pointer-events: none;
+}
+
+.accordion__item--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.accordion__item--disabled .accordion__header {
+  cursor: not-allowed;
+}
+
+/* === ANIMATIONS === */
+
+/* Animation d'ouverture/fermeture */
+.accordion--animated .accordion__panel {
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+.accordion--animated .accordion__chevron {
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.accordion--animated .accordion__header {
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* === RESPONSIVE === */
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --accordion-padding: 12px;
+  }
+  
+  .accordion__header {
+    padding: 12px;
+    font-size: 15px;
+  }
+  
+  .accordion__content {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .accordion__title {
+    font-size: 15px;
+  }
+  
+  .accordion__chevron {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* === ACCESSIBILITÉ === */
+
+/* Focus visible amélioré */
+.accordion__header:focus-visible {
+  outline: 2px solid var(--accordion-focus);
+  outline-offset: -2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Réduction des animations pour utilisateurs sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .accordion {
+    transition: none;
+  }
+  
+  .accordion__header {
+    transition: none;
+  }
+  
+  .accordion__chevron {
+    transition: none;
+  }
+  
+  .accordion__panel {
+    transition: none;
+  }
+  
+  .accordion--animated .accordion__chevron {
+    transform: none !important;
+  }
+}
+
+/* Préférence pour utilisateur avec contraste élevé */
+@media (prefers-contrast: high) {
+  .accordion__item {
+    border-width: 2px;
+    border-color: var(--gray-600);
+  }
+  
+  .accordion__item--open {
+    border-color: var(--primary-700);
+  }
+  
+  .accordion__header {
+    border: 1px solid var(--gray-400);
+  }
+  
+  .accordion__panel {
+    border-top-width: 2px;
+  }
+}
+
+/* === THÈME SOMBRE === */
+[data-theme="dark"] {
+  :root {
+    --accordion-header-bg: var(--gray-800);
+    --accordion-header-bg-hover: var(--gray-700);
+    --accordion-header-bg-active: var(--gray-600);
+    --accordion-header-border: var(--gray-700);
+    --accordion-header-text: var(--gray-100);
+    --accordion-header-text-muted: var(--gray-300);
+    --accordion-chevron: var(--gray-500);
+    --accordion-chevron-hover: var(--gray-300);
+    --accordion-panel-bg: var(--gray-800);
+    --accordion-panel-border: var(--gray-700);
+  }
+  
+  .accordion__content {
+    color: var(--gray-300);
+  }
+}
+
+/* === PRINT === */
+@media print {
+  .accordion {
+    border: 1px solid var(--gray-400);
+  }
+  
+  .accordion__item {
+    border: 1px solid var(--gray-400);
+    page-break-inside: avoid;
+  }
+  
+  .accordion__header {
+    background: var(--gray-100) !important;
+    color: var(--gray-900) !important;
+    cursor: default !important;
+    border-bottom: 1px solid var(--gray-400);
+  }
+  
+  .accordion__panel {
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    border-top: 1px solid var(--gray-400);
+  }
+  
+  .accordion__chevron {
+    display: none;
+  }
+}
+
+/* === UTILITAIRES === */
+
+/* Accordion compact */
+.accordion--compact {
+  --accordion-padding: 12px;
+  --accordion-item-gap: 4px;
+}
+
+.accordion--compact .accordion__content {
+  padding: 12px;
+  font-size: 14px;
+}
+
+/* Accordion avec bordures arrondies */
+.accordion--rounded .accordion__item {
+  border-radius: 8px;
+}
+
+/* Accordion dense */
+.accordion--dense {
+  --accordion-padding: 8px;
+  --accordion-item-gap: 2px;
+}
+
+.accordion--dense .accordion__content {
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* === ANIMATIONS AVANCÉES === */
+
+/* Animation de slide */
+.accordion--slide .accordion__panel {
+  transform: translateY(-10px);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.accordion--slide .accordion__panel--open {
+  transform: translateY(0);
+}
+
+/* Animation de fade */
+.accordion--fade .accordion__panel {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.accordion--fade .accordion__panel--closed {
+  height: auto;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.accordion--fade .accordion__panel--open {
+  height: auto;
+  max-height: 500px;
+  padding-top: var(--accordion-panel-padding);
+  padding-bottom: var(--accordion-panel-padding);
+}

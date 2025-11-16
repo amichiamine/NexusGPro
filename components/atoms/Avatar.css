@@ -1,0 +1,324 @@
+/**
+ * Styles CSS pour le composant Avatar
+ * Utilise le système de variables CSS globales pour cohérence et theming
+ */
+
+/* === VARIABLES CSS === */
+:root {
+  /* Tailles prédéfinies */
+  --avatar-size-xs: 24px;
+  --avatar-size-sm: 32px;
+  --avatar-size-md: 40px;
+  --avatar-size-lg: 48px;
+  --avatar-size-xl: 64px;
+  --avatar-size-2xl: 80px;
+
+  /* Tailles des statuts */
+  --avatar-status-size-xs: 6px;
+  --avatar-status-size-sm: 8px;
+  --avatar-status-size-md: 10px;
+  --avatar-status-size-lg: 12px;
+  --avatar-status-size-xl: 14px;
+  --avatar-status-size-2xl: 16px;
+
+  /* Positions des statuts */
+  --avatar-status-offset-xs: 2px;
+  --avatar-status-offset-sm: 3px;
+  --avatar-status-offset-md: 4px;
+  --avatar-status-offset-lg: 5px;
+  --avatar-status-offset-xl: 6px;
+  --avatar-status-offset-2xl: 8px;
+
+  /* Couleurs de fond pour initiales */
+  --avatar-initials-bg-xs: var(--gray-100);
+  --avatar-initials-bg-sm: var(--gray-200);
+  --avatar-initials-bg-md: var(--gray-300);
+  --avatar-initials-bg-lg: var(--gray-400);
+  --avatar-initials-bg-xl: var(--gray-500);
+  --avatar-initials-bg-2xl: var(--gray-600);
+
+  /* Couleurs de texte pour initiales */
+  --avatar-initials-color-xs: var(--gray-600);
+  --avatar-initials-color-sm: var(--gray-700);
+  --avatar-initials-color-md: var(--gray-800);
+  --avatar-initials-color-lg: var(--white);
+  --avatar-initials-color-xl: var(--white);
+  --avatar-initials-color-2xl: var(--white);
+
+  /* Police des initiales */
+  --avatar-font-weight: 600;
+  --avatar-text-transform: uppercase;
+
+  /* Bordures */
+  --avatar-border-width: 2px;
+  --avatar-border-color: var(--white);
+  --avatar-border-radius: 50%;
+
+  /* Ombres */
+  --avatar-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --avatar-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --avatar-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  /* Transitions */
+  --avatar-transition: all 0.2s ease-in-out;
+}
+
+/* === COMPOSANT AVATAR === */
+.avatar {
+  /* Layout */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Sizing par défaut */
+  width: var(--avatar-size-md);
+  height: var(--avatar-size-md);
+  
+  /* Forme */
+  border-radius: var(--avatar-border-radius);
+  overflow: hidden;
+  
+  /* Bordure */
+  border: var(--avatar-border-width) solid var(--avatar-border-color);
+  
+  /* Style */
+  background-color: var(--avatar-initials-bg-md);
+  
+  /* Typographie */
+  font-weight: var(--avatar-font-weight);
+  text-transform: var(--avatar-text-transform);
+  color: var(--avatar-initials-color-md);
+  
+  /* Interactions */
+  transition: var(--avatar-transition);
+  
+  /* Accessibilité */
+  user-select: none;
+  -webkit-user-drag: none;
+  
+  /* Focus pour accessibilité clavier (si clickable) */
+  &:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+  }
+}
+
+/* === TAILLES === */
+
+/* Extra Small */
+.avatar--xs {
+  width: var(--avatar-size-xs);
+  height: var(--avatar-size-xs);
+  border-width: 1px;
+  font-size: 10px;
+}
+
+.avatar--xs .avatar__status {
+  width: var(--avatar-status-size-xs);
+  height: var(--avatar-status-size-xs);
+}
+
+/* Small */
+.avatar--sm {
+  width: var(--avatar-size-sm);
+  height: var(--avatar-size-sm);
+  border-width: 1px;
+  font-size: 12px;
+}
+
+.avatar--sm .avatar__status {
+  width: var(--avatar-status-size-sm);
+  height: var(--avatar-status-size-sm);
+}
+
+/* Large */
+.avatar--lg {
+  width: var(--avatar-size-lg);
+  height: var(--avatar-size-lg);
+  font-size: 18px;
+  box-shadow: var(--avatar-shadow-sm);
+}
+
+.avatar--lg .avatar__status {
+  width: var(--avatar-status-size-lg);
+  height: var(--avatar-status-size-lg);
+}
+
+/* Extra Large */
+.avatar--xl {
+  width: var(--avatar-size-xl);
+  height: var(--avatar-size-xl);
+  font-size: 24px;
+  box-shadow: var(--avatar-shadow-md);
+}
+
+.avatar--xl .avatar__status {
+  width: var(--avatar-status-size-xl);
+  height: var(--avatar-status-size-xl);
+}
+
+/* 2X Large */
+.avatar--2xl {
+  width: var(--avatar-size-2xl);
+  height: var(--avatar-size-2xl);
+  font-size: 30px;
+  box-shadow: var(--avatar-shadow-lg);
+}
+
+.avatar--2xl .avatar__status {
+  width: var(--avatar-status-size-2xl);
+  height: var(--avatar-status-size-2xl);
+}
+
+/* === ÉTATS === */
+
+/* Avatar clickable */
+.avatar--clickable {
+  cursor: pointer;
+}
+
+.avatar--clickable:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--avatar-shadow-md);
+}
+
+.avatar--clickable:active {
+  transform: translateY(0);
+}
+
+/* Avatar avec image */
+.avatar--has-image {
+  background-color: transparent;
+  color: transparent;
+}
+
+/* Avatar en chargement */
+.avatar--loading {
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-300) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: avatar-loading 1.5s infinite;
+}
+
+@keyframes avatar-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Avatar en erreur */
+.avatar--error {
+  background-color: var(--error-100);
+  color: var(--error-600);
+}
+
+/* === ÉLÉMENTS INTERNES === */
+
+/* Image de l'avatar */
+.avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Initiales de l'avatar */
+.avatar__initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: var(--avatar-font-weight);
+  text-transform: var(--avatar-text-transform);
+  line-height: 1;
+}
+
+/* Statut de l'avatar */
+.avatar__status {
+  position: absolute;
+  bottom: var(--avatar-status-offset-md);
+  right: var(--avatar-status-offset-md);
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  z-index: 1;
+}
+
+/* === RESPONSIVE === */
+
+/* Mobile - ajustements automatiques */
+@media (max-width: 768px) {
+  .avatar--xl {
+    width: calc(var(--avatar-size-xl) * 0.8);
+    height: calc(var(--avatar-size-xl) * 0.8);
+    font-size: 20px;
+  }
+  
+  .avatar--2xl {
+    width: calc(var(--avatar-size-2xl) * 0.7);
+    height: calc(var(--avatar-size-2xl) * 0.7);
+    font-size: 24px;
+  }
+}
+
+/* === ACCESSIBILITÉ === */
+
+/* Réduction des animations pour utilisateurs sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .avatar {
+    transition: none;
+  }
+  
+  .avatar--loading {
+    animation: none;
+    background: var(--gray-300);
+  }
+}
+
+/* === THÈME SOMBRE === */
+[data-theme="dark"] {
+  .avatar {
+    border-color: var(--gray-700);
+  }
+  
+  .avatar__status {
+    border-color: var(--gray-800);
+  }
+  
+  .avatar--error {
+    background-color: var(--error-900);
+    color: var(--error-300);
+  }
+  
+  /* Ajustement des initiales pour le thème sombre */
+  .avatar--xs {
+    background-color: var(--gray-800);
+    color: var(--gray-200);
+  }
+  
+  .avatar--sm {
+    background-color: var(--gray-700);
+    color: var(--gray-100);
+  }
+}
+
+/* === PRINT === */
+@media print {
+  .avatar {
+    background: transparent !important;
+    border: 1px solid var(--gray-400) !important;
+    box-shadow: none !important;
+  }
+  
+  .avatar__image {
+    filter: grayscale(100%);
+  }
+  
+  .avatar__status {
+    display: none;
+  }
+}

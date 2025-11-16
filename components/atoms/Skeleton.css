@@ -1,0 +1,405 @@
+/**
+ * Styles CSS pour le composant Skeleton
+ * Utilise le système de variables CSS globales pour cohérence et theming
+ */
+
+/* === VARIABLES CSS === */
+:root {
+  /* Couleurs par défaut */
+  --skeleton-bg: var(--gray-200);
+  --skeleton-highlight: var(--gray-300);
+  
+  /* Durées d'animation */
+  --skeleton-animation-duration: 1.5s;
+  --skeleton-animation-ease: ease-in-out;
+  
+  /* Tailles par défaut */
+  --skeleton-size-xs-height: 12px;
+  --skeleton-size-sm-height: 16px;
+  --skeleton-size-md-height: 20px;
+  --skeleton-size-lg-height: 24px;
+  --skeleton-size-xl-height: 32px;
+  
+  /* Radius pour les formes circulaires */
+  --skeleton-radius-circle: 50%;
+  --skeleton-radius-rectangle: 6px;
+  
+  /* Espacement pour les textes multilignes */
+  --skeleton-text-line-gap: 8px;
+}
+
+/* === COMPOSANT SKELETON === */
+.skeleton {
+  /* Layout */
+  display: inline-block;
+  position: relative;
+  
+  /* Sizing */
+  width: auto;
+  height: auto;
+  
+  /* Style de base */
+  background-color: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius-rectangle);
+  
+  /* Transitions */
+  transition: all 0.2s ease-in-out;
+  
+  /* Accessibilité */
+  user-select: none;
+  pointer-events: none;
+}
+
+/* === ANIMATIONS === */
+
+/* Animation par défaut */
+.skeleton--animated {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-bg) 25%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading var(--skeleton-animation-duration) var(--skeleton-animation-ease) infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Animation en mouvement */
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* === TAILLES === */
+
+/* Extra Small */
+.skeleton--xs {
+  height: var(--skeleton-size-xs-height);
+}
+
+/* Small */
+.skeleton--sm {
+  height: var(--skeleton-size-sm-height);
+}
+
+/* Large */
+.skeleton--lg {
+  height: var(--skeleton-size-lg-height);
+}
+
+/* Extra Large */
+.skeleton--xl {
+  height: var(--skeleton-size-xl-height);
+}
+
+/* === TYPES DE SKELETONS === */
+
+/* Skeleton de texte */
+.skeleton--text {
+  border-radius: var(--skeleton-radius-rectangle);
+  width: 100%;
+}
+
+.skeleton__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--skeleton-text-line-gap);
+}
+
+.skeleton__line {
+  background-color: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius-rectangle);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton--animated .skeleton__line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+  animation: skeleton-shimmer var(--skeleton-animation-duration) infinite;
+}
+
+.skeleton__line--full {
+  width: 100%;
+}
+
+.skeleton__line--partial {
+  width: 60%;
+}
+
+.skeleton--text-multiline {
+  min-height: calc((var(--skeleton-size-md-height) * 1) + (var(--skeleton-text-line-gap) * (var(--lines, 1) - 1)));
+}
+
+/* Skeleton de cercle/avatar */
+.skeleton--circle,
+.skeleton--avatar {
+  border-radius: var(--skeleton-radius-circle);
+  background-color: var(--skeleton-bg);
+}
+
+.skeleton__circle {
+  border-radius: var(--skeleton-radius-circle);
+  background-color: var(--skeleton-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton--animated .skeleton__circle::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+  animation: skeleton-shimmer var(--skeleton-animation-duration) infinite;
+}
+
+/* Skeleton de rectangle */
+.skeleton--rectangle {
+  border-radius: var(--skeleton-radius-rectangle);
+}
+
+.skeleton__rectangle {
+  border-radius: var(--skeleton-radius-rectangle);
+  background-color: var(--skeleton-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton--animated .skeleton__rectangle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+  animation: skeleton-shimmer var(--skeleton-animation-duration) infinite;
+}
+
+/* Skeleton de bouton */
+.skeleton--button {
+  border-radius: var(--skeleton-radius-rectangle);
+}
+
+.skeleton__button {
+  border-radius: var(--skeleton-radius-rectangle);
+  background-color: var(--skeleton-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton--animated .skeleton__button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+  animation: skeleton-shimmer var(--skeleton-animation-duration) infinite;
+}
+
+/* Skeleton de carte */
+.skeleton--card {
+  border-radius: var(--skeleton-radius-rectangle);
+}
+
+.skeleton__card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton__card-image {
+  background-color: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius-rectangle);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton__card-title {
+  width: 70%;
+  height: 20px;
+  background-color: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius-rectangle);
+  position: relative;
+}
+
+.skeleton__card-description {
+  width: 90%;
+  height: 16px;
+  background-color: var(--skeleton-bg);
+  border-radius: var(--skeleton-radius-rectangle);
+  position: relative;
+}
+
+.skeleton--animated .skeleton__card-image::after,
+.skeleton--animated .skeleton__card-title::after,
+.skeleton--animated .skeleton__card-description::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--skeleton-highlight),
+    transparent
+  );
+  animation: skeleton-shimmer var(--skeleton-animation-duration) infinite;
+}
+
+/* === ÉTATS === */
+
+/* Skeleton inactif (sans animation) */
+.skeleton:not(.skeleton--animated) {
+  animation: none;
+}
+
+.skeleton:not(.skeleton--animated)::after {
+  display: none;
+}
+
+/* === RESPONSIVE === */
+
+/* Mobile - ajustements automatiques */
+@media (max-width: 768px) {
+  .skeleton--xl {
+    height: calc(var(--skeleton-size-xl-height) * 0.8);
+  }
+  
+  .skeleton--lg {
+    height: calc(var(--skeleton-size-lg-height) * 0.9);
+  }
+  
+  .skeleton--card {
+    min-width: 250px;
+  }
+}
+
+/* === ACCESSIBILITÉ === */
+
+/* Réduction des animations pour utilisateurs sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton--animated {
+    animation: none;
+    background: var(--skeleton-bg);
+  }
+  
+  .skeleton--animated::after {
+    display: none;
+  }
+}
+
+/* Préférence pour utilisateur avec contraste élevé */
+@media (prefers-contrast: high) {
+  .skeleton {
+    background-color: var(--gray-300);
+    border: 1px solid var(--gray-400);
+  }
+}
+
+/* === THÈME SOMBRE === */
+[data-theme="dark"] {
+  :root {
+    --skeleton-bg: var(--gray-700);
+    --skeleton-highlight: var(--gray-600);
+  }
+}
+
+/* === PRINT === */
+@media print {
+  .skeleton {
+    background: transparent !important;
+    border: 1px dashed var(--gray-400) !important;
+    animation: none !important;
+  }
+  
+  .skeleton::after {
+    display: none !important;
+  }
+}
+
+/* === UTILITAIRES === */
+
+/* Skeleton en groupe */
+.skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-group .skeleton {
+  width: 100%;
+}
+
+/* Skeleton grid */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Skeleton flex */
+.skeleton-flex {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.skeleton-flex .skeleton:first-child {
+  flex-shrink: 0;
+}
+
+.skeleton-flex .skeleton:last-child {
+  flex: 1;
+}

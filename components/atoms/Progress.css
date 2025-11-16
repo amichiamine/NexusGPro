@@ -1,0 +1,454 @@
+/* ==========================================================================
+   Progress Component Styles
+   ========================================================================== */
+
+.ng-progress {
+  @apply ng-flex ng-flex-col ng-gap-2;
+}
+
+.ng-progress--full-width {
+  @apply ng-w-full;
+}
+
+/* Label wrapper */
+.ng-progress__label-wrapper {
+  @apply ng-flex ng-flex-col ng-gap-1;
+}
+
+.ng-progress__label {
+  @apply ng-flex ng-items-center ng-justify-between;
+  @apply ng-text-sm ng-font-medium ng-text-neutral-900;
+}
+
+.ng-progress__value {
+  @apply ng-text-xs ng-text-neutral-600 ng-font-normal;
+}
+
+.ng-progress__description {
+  @apply ng-text-xs ng-text-neutral-600 ng-m-0;
+}
+
+/* Container principal */
+.ng-progress__container {
+  @apply ng-relative ng-flex ng-items-center;
+}
+
+/* Track (barre de fond) */
+.ng-progress__track {
+  @apply ng-w-full ng-relative ng-overflow-hidden ng-rounded-full;
+  @apply ng-bg-neutral-200;
+}
+
+/* Tailles du track */
+.ng-progress--sm .ng-progress__track {
+  @apply ng-h-2;
+}
+
+.ng-progress--md .ng-progress__track {
+  @apply ng-h-3;
+}
+
+.ng-progress--lg .ng-progress__track {
+  @apply ng-h-4;
+}
+
+.ng-progress--xl .ng-progress__track {
+  @apply ng-h-6;
+}
+
+/* Indicator (barre de progression) */
+.ng-progress__indicator {
+  @apply ng-h-full ng-rounded-full ng-transition-all ng-duration-300;
+  @apply ng-bg-primary-600;
+}
+
+/* Tailles du track en mode circulaire */
+.ng-progress--sm.ng-progress--circular .ng-progress__track {
+  @apply ng-h-8 ng-w-8;
+}
+
+.ng-progress--md.ng-progress--circular .ng-progress__track {
+  @apply ng-h-12 ng-w-12;
+}
+
+.ng-progress--lg.ng-progress--circular .ng-progress__track {
+  @apply ng-h-16 ng-w-16;
+}
+
+.ng-progress--xl.ng-progress--circular .ng-progress__track {
+  @apply ng-h-20 ng-w-20;
+}
+
+/* Variantes de couleur */
+.ng-progress--default .ng-progress__indicator {
+  @apply ng-bg-primary-600;
+}
+
+.ng-progress--success .ng-progress__indicator {
+  @apply ng-bg-success-600;
+}
+
+.ng-progress--warning .ng-progress__indicator {
+  @apply ng-bg-warning-600;
+}
+
+.ng-progress--error .ng-progress__indicator {
+  @apply ng-bg-error-600;
+}
+
+.ng-progress--info .ng-progress__indicator {
+  @apply ng-bg-info-600;
+}
+
+/* Variantes de couleur pour track circulaire */
+.ng-progress--default .ng-progress__track {
+  @apply ng-stroke-neutral-200;
+}
+
+.ng-progress--success .ng-progress__track {
+  @apply ng-stroke-success-200;
+}
+
+.ng-progress--warning .ng-progress__track {
+  @apply ng-stroke-warning-200;
+}
+
+.ng-progress--error .ng-progress__track {
+  @apply ng-stroke-error-200;
+}
+
+.ng-progress--info .ng-progress__track {
+  @apply ng-stroke-info-200;
+}
+
+/* Mode circulaire */
+.ng-progress__circular {
+  @apply ng-relative ng-transform ng-rotate-[-90deg];
+}
+
+.ng-progress__track,
+.ng-progress__indicator {
+  stroke-linecap: round;
+}
+
+/* Texte dans la progress */
+.ng-progress__text-wrapper {
+  @apply ng-absolute ng-inset-0 ng-flex ng-items-center ng-justify-center;
+  @apply ng-text-center;
+}
+
+.ng-progress__text-wrapper--center {
+  @apply ng-absolute ng-inset-0;
+}
+
+.ng-progress__text {
+  @apply ng-text-xs ng-font-medium;
+}
+
+.ng-progress__text--label {
+  @apply ng-text-neutral-700;
+}
+
+.ng-progress__text--value {
+  @apply ng-text-neutral-900;
+}
+
+.ng-progress--text-inside .ng-progress__text-wrapper {
+  @apply ng-relative ng-static ng-invisible ng-h-full ng-w-full;
+}
+
+.ng-progress--text-inside .ng-progress__track {
+  @apply ng-invisible;
+}
+
+/* Mode par étapes */
+.ng-progress__steps {
+  @apply ng-flex ng-items-center ng-justify-between ng-w-full;
+}
+
+.ng-progress__step {
+  @apply ng-flex ng-flex-col ng-items-center ng-gap-2;
+}
+
+.ng-progress__step-circle {
+  @apply ng-relative ng-flex ng-items-center ng-justify-center;
+  @apply ng-w-6 ng-h-6 ng-rounded-full;
+  @apply ng-border-2 ng-transition-colors ng-duration-200;
+}
+
+.ng-progress__step-label {
+  @apply ng-text-xs ng-text-neutral-600 ng-text-center ng-font-medium;
+}
+
+/* États des étapes */
+.ng-progress__step--completed .ng-progress__step-circle {
+  @apply ng-bg-success-600 ng-border-success-600 ng-text-white;
+}
+
+.ng-progress__step--active .ng-progress__step-circle {
+  @apply ng-bg-primary-600 ng-border-primary-600 ng-text-white;
+}
+
+.ng-progress__step--pending .ng-progress__step-circle {
+  @apply ng-bg-transparent ng-border-neutral-300 ng-text-neutral-500;
+}
+
+.ng-progress__step-number {
+  @apply ng-text-xs ng-font-medium;
+}
+
+/* Icônes pour les étapes */
+.ng-progress__step-check {
+  @apply ng-text-white ng-flex-shrink-0;
+}
+
+/* Tailles du mode par étapes */
+.ng-progress--sm .ng-progress__step-circle {
+  @apply ng-w-5 ng-h-5;
+}
+
+.ng-progress--lg .ng-progress__step-circle {
+  @apply ng-w-8 ng-h-8;
+}
+
+.ng-progress--xl .ng-progress__step-circle {
+  @apply ng-w-10 ng-h-10;
+}
+
+.ng-progress--sm .ng-progress__step-number {
+  @apply ng-text-xs;
+}
+
+.ng-progress--lg .ng-progress__step-number {
+  @apply ng-text-sm;
+}
+
+.ng-progress--xl .ng-progress__step-number {
+  @apply ng-text-base;
+}
+
+/* Animation indéterminée */
+.ng-progress__indicator--animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.ng-progress__indicator--animated::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Animation circulaire indéterminée */
+.ng-progress--indeterminate .ng-progress__indicator {
+  animation: progress-circular 2s linear infinite;
+}
+
+@keyframes progress-circular {
+  0% {
+    stroke-dashoffset: 0;
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    stroke-dashoffset: -100;
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation des étapes */
+.ng-progress__step-circle {
+  animation: progress-step 0.3s ease-in-out;
+}
+
+@keyframes progress-step {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Gradient mode */
+.ng-progress--gradient .ng-progress__indicator {
+  background: linear-gradient(
+    90deg,
+    var(--progress-start-color, #3b82f6),
+    var(--progress-end-color, #1d4ed8)
+  );
+}
+
+/* Focus states */
+.ng-progress__container:focus-within {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2 ng-ring-offset-white;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ng-progress__label {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-progress__description {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-progress__value {
+  @apply ng-text-neutral-300;
+}
+
+[data-theme="dark"] .ng-progress__track {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-progress__text--label {
+  @apply ng-text-neutral-200;
+}
+
+[data-theme="dark"] .ng-progress__text--value {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-progress__step--pending .ng-progress__step-circle {
+  @apply ng-border-neutral-600 ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-progress__step-label {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-progress--default .ng-progress__track {
+  @apply ng-stroke-neutral-700;
+}
+
+/* Variantes de couleur pour dark theme */
+[data-theme="dark"] .ng-progress--default .ng-progress__indicator {
+  @apply ng-bg-primary-500;
+}
+
+[data-theme="dark"] .ng-progress--success .ng-progress__indicator {
+  @apply ng-bg-success-500;
+}
+
+[data-theme="dark"] .ng-progress--warning .ng-progress__indicator {
+  @apply ng-bg-warning-500;
+}
+
+[data-theme="dark"] .ng-progress--error .ng-progress__indicator {
+  @apply ng-bg-error-500;
+}
+
+[data-theme="dark"] .ng-progress--info .ng-progress__indicator {
+  @apply ng-bg-info-500;
+}
+
+/* RTL support */
+[dir="rtl"] .ng-progress__indicator {
+  animation-direction: reverse;
+}
+
+[dir="rtl"] .ng-progress__steps {
+  @apply ng-flex-row-reverse;
+}
+
+[dir="rtl"] .ng-progress__step-circle {
+  animation: progress-step 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ng-progress__label {
+    @apply ng-text-xs;
+  }
+
+  .ng-progress__description {
+    @apply ng-text-xs;
+  }
+
+  .ng-progress__value {
+    @apply ng-text-xs;
+  }
+
+  .ng-progress__text {
+    @apply ng-text-xs;
+  }
+
+  .ng-progress__step-label {
+    @apply ng-text-xs;
+  }
+}
+
+/* States interactifs */
+.ng-progress:not(.ng-progress--indeterminate):hover .ng-progress__track {
+  @apply ng-shadow-sm;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-progress__indicator {
+    @apply ng-transition-none;
+  }
+
+  .ng-progress__indicator--animated::before {
+    animation: none;
+  }
+
+  .ng-progress--indeterminate .ng-progress__indicator {
+    animation: none;
+  }
+
+  .ng-progress__step-circle {
+    animation: none;
+  }
+}
+
+/* Performance optimizations */
+.ng-progress__indicator {
+  will-change: width;
+}
+
+.ng-progress--circular .ng-progress__indicator {
+  will-change: transform, stroke-dashoffset;
+}
+
+/* Custom scrollbar si nécessaire */
+.ng-progress__container::-webkit-scrollbar {
+  @apply ng-h-1;
+}
+
+.ng-progress__container::-webkit-scrollbar-track {
+  @apply ng-bg-neutral-100 ng-rounded-full;
+}
+
+.ng-progress__container::-webkit-scrollbar-thumb {
+  @apply ng-bg-neutral-300 ng-rounded-full;
+}
+
+[data-theme="dark"] .ng-progress__container::-webkit-scrollbar-track {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-progress__container::-webkit-scrollbar-thumb {
+  @apply ng-bg-neutral-600;
+}

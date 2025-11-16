@@ -1,0 +1,589 @@
+/* FilterSidebar.css - Styles pour le composant FilterSidebar */
+
+.ng-filter-sidebar {
+  --ng-filter-sidebar-bg-color: #ffffff;
+  --ng-filter-sidebar-border-color: #e5e7eb;
+  --ng-filter-sidebar-border-radius: 0.75rem;
+  --ng-filter-sidebar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ng-filter-sidebar-padding: 1.5rem;
+  --ng-filter-sidebar-gap: 1rem;
+  
+  background-color: var(--ng-filter-sidebar-bg-color);
+  border: 1px solid var(--ng-filter-sidebar-border-color);
+  border-radius: var(--ng-filter-sidebar-border-radius);
+  box-shadow: var(--ng-filter-sidebar-shadow);
+  width: 100%;
+  max-width: 18rem;
+  height: fit-content;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  position: sticky;
+  top: 2rem;
+}
+
+/* En-tête */
+.ng-filter-sidebar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: var(--ng-filter-sidebar-gap);
+  border-bottom: 1px solid #f3f4f6;
+  margin-bottom: var(--ng-filter-sidebar-gap);
+  position: sticky;
+  top: 0;
+  background-color: var(--ng-filter-sidebar-bg-color);
+  z-index: 10;
+}
+
+.ng-filter-sidebar__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ng-filter-sidebar__active-count {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.ng-filter-sidebar__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ng-filter-sidebar__reset-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.ng-filter-sidebar__reset-btn:hover {
+  color: #374151;
+}
+
+.ng-filter-sidebar__close-btn {
+  background: none;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ng-filter-sidebar__close-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.ng-filter-sidebar__close-btn svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2;
+}
+
+/* Contenu */
+.ng-filter-sidebar__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ng-filter-sidebar-gap);
+}
+
+/* Groupes de filtres */
+.ng-filter-sidebar__group {
+  border: 1px solid #f3f4f6;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.ng-filter-sidebar__group-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #f9fafb;
+}
+
+.ng-filter-sidebar__group-header:hover {
+  background-color: #f3f4f6;
+}
+
+.ng-filter-sidebar__group-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ng-filter-sidebar__selection-count {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #3b82f6;
+  background-color: #eff6ff;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.75rem;
+}
+
+.ng-filter-sidebar__group-toggle {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2;
+  color: #6b7280;
+  transition: transform 0.2s ease-in-out;
+}
+
+.ng-filter-sidebar__group-toggle--expanded {
+  transform: rotate(180deg);
+}
+
+.ng-filter-sidebar__group-content {
+  padding: 0 1rem 1rem 1rem;
+  background-color: #ffffff;
+}
+
+/* Options */
+.ng-filter-sidebar__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ng-filter-sidebar__select-all {
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.ng-filter-sidebar__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ng-filter-sidebar__checkbox-label:hover {
+  background-color: #f9fafb;
+}
+
+.ng-filter-sidebar__checkbox-label--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-filter-sidebar__checkbox-label--disabled:hover {
+  background-color: transparent;
+}
+
+.ng-filter-sidebar__checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+.ng-filter-sidebar__checkbox:disabled {
+  cursor: not-allowed;
+}
+
+.ng-filter-sidebar__checkbox-text {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.ng-filter-sidebar__option-count {
+  font-size: 0.75rem;
+  color: #6b7280;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.75rem;
+  white-space: nowrap;
+}
+
+/* Filtres de type range */
+.ng-filter-sidebar__range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ng-filter-sidebar__range-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.ng-filter-sidebar__range-input label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.ng-filter-sidebar__number-input {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: white;
+}
+
+.ng-filter-sidebar__number-input:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-color: #3b82f6;
+}
+
+.ng-filter-sidebar__range-separator {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 1.25rem;
+}
+
+.ng-filter-sidebar__range-slider {
+  position: relative;
+  height: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.ng-filter-sidebar__range-slider-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+  -webkit-appearance: none;
+  background: #e5e7eb;
+  border-radius: 0.125rem;
+  outline: none;
+  pointer-events: none;
+}
+
+.ng-filter-sidebar__range-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ng-filter-sidebar__range-slider-input::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background: #3b82f6;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.ng-filter-sidebar__range-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #374151;
+  font-weight: 500;
+  padding: 0 0.5rem;
+}
+
+/* Filtres select */
+.ng-filter-sidebar__select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: white;
+  cursor: pointer;
+}
+
+.ng-filter-sidebar__select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-color: #3b82f6;
+}
+
+/* Filtres couleur */
+.ng-filter-sidebar__color-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ng-filter-sidebar__color-swatch {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  outline: none;
+}
+
+.ng-filter-sidebar__color-swatch:hover {
+  transform: scale(1.1);
+  border-color: #9ca3af;
+}
+
+.ng-filter-sidebar__color-swatch:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.ng-filter-sidebar__color-swatch--selected {
+  border-color: #3b82f6;
+  transform: scale(1.05);
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.ng-filter-sidebar__color-swatch:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Pied de page */
+.ng-filter-sidebar__footer {
+  padding-top: var(--ng-filter-sidebar-gap);
+  border-top: 1px solid #f3f4f6;
+  margin-top: var(--ng-filter-sidebar-gap);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: sticky;
+  bottom: 0;
+  background-color: var(--ng-filter-sidebar-bg-color);
+}
+
+.ng-filter-sidebar__results-count {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: center;
+  font-weight: 500;
+}
+
+.ng-filter-sidebar__apply-btn {
+  width: 100%;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ng-filter-sidebar__apply-btn:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.ng-filter-sidebar__apply-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive et mobile */
+@media (max-width: 1024px) {
+  .ng-filter-sidebar {
+    position: static;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .ng-filter-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+  
+  .ng-filter-sidebar--open {
+    transform: translateX(0);
+  }
+  
+  .ng-filter-sidebar__header {
+    background-color: white;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 51;
+  }
+  
+  .ng-filter-sidebar__content {
+    padding: 1rem;
+    background-color: white;
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .ng-filter-sidebar__footer {
+    background-color: white;
+    padding: 1rem;
+    border-top: 1px solid #e5e7eb;
+  }
+}
+
+@media (max-width: 480px) {
+  .ng-filter-sidebar__range-inputs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .ng-filter-sidebar__range-separator {
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  .ng-filter-sidebar__color-swatches {
+    gap: 0.5rem;
+  }
+  
+  .ng-filter-sidebar__color-swatch {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* Animation d'ouverture mobile */
+.ng-filter-sidebar__group {
+  animation: ng-filter-sidebar-fade-in 0.3s ease-out;
+}
+
+@keyframes ng-filter-sidebar-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* États d'interaction avancés */
+.ng-filter-sidebar__group-header:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+.ng-filter-sidebar__checkbox:focus + .ng-filter-sidebar__checkbox-text,
+.ng-filter-sidebar__checkbox:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .ng-filter-sidebar__group-toggle,
+  .ng-filter-sidebar__color-swatch,
+  .ng-filter-sidebar__checkbox-label {
+    transition: none;
+  }
+  
+  .ng-filter-sidebar {
+    animation: none;
+  }
+  
+  .ng-filter-sidebar__group {
+    animation: none;
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .ng-filter-sidebar {
+    --ng-filter-sidebar-bg-color: #1f2937;
+    --ng-filter-sidebar-border-color: #374151;
+    --ng-filter-sidebar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .ng-filter-sidebar__title,
+  .ng-filter-sidebar__group-title,
+  .ng-filter-sidebar__checkbox-text,
+  .ng-filter-sidebar__range-values {
+    color: #f9fafb;
+  }
+  
+  .ng-filter-sidebar__selection-count {
+    background-color: #1e40af;
+    color: #dbeafe;
+  }
+  
+  .ng-filter-sidebar__group-header {
+    background-color: #374151;
+  }
+  
+  .ng-filter-sidebar__group-content,
+  .ng-filter-sidebar__footer {
+    background-color: #1f2937;
+  }
+  
+  .ng-filter-sidebar__checkbox-label:hover {
+    background-color: #374151;
+  }
+  
+  .ng-filter-sidebar__number-input,
+  .ng-filter-sidebar__select {
+    background-color: #374151;
+    border-color: #6b7280;
+    color: #f9fafb;
+  }
+  
+  .ng-filter-sidebar__range-slider-input {
+    background: #4b5563;
+  }
+  
+  .ng-filter-sidebar__results-count {
+    color: #d1d5db;
+  }
+}

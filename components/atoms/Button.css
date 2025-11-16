@@ -1,0 +1,265 @@
+/* Button Component Styles */
+
+.ng-button {
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--ng-radius-md);
+  font-family: var(--ng-font-family);
+  font-weight: var(--ng-font-medium);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: all var(--ng-transition-fast);
+  outline: none;
+
+  /* Focus styles for accessibility */
+  &:focus {
+    outline: 2px solid var(--ng-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled,
+  &--disabled,
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Loading state */
+  &--loading {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Full width variant */
+  &--full-width {
+    width: 100%;
+  }
+}
+
+/* Button Sizes */
+.ng-button--xs {
+  padding: var(--ng-space-1) var(--ng-space-2);
+  font-size: var(--ng-text-xs);
+  line-height: 1.2;
+  min-height: 24px;
+}
+
+.ng-button--sm {
+  padding: var(--ng-space-2) var(--ng-space-3);
+  font-size: var(--ng-text-sm);
+  line-height: 1.25;
+  min-height: 32px;
+}
+
+.ng-button--md {
+  padding: var(--ng-space-3) var(--ng-space-4);
+  font-size: var(--ng-text-base);
+  line-height: 1.5;
+  min-height: 40px;
+}
+
+.ng-button--lg {
+  padding: var(--ng-space-4) var(--ng-space-6);
+  font-size: var(--ng-text-lg);
+  line-height: 1.5;
+  min-height: 48px;
+}
+
+.ng-button--xl {
+  padding: var(--ng-space-5) var(--ng-space-8);
+  font-size: var(--ng-text-xl);
+  line-height: 1.5;
+  min-height: 56px;
+}
+
+/* Button Shapes */
+.ng-button--square {
+  border-radius: var(--ng-radius-none);
+}
+
+.ng-button--rounded {
+  border-radius: var(--ng-radius-md);
+}
+
+.ng-button--pill {
+  border-radius: var(--ng-radius-full);
+}
+
+/* Button Variants */
+.ng-button--default {
+  background-color: var(--ng-surface);
+  border-color: var(--ng-border);
+  color: var(--ng-text-primary);
+
+  &:hover:not(:disabled) {
+    background-color: var(--ng-surface-elevated);
+    border-color: var(--ng-border-focus);
+  }
+
+  &:active {
+    background-color: var(--ng-border);
+  }
+}
+
+.ng-button--primary {
+  background-color: var(--ng-primary-600);
+  border-color: var(--ng-primary-600);
+  color: var(--ng-text-inverse);
+
+  &:hover:not(:disabled) {
+    background-color: var(--ng-primary-700);
+    border-color: var(--ng-primary-700);
+  }
+
+  &:active {
+    background-color: var(--ng-primary-800);
+    border-color: var(--ng-primary-800);
+  }
+}
+
+.ng-button--secondary {
+  background-color: var(--ng-secondary-600);
+  border-color: var(--ng-secondary-600);
+  color: var(--ng-text-inverse);
+
+  &:hover:not(:disabled) {
+    background-color: var(--ng-secondary-700);
+    border-color: var(--ng-secondary-700);
+  }
+
+  &:active {
+    background-color: var(--ng-secondary-800);
+    border-color: var(--ng-secondary-800);
+  }
+}
+
+.ng-button--success {
+  background-color: var(--ng-success);
+  border-color: var(--ng-success);
+  color: var(--ng-text-inverse);
+
+  &:hover:not(:disabled) {
+    background-color: #059669;
+    border-color: #059669;
+  }
+
+  &:active {
+    background-color: #047857;
+    border-color: #047857;
+  }
+}
+
+.ng-button--warning {
+  background-color: var(--ng-warning);
+  border-color: var(--ng-warning);
+  color: var(--ng-text-inverse);
+
+  &:hover:not(:disabled) {
+    background-color: #d97706;
+    border-color: #d97706;
+  }
+
+  &:active {
+    background-color: #b45309;
+    border-color: #b45309;
+  }
+}
+
+.ng-button--error {
+  background-color: var(--ng-error);
+  border-color: var(--ng-error);
+  color: var(--ng-text-inverse);
+
+  &:hover:not(:disabled) {
+    background-color: #dc2626;
+    border-color: #dc2626;
+  }
+
+  &:active {
+    background-color: #b91c1c;
+    border-color: #b91c1c;
+  }
+}
+
+.ng-button--info {
+  background-color: var(--ng-info);
+  border-color: var(--ng-info);
+  color: var(--ng-text-inverse);
+
+  &:hover:not(:disabled) {
+    background-color: var(--ng-primary-700);
+    border-color: var(--ng-primary-700);
+  }
+
+  &:active {
+    background-color: var(--ng-primary-800);
+    border-color: var(--ng-primary-800);
+  }
+}
+
+/* Button Content */
+.ng-button__content {
+  display: flex;
+  align-items: center;
+  gap: var(--ng-space-2);
+}
+
+.ng-button__text {
+  flex: 0 0 auto;
+}
+
+.ng-button__icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &--left {
+    margin-right: var(--ng-space-1);
+  }
+  
+  &--right {
+    margin-left: var(--ng-space-1);
+  }
+}
+
+/* Loading Spinner */
+.ng-button__spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: ng-spin 1s linear infinite;
+}
+
+@keyframes ng-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .ng-button {
+    /* Réduire légèrement la taille sur mobile */
+    &--xl {
+      padding: var(--ng-space-4) var(--ng-space-6);
+      font-size: var(--ng-text-lg);
+      min-height: 48px;
+    }
+    
+    &--lg {
+      padding: var(--ng-space-3) var(--ng-space-5);
+      font-size: var(--ng-text-base);
+      min-height: 40px;
+    }
+  }
+}

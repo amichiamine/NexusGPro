@@ -1,0 +1,279 @@
+/* Card Component Styles */
+
+.ng-card {
+  /* Base styles */
+  display: flex;
+  flex-direction: column;
+  background-color: var(--ng-surface);
+  border: 1px solid var(--ng-border);
+  border-radius: var(--ng-radius-lg);
+  transition: all var(--ng-transition-fast);
+  overflow: hidden;
+
+  /* Accessibility */
+  &:focus-within {
+    outline: 2px solid var(--ng-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Card Variants */
+.ng-card--default {
+  background-color: var(--ng-surface);
+  border-color: var(--ng-border);
+}
+
+.ng-card--primary {
+  background-color: var(--ng-primary-50);
+  border-color: var(--ng-primary-200);
+  color: var(--ng-primary-900);
+}
+
+.ng-card--secondary {
+  background-color: var(--ng-secondary-50);
+  border-color: var(--ng-secondary-200);
+  color: var(--ng-secondary-900);
+}
+
+.ng-card--success {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+  color: #166534;
+}
+
+.ng-card--warning {
+  background-color: #fffbeb;
+  border-color: #fed7aa;
+  color: #92400e;
+}
+
+.ng-card--error {
+  background-color: #fef2f2;
+  border-color: #fecaca;
+  color: #991b1b;
+}
+
+.ng-card--info {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+
+/* Card Padding */
+.ng-card--xs {
+  padding: var(--ng-space-2);
+}
+
+.ng-card--sm {
+  padding: var(--ng-space-3);
+}
+
+.ng-card--md {
+  padding: var(--ng-space-4);
+}
+
+.ng-card--lg {
+  padding: var(--ng-space-6);
+}
+
+.ng-card--xl {
+  padding: var(--ng-space-8);
+}
+
+/* Card Shadow */
+.ng-card--shadow {
+  box-shadow: var(--ng-shadow-sm);
+}
+
+.ng-card--shadow-sm {
+  box-shadow: var(--ng-shadow-sm);
+}
+
+.ng-card--shadow-md {
+  box-shadow: var(--ng-shadow-md);
+}
+
+.ng-card--shadow-lg {
+  box-shadow: var(--ng-shadow-lg);
+}
+
+.ng-card--shadow-xl {
+  box-shadow: var(--ng-shadow-xl);
+}
+
+/* Card Border */
+.ng-card--border {
+  border: 1px solid var(--ng-border);
+}
+
+.ng-card--border-none {
+  border: none;
+}
+
+/* Card Shape */
+.ng-card--rounded {
+  border-radius: var(--ng-radius-lg);
+}
+
+.ng-card--rounded-sm {
+  border-radius: var(--ng-radius-md);
+}
+
+.ng-card--rounded-lg {
+  border-radius: var(--ng-radius-xl);
+}
+
+.ng-card--rounded-full {
+  border-radius: var(--ng-radius-full);
+}
+
+.ng-card--square {
+  border-radius: var(--ng-radius-none);
+}
+
+/* Interactive Card */
+.ng-card--interactive {
+  cursor: pointer;
+  
+  &:focus {
+    outline: 2px solid var(--ng-border-focus);
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Hoverable Card */
+.ng-card--hoverable {
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ng-shadow-lg);
+  }
+  
+  &:focus-within {
+    outline: 2px solid var(--ng-border-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* Card Header */
+.ng-card__header {
+  padding: var(--ng-space-4) var(--ng-space-4) 0;
+  border-bottom: 1px solid var(--ng-border);
+  margin-bottom: var(--ng-space-4);
+  
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: var(--ng-space-4);
+    border-bottom: none;
+  }
+}
+
+/* Card Body */
+.ng-card__body {
+  flex: 1;
+  padding: var(--ng-space-4);
+  
+  /* Remove padding when header or footer are present */
+  .ng-card__header ~ &,
+  .ng-card__footer ~ & {
+    padding-top: 0;
+  }
+  
+  .ng-card__header + .ng-card__footer ~ & {
+    padding-top: 0;
+  }
+}
+
+/* Card Footer */
+.ng-card__footer {
+  padding: 0 var(--ng-space-4) var(--ng-space-4);
+  border-top: 1px solid var(--ng-border);
+  margin-top: var(--ng-space-4);
+  
+  &:first-child {
+    margin-top: 0;
+    padding-top: var(--ng-space-4);
+    border-top: none;
+  }
+}
+
+/* Card Actions */
+.ng-card__actions {
+  display: flex;
+  gap: var(--ng-space-2);
+  justify-content: flex-end;
+  padding: var(--ng-space-3) var(--ng-space-4);
+  background-color: var(--ng-surface-elevated);
+  border-top: 1px solid var(--ng-border);
+  margin-top: auto;
+  
+  &:first-child {
+    border-top: none;
+    margin-top: 0;
+    padding-top: var(--ng-space-4);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .ng-card {
+    &--lg {
+      padding: var(--ng-space-4);
+    }
+    
+    &--xl {
+      padding: var(--ng-space-5);
+    }
+  }
+  
+  .ng-card__header,
+  .ng-card__body,
+  .ng-card__footer {
+    padding-left: var(--ng-space-3);
+    padding-right: var(--ng-space-3);
+  }
+  
+  .ng-card__actions {
+    padding-left: var(--ng-space-3);
+    padding-right: var(--ng-space-3);
+    flex-direction: column;
+    gap: var(--ng-space-3);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .ng-card {
+    border-width: 2px;
+    
+    &--shadow,
+    &--shadow-sm,
+    &--shadow-md,
+    &--shadow-lg,
+    &--shadow-xl {
+      box-shadow: none;
+    }
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-card {
+    transition: none;
+    
+    &--hoverable {
+      &:hover {
+        transform: none;
+      }
+    }
+    
+    &--interactive {
+      &:active {
+        transform: none;
+      }
+    }
+  }
+}

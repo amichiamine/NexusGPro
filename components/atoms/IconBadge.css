@@ -1,0 +1,456 @@
+/* =================================================================
+   ICON BADGE - Styles modernes avec CSS Variables et animations
+   ================================================================= */
+
+/* Variables CSS pour les couleurs et theming */
+.tb-badge {
+  /* Variables de base */
+  --badge-font-family: var(--font-family-sans, 'Inter', system-ui, sans-serif);
+  --badge-font-weight: var(--font-weight-medium, 500);
+  --badge-line-height: 1.2;
+  --badge-border-radius: var(--radius-sm, 6px);
+  --badge-border-width: var(--border-width-sm, 1px);
+  --badge-transition: all var(--transition-fast, 150ms) ease-in-out;
+
+  /* Variables de couleurs - variants */
+  --badge-primary-bg: var(--color-primary-50, #eff6ff);
+  --badge-primary-text: var(--color-primary-700, #1d4ed8);
+  --badge-primary-border: var(--color-primary-200, #bfdbfe);
+  --badge-primary-hover: var(--color-primary-100, #dbeafe);
+
+  --badge-success-bg: var(--color-success-50, #f0fdf4);
+  --badge-success-text: var(--color-success-700, #15803d);
+  --badge-success-border: var(--color-success-200, #bbf7d0);
+  --badge-success-hover: var(--color-success-100, #dcfce7);
+
+  --badge-warning-bg: var(--color-warning-50, #fffbeb);
+  --badge-warning-text: var(--color-warning-800, #92400e);
+  --badge-warning-border: var(--color-warning-300, #fcd34d);
+  --badge-warning-hover: var(--color-warning-100, #fef3c7);
+
+  --badge-error-bg: var(--color-error-50, #fef2f2);
+  --badge-error-text: var(--color-error-700, #b91c1c);
+  --badge-error-border: var(--color-error-200, #fecaca);
+  --badge-error-hover: var(--color-error-100, #fee2e2);
+
+  --badge-info-bg: var(--color-info-50, #f0f9ff);
+  --badge-info-text: var(--color-info-700, #0369a1);
+  --badge-info-border: var(--color-info-200, #bae6fd);
+  --badge-info-hover: var(--color-info-100, #e0f2fe);
+
+  --badge-neutral-bg: var(--color-neutral-50, #f9fafb);
+  --badge-neutral-text: var(--color-neutral-700, #374151);
+  --badge-neutral-border: var(--color-neutral-200, #e5e7eb);
+  --badge-neutral-hover: var(--color-neutral-100, #f3f4f6);
+
+  --badge-default-bg: var(--color-neutral-100, #f3f4f6);
+  --badge-default-text: var(--color-neutral-800, #1f2937);
+  --badge-default-border: var(--color-neutral-300, #d1d5db);
+  --badge-default-hover: var(--color-neutral-200, #e5e7eb);
+
+  --badge-premium-bg: linear-gradient(135deg, var(--color-primary-50, #eff6ff) 0%, var(--color-purple-50, #faf5ff) 100%);
+  --badge-premium-text: var(--color-primary-700, #1d4ed8);
+  --badge-premium-border: var(--color-primary-200, #bfdbfe);
+  --badge-premium-hover: linear-gradient(135deg, var(--color-primary-100, #dbeafe) 0%, var(--color-purple-100, #e9d5ff) 100%);
+
+  /* Variables de tailles */
+  --badge-xs-padding-x: var(--spacing-xs, 4px);
+  --badge-xs-padding-y: var(--spacing-xs, 4px);
+  --badge-xs-font-size: var(--font-size-xs, 0.75rem);
+  --badge-xs-icon-size: 12px;
+
+  --badge-sm-padding-x: var(--spacing-sm, 6px);
+  --badge-sm-padding-y: var(--spacing-xs, 4px);
+  --badge-sm-font-size: var(--font-size-sm, 0.875rem);
+  --badge-sm-icon-size: 14px;
+
+  --badge-md-padding-x: var(--spacing-sm, 6px);
+  --badge-md-padding-y: var(--spacing-sm, 6px);
+  --badge-md-font-size: var(--font-size-sm, 0.875rem);
+  --badge-md-icon-size: 16px;
+
+  --badge-lg-padding-x: var(--spacing-md, 8px);
+  --badge-lg-padding-y: var(--spacing-sm, 6px);
+  --badge-lg-font-size: var(--font-size-base, 1rem);
+  --badge-lg-icon-size: 18px;
+
+  /* Variables d'espacement */
+  --badge-gap: var(--spacing-xs, 4px);
+
+  /* Variables d'animations */
+  --badge-scale-hover: 1.05;
+  --badge-scale-active: 0.98;
+  --badge-shadow-focus: 0 0 0 3px var(--color-primary-100, #dbeafe);
+  --badge-shadow-hover: var(--shadow-sm, 0 1px 2px 0 rgb(0 0 0 / 0.05));
+
+  /* Base styles */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--badge-gap);
+  padding: var(--badge-md-padding-y) var(--badge-md-padding-x);
+  font-family: var(--badge-font-family);
+  font-size: var(--badge-md-font-size);
+  font-weight: var(--badge-font-weight);
+  line-height: var(--badge-line-height);
+  color: var(--badge-default-text);
+  background-color: var(--badge-default-bg);
+  border: var(--badge-border-width) solid var(--badge-default-border);
+  border-radius: var(--badge-border-radius);
+  text-decoration: none;
+  cursor: default;
+  transition: var(--badge-transition);
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  overflow: hidden;
+  min-height: auto;
+}
+
+/* Focus management et accessibilité */
+.tb-badge:focus {
+  outline: none;
+  box-shadow: var(--badge-shadow-focus);
+}
+
+.tb-badge:focus-visible {
+  outline: 2px solid var(--color-primary-500, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* States interactifs */
+.tb-badge.is-clickable {
+  cursor: pointer;
+}
+
+.tb-badge.is-clickable:hover {
+  transform: scale(var(--badge-scale-hover));
+  box-shadow: var(--badge-shadow-hover);
+}
+
+.tb-badge.is-clickable:active {
+  transform: scale(var(--badge-scale-active));
+}
+
+.tb-badge.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.tb-badge.is-loading {
+  pointer-events: none;
+}
+
+/* Icon-only mode */
+.tb-badge.icon-only {
+  padding: var(--badge-md-padding-y);
+  min-width: auto;
+  aspect-ratio: 1;
+}
+
+.tb-badge.icon-only .tb-badge__label {
+  display: none;
+}
+
+/* Variantes de couleurs */
+.tb-badge--default {
+  color: var(--badge-default-text);
+  background-color: var(--badge-default-bg);
+  border-color: var(--badge-default-border);
+}
+
+.tb-badge--default:hover {
+  background-color: var(--badge-default-hover);
+}
+
+.tb-badge--primary {
+  color: var(--badge-primary-text);
+  background-color: var(--badge-primary-bg);
+  border-color: var(--badge-primary-border);
+}
+
+.tb-badge--primary:hover {
+  background-color: var(--badge-primary-hover);
+}
+
+.tb-badge--success {
+  color: var(--badge-success-text);
+  background-color: var(--badge-success-bg);
+  border-color: var(--badge-success-border);
+}
+
+.tb-badge--success:hover {
+  background-color: var(--badge-success-hover);
+}
+
+.tb-badge--warning {
+  color: var(--badge-warning-text);
+  background-color: var(--badge-warning-bg);
+  border-color: var(--badge-warning-border);
+}
+
+.tb-badge--warning:hover {
+  background-color: var(--badge-warning-hover);
+}
+
+.tb-badge--error {
+  color: var(--badge-error-text);
+  background-color: var(--badge-error-bg);
+  border-color: var(--badge-error-border);
+}
+
+.tb-badge--error:hover {
+  background-color: var(--badge-error-hover);
+}
+
+.tb-badge--info {
+  color: var(--badge-info-text);
+  background-color: var(--badge-info-bg);
+  border-color: var(--badge-info-border);
+}
+
+.tb-badge--info:hover {
+  background-color: var(--badge-info-hover);
+}
+
+.tb-badge--neutral {
+  color: var(--badge-neutral-text);
+  background-color: var(--badge-neutral-bg);
+  border-color: var(--badge-neutral-border);
+}
+
+.tb-badge--neutral:hover {
+  background-color: var(--badge-neutral-hover);
+}
+
+.tb-badge--premium {
+  color: var(--badge-premium-text);
+  background: var(--badge-premium-bg);
+  border: var(--badge-border-width) solid var(--badge-premium-border);
+}
+
+.tb-badge--premium:hover {
+  background: var(--badge-premium-hover);
+}
+
+/* Tailles */
+.tb-badge--xs {
+  padding: var(--badge-xs-padding-y) var(--badge-xs-padding-x);
+  font-size: var(--badge-xs-font-size);
+  gap: calc(var(--badge-gap) * 0.75);
+}
+
+.tb-badge--xs .tb-badge__icon {
+  width: var(--badge-xs-icon-size);
+  height: var(--badge-xs-icon-size);
+}
+
+.tb-badge--sm {
+  padding: var(--badge-sm-padding-y) var(--badge-sm-padding-x);
+  font-size: var(--badge-sm-font-size);
+  gap: var(--badge-gap);
+}
+
+.tb-badge--sm .tb-badge__icon {
+  width: var(--badge-sm-icon-size);
+  height: var(--badge-sm-icon-size);
+}
+
+.tb-badge--md {
+  padding: var(--badge-md-padding-y) var(--badge-md-padding-x);
+  font-size: var(--badge-md-font-size);
+  gap: var(--badge-gap);
+}
+
+.tb-badge--md .tb-badge__icon {
+  width: var(--badge-md-icon-size);
+  height: var(--badge-md-icon-size);
+}
+
+.tb-badge--lg {
+  padding: var(--badge-lg-padding-y) var(--badge-lg-padding-x);
+  font-size: var(--badge-lg-font-size);
+  gap: calc(var(--badge-gap) * 1.25);
+}
+
+.tb-badge--lg .tb-badge__icon {
+  width: var(--badge-lg-icon-size);
+  height: var(--badge-lg-icon-size);
+}
+
+/* Icône */
+.tb-badge__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  position: relative;
+}
+
+/* Spinner pour loading state */
+.tb-badge__spinner {
+  width: 100%;
+  height: 100%;
+  animation: tb-badge-spin 1s linear infinite;
+}
+
+.tb-badge__spinner-circle {
+  animation: tb-badge-dash 1.5s ease-in-out infinite;
+}
+
+@keyframes tb-badge-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tb-badge-dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+/* Label */
+.tb-badge__label {
+  font-weight: var(--badge-font-weight);
+  line-height: var(--badge-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Trailing icon position */
+.tb-badge.has-trailing-icon {
+  flex-direction: row-reverse;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .tb-badge {
+    --badge-default-bg: var(--color-neutral-800, #1f2937);
+    --badge-default-text: var(--color-neutral-100, #f3f4f6);
+    --badge-default-border: var(--color-neutral-600, #4b5563);
+    --badge-default-hover: var(--color-neutral-700, #374151);
+
+    --badge-primary-bg: var(--color-primary-900, #1e3a8a);
+    --badge-primary-text: var(--color-primary-100, #dbeafe);
+    --badge-primary-border: var(--color-primary-700, #1d4ed8);
+    --badge-primary-hover: var(--color-primary-800, #1e40af);
+
+    --badge-success-bg: var(--color-success-900, #14532d);
+    --badge-success-text: var(--color-success-100, #dcfce7);
+    --badge-success-border: var(--color-success-700, #15803d);
+    --badge-success-hover: var(--color-success-800, #166534);
+
+    --badge-warning-bg: var(--color-warning-900, #78350f);
+    --badge-warning-text: var(--color-warning-100, #fef3c7);
+    --badge-warning-border: var(--color-warning-700, #d97706);
+    --badge-warning-hover: var(--color-warning-800, #92400e);
+
+    --badge-error-bg: var(--color-error-900, #7f1d1d);
+    --badge-error-text: var(--color-error-100, #fee2e2);
+    --badge-error-border: var(--color-error-700, #b91c1c);
+    --badge-error-hover: var(--color-error-800, #991b1b);
+
+    --badge-info-bg: var(--color-info-900, #0c4a6e);
+    --badge-info-text: var(--color-info-100, #e0f2fe);
+    --badge-info-border: var(--color-info-700, #0369a1);
+    --badge-info-hover: var(--color-info-800, #075985);
+
+    --badge-neutral-bg: var(--color-neutral-800, #1f2937);
+    --badge-neutral-text: var(--color-neutral-100, #f3f4f6);
+    --badge-neutral-border: var(--color-neutral-600, #4b5563);
+    --badge-neutral-hover: var(--color-neutral-700, #374151);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tb-badge {
+    transition: none;
+  }
+
+  .tb-badge:hover,
+  .tb-badge:active {
+    transform: none;
+  }
+
+  .tb-badge__spinner {
+    animation: none;
+  }
+
+  .tb-badge__spinner-circle {
+    animation: none;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .tb-badge {
+    font-size: var(--font-size-xs);
+  }
+
+  .tb-badge--lg {
+    font-size: var(--font-size-sm);
+    padding: var(--badge-sm-padding-y) var(--badge-sm-padding-x);
+  }
+
+  .tb-badge--lg .tb-badge__icon {
+    width: var(--badge-sm-icon-size);
+    height: var(--badge-sm-icon-size);
+  }
+
+  .tb-badge--lg .tb-badge__label {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .tb-badge {
+    border-width: 2px;
+  }
+
+  .tb-badge:focus-visible {
+    outline-width: 3px;
+  }
+
+  .tb-badge--premium {
+    background: var(--color-primary-100, #dbeafe) !important;
+    color: var(--color-primary-900, #1e3a8a) !important;
+    border: 2px solid var(--color-primary-900, #1e3a8a) !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .tb-badge {
+    background: transparent !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+  }
+
+  .tb-badge.is-clickable:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .tb-badge__spinner {
+    display: none !important;
+  }
+}

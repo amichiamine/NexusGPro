@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Checkbox Component Styles
+   ========================================================================== */
+
+.ng-checkbox {
+  @apply ng-flex ng-items-start ng-gap-2 ng-relative;
+}
+
+/* Input wrapper - cache l'input natif tout en gardant l'accessibilité */
+.ng-checkbox__input-wrapper {
+  @apply ng-relative ng-flex ng-items-center;
+}
+
+.ng-checkbox__input {
+  @apply ng-absolute ng-opacity-0 ng-pointer-events-none;
+}
+
+/* Boîte de checkbox principale */
+.ng-checkbox__box {
+  @apply ng-relative ng-flex ng-items-center ng-justify-center ng-transition-all ng-duration-200;
+}
+
+/* Tailles de la checkbox */
+.ng-checkbox--sm .ng-checkbox__box {
+  @apply ng-w-4 ng-h-4;
+}
+
+.ng-checkbox--md .ng-checkbox__box {
+  @apply ng-w-5 ng-h-5;
+}
+
+.ng-checkbox--lg .ng-checkbox__box {
+  @apply ng-w-6 ng-h-6;
+}
+
+/* Variantes visuelles */
+.ng-checkbox--default .ng-checkbox__box {
+  @apply ng-border ng-border-neutral-300 ng-bg-white;
+}
+
+.ng-checkbox--filled .ng-checkbox__box {
+  @apply ng-border-0 ng-bg-neutral-100;
+}
+
+.ng-checkbox--outline .ng-checkbox__box {
+  @apply ng-border-2 ng-border-primary-500;
+}
+
+.ng-checkbox--ghost .ng-checkbox__box {
+  @apply ng-border-0;
+}
+
+/* États de la checkbox */
+.ng-checkbox--checked .ng-checkbox__box {
+  @apply ng-bg-primary-600 ng-border-primary-600;
+}
+
+.ng-checkbox--indeterminate .ng-checkbox__box {
+  @apply ng-bg-primary-600 ng-border-primary-600;
+}
+
+.ng-checkbox--disabled .ng-checkbox__box {
+  @apply ng-bg-neutral-200 ng-border-neutral-300 ng-opacity-50;
+}
+
+.ng-checkbox--disabled.ng-checkbox--checked .ng-checkbox__box {
+  @apply ng-bg-neutral-400 ng-border-neutral-400;
+}
+
+/* Focus state */
+.ng-checkbox__input:focus-visible + .ng-checkbox__box {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2;
+}
+
+/* Icônes de la checkbox */
+.ng-checkbox__icon {
+  @apply ng-absolute ng-inset-0 ng-w-full ng-h-full ng-transition-opacity ng-duration-200;
+}
+
+/* États des icônes */
+.ng-checkbox__icon--unchecked {
+  @apply ng-opacity-100;
+}
+
+.ng-checkbox--checked .ng-checkbox__icon--unchecked,
+.ng-checkbox--indeterminate .ng-checkbox__icon--unchecked {
+  @apply ng-opacity-0;
+}
+
+.ng-checkbox__icon--checked {
+  @apply ng-opacity-0;
+}
+
+.ng-checkbox--checked .ng-checkbox__icon--checked {
+  @apply ng-opacity-100;
+}
+
+.ng-checkbox__icon--indeterminate {
+  @apply ng-opacity-0;
+}
+
+.ng-checkbox--indeterminate .ng-checkbox__icon--indeterminate {
+  @apply ng-opacity-100;
+}
+
+/* Contenu textuel */
+.ng-checkbox__content {
+  @apply ng-flex ng-flex-col ng-gap-1;
+}
+
+.ng-checkbox__label {
+  @apply ng-text-sm ng-font-medium ng-text-neutral-900 ng-cursor-pointer;
+}
+
+.ng-checkbox--label-left .ng-checkbox__content {
+  @apply ng-order-first;
+}
+
+.ng-checkbox__description {
+  @apply ng-text-xs ng-text-neutral-600 ng-m-0;
+}
+
+/* States interactifs */
+.ng-checkbox:not(.ng-checkbox--disabled) .ng-checkbox__label:hover {
+  @apply ng-text-neutral-700;
+}
+
+.ng-checkbox:not(.ng-checkbox--disabled) .ng-checkbox__box:hover {
+  @apply ng-shadow-sm;
+}
+
+/* Couleurs par variante */
+.ng-checkbox--default:not(.ng-checkbox--disabled):hover .ng-checkbox__box {
+  @apply ng-border-neutral-400;
+}
+
+.ng-checkbox--filled:not(.ng-checkbox--disabled):hover .ng-checkbox__box {
+  @apply ng-bg-neutral-200;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ng-checkbox__label {
+  @apply ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-checkbox__description {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-checkbox--default .ng-checkbox__box {
+  @apply ng-bg-neutral-800 ng-border-neutral-600;
+}
+
+[data-theme="dark"] .ng-checkbox--filled .ng-checkbox__box {
+  @apply ng-bg-neutral-700;
+}
+
+[data-theme="dark"] .ng-checkbox--default:not(.ng-checkbox--disabled):hover .ng-checkbox__box {
+  @apply ng-border-neutral-500;
+}
+
+[data-theme="dark"] .ng-checkbox--filled:not(.ng-checkbox--disabled):hover .ng-checkbox__box {
+  @apply ng-bg-neutral-600;
+}
+
+[data-theme="dark"] .ng-checkbox__label:hover {
+  @apply ng-text-neutral-200;
+}
+
+/* Animations */
+@keyframes checkbox-check {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes checkbox-indeterminate {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleX(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.ng-checkbox--checked .ng-checkbox__icon--checked {
+  animation: checkbox-check 200ms ease-in-out;
+}
+
+.ng-checkbox--indeterminate .ng-checkbox__icon--indeterminate rect:last-child {
+  animation: checkbox-indeterminate 200ms ease-in-out;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-checkbox__box,
+  .ng-checkbox__icon {
+    @apply ng-transition-none;
+  }
+
+  .ng-checkbox--checked .ng-checkbox__icon--checked,
+  .ng-checkbox--indeterminate .ng-checkbox__icon--indeterminate rect:last-child {
+    animation: none;
+  }
+}
+
+/* RTL support */
+[dir="rtl"] .ng-checkbox {
+  @apply ng-flex-row-reverse;
+}
+
+[dir="rtl"] .ng-checkbox--label-left .ng-checkbox__content {
+  @apply ng-order-last;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ng-checkbox__label {
+    @apply ng-text-xs;
+  }
+
+  .ng-checkbox__description {
+    @apply ng-text-xs;
+  }
+}

@@ -1,0 +1,704 @@
+/* CheckoutSummary.css - Styles pour le composant CheckoutSummary */
+
+.ng-checkout-summary {
+  --ng-checkout-summary-bg-color: #ffffff;
+  --ng-checkout-summary-border-color: #e5e7eb;
+  --ng-checkout-summary-border-radius: 0.75rem;
+  --ng-checkout-summary-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ng-checkout-summary-padding: 1.5rem;
+  --ng-checkout-summary-gap: 1.5rem;
+  
+  background-color: var(--ng-checkout-summary-bg-color);
+  border: 1px solid var(--ng-checkout-summary-border-color);
+  border-radius: var(--ng-checkout-summary-border-radius);
+  box-shadow: var(--ng-checkout-summary-shadow);
+  position: sticky;
+  top: 2rem;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+.ng-checkout-summary__container {
+  padding: var(--ng-checkout-summary-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ng-checkout-summary-gap);
+}
+
+/* Étapes du processus */
+.ng-checkout-summary__steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f3f4f6;
+  position: relative;
+}
+
+.ng-checkout-summary__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  flex: 1;
+}
+
+.ng-checkout-summary__step-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+
+.ng-checkout-summary__step--completed .ng-checkout-summary__step-icon {
+  background-color: #10b981;
+  color: white;
+}
+
+.ng-checkout-summary__step--current .ng-checkout-summary__step-icon {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.ng-checkout-summary__step--pending .ng-checkout-summary__step-icon {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  border: 2px solid #e5e7eb;
+}
+
+.ng-checkout-summary__step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ng-checkout-summary__step-icon svg {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2.5;
+}
+
+.ng-checkout-summary__step-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-align: center;
+}
+
+.ng-checkout-summary__step--completed .ng-checkout-summary__step-label,
+.ng-checkout-summary__step--current .ng-checkout-summary__step-label {
+  color: #374151;
+  font-weight: 600;
+}
+
+/* Articles */
+.ng-checkout-summary__items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ng-checkout-summary__items-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.ng-checkout-summary__items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ng-checkout-summary__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.ng-checkout-summary__item-image {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.375rem;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.ng-checkout-summary__item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ng-checkout-summary__item-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: ng-checkout-summary-loading 1.5s infinite;
+}
+
+@keyframes ng-checkout-summary-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.ng-checkout-summary__item-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.ng-checkout-summary__item-name {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ng-checkout-summary__item-sku {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.ng-checkout-summary__item-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ng-checkout-summary__item-quantity {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.ng-checkout-summary__item-price {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+.ng-checkout-summary__item-total {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111827;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Méthodes */
+.ng-checkout-summary__methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.ng-checkout-summary__method {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ng-checkout-summary__method-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  min-width: 4rem;
+}
+
+.ng-checkout-summary__method-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.ng-checkout-summary__method-change {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ng-checkout-summary__method-change:hover {
+  color: #1d4ed8;
+}
+
+/* Promotion livraison gratuite */
+.ng-checkout-summary__free-shipping-promotion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #f59e0b;
+  border-radius: 0.5rem;
+  gap: 1rem;
+}
+
+.ng-checkout-summary__promotion-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.ng-checkout-summary__promotion-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+.ng-checkout-summary__promotion-text {
+  flex: 1;
+}
+
+.ng-checkout-summary__promotion-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #92400e;
+}
+
+.ng-checkout-summary__promotion-message {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #a16207;
+}
+
+.ng-checkout-summary__promotion-action {
+  background-color: #d97706;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.ng-checkout-summary__promotion-action:hover:not(:disabled) {
+  background-color: #b45309;
+}
+
+.ng-checkout-summary__promotion-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Code promo */
+.ng-checkout-summary__promo-code {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ng-checkout-summary__promo-input {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.ng-checkout-summary__promo-input-field {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  background-color: white;
+}
+
+.ng-checkout-summary__promo-input-field:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-color: #3b82f6;
+}
+
+.ng-checkout-summary__promo-apply {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  white-space: nowrap;
+}
+
+.ng-checkout-summary__promo-apply:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.ng-checkout-summary__promo-apply:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-checkout-summary__promo-applied {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background-color: #ecfdf5;
+  border: 1px solid #10b981;
+  border-radius: 0.375rem;
+}
+
+.ng-checkout-summary__promo-code-text {
+  font-size: 0.875rem;
+  color: #065f46;
+}
+
+.ng-checkout-summary__promo-remove {
+  background: none;
+  border: none;
+  color: #059669;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.ng-checkout-summary__promo-remove:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+}
+
+.ng-checkout-summary__promo-error {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #dc2626;
+}
+
+/* Totaux */
+.ng-checkout-summary__totals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.ng-checkout-summary__total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.ng-checkout-summary__total-line--discount {
+  color: #059669;
+}
+
+.ng-checkout-summary__total-line--highlight {
+  background-color: #ecfdf5;
+  margin: 0 -1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+}
+
+.ng-checkout-summary__free-shipping {
+  color: #059669;
+  font-weight: 600;
+  font-size: 0.75rem;
+  background-color: #d1fae5;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.ng-checkout-summary__total-line--final {
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+  border-top: 1px solid #d1d5db;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Actions */
+.ng-checkout-summary__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ng-checkout-summary__primary-action {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.ng-checkout-summary__primary-action:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.ng-checkout-summary__primary-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ng-checkout-summary__loading-spinner {
+  width: 1rem;
+  height: 1rem;
+  animation: ng-checkout-summary-spin 1s linear infinite;
+}
+
+@keyframes ng-checkout-summary-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ng-checkout-summary__secondary-action {
+  background: none;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.ng-checkout-summary__secondary-action:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.ng-checkout-summary__secondary-action--link {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  text-decoration: underline;
+  padding: 0.5rem 0;
+}
+
+.ng-checkout-summary__secondary-action--link:hover {
+  background: none;
+  color: #1d4ed8;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .ng-checkout-summary {
+    position: static;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .ng-checkout-summary {
+    --ng-checkout-summary-padding: 1rem;
+    --ng-checkout-summary-gap: 1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  
+  .ng-checkout-summary__container {
+    padding: var(--ng-checkout-summary-padding);
+  }
+  
+  .ng-checkout-summary__steps {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .ng-checkout-summary__step {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .ng-checkout-summary__step-icon {
+    flex-shrink: 0;
+  }
+  
+  .ng-checkout-summary__free-shipping-promotion {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .ng-checkout-summary__promotion-action {
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ng-checkout-summary__items-title {
+    font-size: 1rem;
+  }
+  
+  .ng-checkout-summary__item-name {
+    font-size: 0.8rem;
+  }
+  
+  .ng-checkout-summary__total-line {
+    font-size: 0.8rem;
+  }
+  
+  .ng-checkout-summary__total-line--final {
+    font-size: 1rem;
+  }
+  
+  .ng-checkout-summary__primary-action {
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* États de focus et accessibilité */
+.ng-checkout-summary__method-change:focus,
+.ng-checkout-summary__promo-apply:focus,
+.ng-checkout-summary__promo-remove:focus,
+.ng-checkout-summary__promotion-action:focus,
+.ng-checkout-summary__primary-action:focus,
+.ng-checkout-summary__secondary-action:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Animation d'apparition */
+.ng-checkout-summary {
+  animation: ng-checkout-summary-fade-in 0.3s ease-out;
+}
+
+@keyframes ng-checkout-summary-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  .ng-checkout-summary__step-icon,
+  .ng-checkout-summary__promo-apply,
+  .ng-checkout-summary__promotion-action,
+  .ng-checkout-summary__primary-action,
+  .ng-checkout-summary__secondary-action {
+    transition: none;
+  }
+  
+  .ng-checkout-summary__loading-spinner,
+  .ng-checkout-summary,
+  .ng-checkout-summary__image-placeholder {
+    animation: none;
+  }
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .ng-checkout-summary {
+    --ng-checkout-summary-bg-color: #1f2937;
+    --ng-checkout-summary-border-color: #374151;
+    --ng-checkout-summary-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  
+  .ng-checkout-summary__items-title,
+  .ng-checkout-summary__item-name,
+  .ng-checkout-summary__item-total,
+  .ng-checkout-summary__total-line--final {
+    color: #f9fafb;
+  }
+  
+  .ng-checkout-summary__item-sku,
+  .ng-checkout-summary__item-quantity,
+  .ng-checkout-summary__item-price {
+    color: #d1d5db;
+  }
+  
+  .ng-checkout-summary__step-label {
+    color: #9ca3af;
+  }
+  
+  .ng-checkout-summary__step--completed .ng-checkout-summary__step-label,
+  .ng-checkout-summary__step--current .ng-checkout-summary__step-label {
+    color: #f3f4f6;
+  }
+  
+  .ng-checkout-summary__method-label {
+    color: #d1d5db;
+  }
+  
+  .ng-checkout-summary__totals {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+  
+  .ng-checkout-summary__items,
+  .ng-checkout-summary__methods,
+  .ng-checkout-summary__promo-code {
+    background-color: #374151;
+    border-color: #4b5563;
+  }
+  
+  .ng-checkout-summary__item,
+  .ng-checkout-summary__promo-applied {
+    background-color: #4b5563;
+    border-color: #6b7280;
+  }
+  
+  .ng-checkout-summary__promo-input-field {
+    background-color: #374151;
+    border-color: #6b7280;
+    color: #f9fafb;
+  }
+  
+  .ng-checkout-summary__secondary-action {
+    background-color: #374151;
+    border-color: #6b7280;
+    color: #f3f4f6;
+  }
+}

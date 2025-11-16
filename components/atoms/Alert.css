@@ -1,0 +1,457 @@
+/* ==========================================================================
+   Alert Component Styles
+   ========================================================================== */
+
+.ng-alert {
+  @apply ng-relative ng-flex ng-items-start ng-gap-3 ng-p-4;
+  @apply ng-border ng-border-solid ng-border-transparent;
+  @apply ng-transition-all ng-duration-200;
+}
+
+.ng-alert--full-width {
+  @apply ng-w-full;
+}
+
+.ng-alert--rounded {
+  @apply ng-rounded-lg;
+}
+
+.ng-alert--elevated {
+  @apply ng-shadow-md;
+}
+
+.ng-alert--animated {
+  @apply ng-animate-fade-in;
+}
+
+/* Tailles */
+.ng-alert--sm {
+  @apply ng-gap-2 ng-p-3;
+}
+
+.ng-alert--lg {
+  @apply ng-gap-4 ng-p-6;
+}
+
+/* Icônes */
+.ng-alert__icon-left,
+.ng-alert__icon-right {
+  @apply ng-flex-shrink-0;
+}
+
+.ng-alert__icon {
+  @apply ng-text-current;
+}
+
+.ng-alert--sm .ng-alert__icon {
+  @apply ng-w-4 ng-h-4;
+}
+
+.ng-alert--md .ng-alert__icon {
+  @apply ng-w-5 ng-h-5;
+}
+
+.ng-alert--lg .ng-alert__icon {
+  @apply ng-w-6 ng-h-6;
+}
+
+/* Contenu */
+.ng-alert__content {
+  @apply ng-flex-1 ng-min-w-0;
+}
+
+.ng-alert__content-wrapper {
+  @apply ng-flex ng-flex-col ng-gap-1;
+}
+
+.ng-alert__title {
+  @apply ng-m-0 ng-text-sm ng-font-semibold ng-text-current;
+}
+
+.ng-alert__message {
+  @apply ng-m-0 ng-text-sm ng-leading-relaxed ng-text-current;
+}
+
+.ng-alert--sm .ng-alert__title {
+  @apply ng-text-xs;
+}
+
+.ng-alert--sm .ng-alert__message {
+  @apply ng-text-xs;
+}
+
+.ng-alert--lg .ng-alert__title {
+  @apply ng-text-base;
+}
+
+.ng-alert--lg .ng-alert__message {
+  @apply ng-text-base;
+}
+
+/* Dismiss button */
+.ng-alert__dismiss {
+  @apply ng-flex ng-items-center ng-justify-center;
+  @apply ng-w-6 ng-h-6 ng-rounded-full;
+  @apply ng-bg-transparent ng-border-none ng-cursor-pointer;
+  @apply ng-transition-colors ng-duration-150;
+  @apply ng-hover:ng-bg-black ng-hover:ng-bg-opacity-10;
+  @apply ng-focus:ng-outline-none ng-focus:ng-ring-2 ng-focus:ng-ring-current;
+}
+
+.ng-alert__dismiss-icon {
+  @apply ng-text-current;
+}
+
+.ng-alert--sm .ng-alert__dismiss {
+  @apply ng-w-5 ng-h-5;
+}
+
+/* Variantes filled */
+.ng-alert--filled.ng-alert--info {
+  @apply ng-bg-info-50 ng-text-info-800 ng-border-info-200;
+}
+
+.ng-alert--filled.ng-alert--success {
+  @apply ng-bg-success-50 ng-text-success-800 ng-border-success-200;
+}
+
+.ng-alert--filled.ng-alert--warning {
+  @apply ng-bg-warning-50 ng-text-warning-800 ng-border-warning-200;
+}
+
+.ng-alert--filled.ng-alert--error {
+  @apply ng-bg-error-50 ng-text-error-800 ng-border-error-200;
+}
+
+.ng-alert--filled.ng-alert--neutral {
+  @apply ng-bg-neutral-50 ng-text-neutral-800 ng-border-neutral-200;
+}
+
+/* Variantes outlined */
+.ng-alert--outlined.ng-alert--info {
+  @apply ng-bg-transparent ng-text-info-700 ng-border-info-300;
+}
+
+.ng-alert--outlined.ng-alert--success {
+  @apply ng-bg-transparent ng-text-success-700 ng-border-success-300;
+}
+
+.ng-alert--outlined.ng-alert--warning {
+  @apply ng-bg-transparent ng-text-warning-700 ng-border-warning-300;
+}
+
+.ng-alert--outlined.ng-alert--error {
+  @apply ng-bg-transparent ng-text-error-700 ng-border-error-300;
+}
+
+.ng-alert--outlined.ng-alert--neutral {
+  @apply ng-bg-transparent ng-text-neutral-700 ng-border-neutral-300;
+}
+
+/* Variantes ghost */
+.ng-alert--ghost.ng-alert--info {
+  @apply ng-bg-transparent ng-text-info-700 ng-border-transparent;
+}
+
+.ng-alert--ghost.ng-alert--success {
+  @apply ng-bg-transparent ng-text-success-700 ng-border-transparent;
+}
+
+.ng-alert--ghost.ng-alert--warning {
+  @apply ng-bg-transparent ng-text-warning-700 ng-border-transparent;
+}
+
+.ng-alert--ghost.ng-alert--error {
+  @apply ng-bg-transparent ng-text-error-700 ng-border-transparent;
+}
+
+.ng-alert--ghost.ng-alert--neutral {
+  @apply ng-bg-transparent ng-text-neutral-700 ng-border-transparent;
+}
+
+/* Variantes subtle */
+.ng-alert--subtle.ng-alert--info {
+  @apply ng-bg-info-100 ng-text-info-700 ng-border-info-200;
+}
+
+.ng-alert--subtle.ng-alert--success {
+  @apply ng-bg-success-100 ng-text-success-700 ng-border-success-200;
+}
+
+.ng-alert--subtle.ng-alert--warning {
+  @apply ng-bg-warning-100 ng-text-warning-700 ng-border-warning-200;
+}
+
+.ng-alert--subtle.ng-alert--error {
+  @apply ng-bg-error-100 ng-text-error-700 ng-border-error-200;
+}
+
+.ng-alert--subtle.ng-alert--neutral {
+  @apply ng-bg-neutral-100 ng-text-neutral-700 ng-border-neutral-200;
+}
+
+/* Actions */
+.ng-alert__actions {
+  @apply ng-flex ng-items-center ng-gap-3 ng-mt-3;
+}
+
+.ng-alert__actions > * {
+  @apply ng-flex-shrink-0;
+}
+
+/* Error list */
+.ng-alert__error-list {
+  @apply ng-m-0 ng-pl-5 ng-list-disc;
+}
+
+.ng-alert__error-item {
+  @apply ng-text-sm ng-text-current;
+}
+
+/* States interactifs */
+.ng-alert:not(.ng-alert--dismissible):hover {
+  @apply ng-shadow-lg;
+}
+
+/* Focus states */
+.ng-alert__dismiss:focus-visible {
+  @apply ng-ring-2 ng-ring-offset-2;
+}
+
+.ng-alert--filled .ng-alert__dismiss:hover {
+  @apply ng-bg-black ng-bg-opacity-20;
+}
+
+/* Animations */
+@keyframes alert-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes alert-disappear {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 200px;
+    margin-bottom: 1rem;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+    margin-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.ng-alert--animated {
+  animation: alert-appear 300ms ease-out;
+}
+
+.ng-alert--animated.ng-alert--disappearing {
+  animation: alert-disappear 300ms ease-in forwards;
+}
+
+/* Success/error specific styles */
+.ng-alert--success.ng-alert--filled .ng-alert__dismiss:hover {
+  @apply ng-bg-success-600 ng-bg-opacity-20;
+}
+
+.ng-alert--error.ng-alert--filled .ng-alert__dismiss:hover {
+  @apply ng-bg-error-600 ng-bg-opacity-20;
+}
+
+.ng-alert--warning.ng-alert--filled .ng-alert__dismiss:hover {
+  @apply ng-bg-warning-600 ng-bg-opacity-20;
+}
+
+.ng-alert--info.ng-alert--filled .ng-alert__dismiss:hover {
+  @apply ng-bg-info-600 ng-bg-opacity-20;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ng-alert--filled.ng-alert--info {
+  @apply ng-bg-info-900 ng-text-info-200 ng-border-info-800;
+}
+
+[data-theme="dark"] .ng-alert--filled.ng-alert--success {
+  @apply ng-bg-success-900 ng-text-success-200 ng-border-success-800;
+}
+
+[data-theme="dark"] .ng-alert--filled.ng-alert--warning {
+  @apply ng-bg-warning-900 ng-text-warning-200 ng-border-warning-800;
+}
+
+[data-theme="dark"] .ng-alert--filled.ng-alert--error {
+  @apply ng-bg-error-900 ng-text-error-200 ng-border-error-800;
+}
+
+[data-theme="dark"] .ng-alert--filled.ng-alert--neutral {
+  @apply ng-bg-neutral-900 ng-text-neutral-200 ng-border-neutral-800;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--info {
+  @apply ng-text-info-300 ng-border-info-700;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--success {
+  @apply ng-text-success-300 ng-border-success-700;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--warning {
+  @apply ng-text-warning-300 ng-border-warning-700;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--error {
+  @apply ng-text-error-300 ng-border-error-700;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--neutral {
+  @apply ng-text-neutral-300 ng-border-neutral-700;
+}
+
+[data-theme="dark"] .ng-alert--subtle.ng-alert--info {
+  @apply ng-bg-info-800 ng-text-info-300 ng-border-info-700;
+}
+
+[data-theme="dark"] .ng-alert--subtle.ng-alert--success {
+  @apply ng-bg-success-800 ng-text-success-300 ng-border-success-700;
+}
+
+[data-theme="dark"] .ng-alert--subtle.ng-alert--warning {
+  @apply ng-bg-warning-800 ng-text-warning-300 ng-border-warning-700;
+}
+
+[data-theme="dark"] .ng-alert--subtle.ng-alert--error {
+  @apply ng-bg-error-800 ng-text-error-300 ng-border-error-700;
+}
+
+[data-theme="dark"] .ng-alert--subtle.ng-alert--neutral {
+  @apply ng-bg-neutral-800 ng-text-neutral-300 ng-border-neutral-700;
+}
+
+[data-theme="dark"] .ng-alert--filled .ng-alert__dismiss:hover {
+  @apply ng-bg-white ng-bg-opacity-20;
+}
+
+/* RTL support */
+[dir="rtl"] .ng-alert {
+  @apply ng-flex-row-reverse;
+}
+
+[dir="rtl"] .ng-alert__actions {
+  @apply ng-flex-row-reverse;
+}
+
+[dir="rtl"] .ng-alert__error-list {
+  @apply ng-pr-5 ng-pl-0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ng-alert {
+    @apply ng-gap-2 ng-p-3;
+  }
+
+  .ng-alert--lg {
+    @apply ng-p-4;
+  }
+
+  .ng-alert__actions {
+    @apply ng-flex-col ng-items-start ng-mt-2;
+    @apply ng-gap-2;
+  }
+
+  .ng-alert__title {
+    @apply ng-text-xs;
+  }
+
+  .ng-alert__message {
+    @apply ng-text-xs;
+  }
+}
+
+/* Compact mode */
+.ng-alert--compact {
+  @apply ng-p-2 ng-gap-2;
+}
+
+.ng-alert--compact .ng-alert__icon {
+  @apply ng-w-4 ng-h-4;
+}
+
+.ng-alert--compact .ng-alert__title {
+  @apply ng-text-xs;
+}
+
+.ng-alert--compact .ng-alert__message {
+  @apply ng-text-xs;
+}
+
+/* States pour les variantes outlined et ghost */
+.ng-alert--outlined:hover,
+.ng-alert--ghost:hover {
+  @apply ng-shadow-sm ng-border-opacity-80;
+}
+
+.ng-alert--outlined.ng-alert--info:hover {
+  @apply ng-bg-info-50 ng-border-info-400;
+}
+
+.ng-alert--outlined.ng-alert--success:hover {
+  @apply ng-bg-success-50 ng-border-success-400;
+}
+
+.ng-alert--outlined.ng-alert--warning:hover {
+  @apply ng-bg-warning-50 ng-border-warning-400;
+}
+
+.ng-alert--outlined.ng-alert--error:hover {
+  @apply ng-bg-error-50 ng-border-error-400;
+}
+
+.ng-alert--outlined.ng-alert--neutral:hover {
+  @apply ng-bg-neutral-50 ng-border-neutral-400;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--info:hover {
+  @apply ng-bg-info-800 ng-border-info-600;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--success:hover {
+  @apply ng-bg-success-800 ng-border-success-600;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--warning:hover {
+  @apply ng-bg-warning-800 ng-border-warning-600;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--error:hover {
+  @apply ng-bg-error-800 ng-border-error-600;
+}
+
+[data-theme="dark"] .ng-alert--outlined.ng-alert--neutral:hover {
+  @apply ng-bg-neutral-800 ng-border-neutral-600;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-alert {
+    @apply ng-transition-none;
+  }
+
+  .ng-alert--animated {
+    animation: none;
+  }
+
+  .ng-alert--animated.ng-alert--disappearing {
+    animation: none;
+  }
+}

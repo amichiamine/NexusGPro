@@ -1,0 +1,672 @@
+/* ==========================================
+   NEXUS PAGINATION COMPONENT STYLES
+   ========================================== */
+
+.nexus-pagination {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  align-items: center;
+  font-family: var(--font-family-base);
+  color: var(--text-primary);
+  transition: all var(--transition-base);
+}
+
+.nexus-pagination__container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* ==========================================
+   PAGINATION BUTTONS
+   ========================================== */
+
+.nexus-pagination__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+  outline: none;
+  position: relative;
+}
+
+.nexus-pagination__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.nexus-pagination__button:focus-visible {
+  box-shadow: var(--focus-ring);
+  z-index: 1;
+}
+
+.nexus-pagination__button:hover:not(:disabled) {
+  background: var(--bg-secondary);
+  border-color: var(--border-secondary);
+  transform: translateY(-1px);
+}
+
+.nexus-pagination__button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.nexus-pagination__button--page {
+  min-width: 2.25rem;
+  height: 2.25rem;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+}
+
+.nexus-pagination__button--page:hover:not(:disabled) {
+  background: var(--primary-50);
+  color: var(--primary-600);
+  border-color: var(--primary-200);
+}
+
+.nexus-pagination__button--active {
+  background: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nexus-pagination__button--active:hover {
+  background: var(--primary-600);
+  border-color: var(--primary-600);
+}
+
+.nexus-pagination__button--first,
+.nexus-pagination__button--last {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  min-width: 2.75rem;
+}
+
+.nexus-pagination__button--previous,
+.nexus-pagination__button--next {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ==========================================
+   VARIANTS
+   ========================================== */
+
+.nexus-pagination--bordered .nexus-pagination__button {
+  border-width: 2px;
+}
+
+.nexus-pagination--bordered .nexus-pagination__button--active {
+  background: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
+}
+
+.nexus-pagination--filled .nexus-pagination__button {
+  background: var(--gray-100);
+  border-color: var(--gray-200);
+}
+
+.nexus-pagination--filled .nexus-pagination__button:hover:not(:disabled) {
+  background: var(--gray-200);
+}
+
+.nexus-pagination--filled .nexus-pagination__button--active {
+  background: var(--primary-500);
+  color: white;
+  border-color: var(--primary-500);
+}
+
+.nexus-pagination--minimal .nexus-pagination__button {
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  min-width: 2rem;
+  height: 2rem;
+}
+
+.nexus-pagination--minimal .nexus-pagination__button:hover:not(:disabled) {
+  background: var(--gray-100);
+  color: var(--text-primary);
+}
+
+.nexus-pagination--minimal .nexus-pagination__button--active {
+  background: var(--primary-100);
+  color: var(--primary-700);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nexus-pagination--pills .nexus-pagination__button {
+  border-radius: 9999px;
+  padding: 0 var(--spacing-4);
+  font-weight: var(--font-weight-medium);
+}
+
+.nexus-pagination--pills .nexus-pagination__button--active {
+  background: var(--primary-500);
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================
+   ELLIPSIS
+   ========================================== */
+
+.nexus-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2.5rem;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ==========================================
+   PAGE CONTAINER
+   ========================================== */
+
+.nexus-pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* ==========================================
+   CONTROLS
+   ========================================== */
+
+.nexus-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.nexus-pagination__controls--start {
+  margin-right: var(--spacing-2);
+}
+
+.nexus-pagination__controls--end {
+  margin-left: var(--spacing-2);
+}
+
+/* ==========================================
+   JUMP TO PAGE
+   ========================================== */
+
+.nexus-pagination__jump {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+.nexus-pagination__jump input {
+  width: 4rem;
+  height: 2rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.nexus-pagination__jump input:focus {
+  border-color: var(--primary-500);
+  box-shadow: var(--focus-ring);
+}
+
+.nexus-pagination__jump input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nexus-pagination__jump-button {
+  height: 2rem;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--primary-500);
+  border-radius: var(--border-radius-sm);
+  background: var(--primary-500);
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.nexus-pagination__jump-button:hover:not(:disabled) {
+  background: var(--primary-600);
+  border-color: var(--primary-600);
+}
+
+.nexus-pagination__jump-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ==========================================
+   ITEMS PER PAGE
+   ========================================== */
+
+.nexus-pagination__items-per-page {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+.nexus-pagination__label {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.nexus-pagination__select {
+  height: 2rem;
+  padding: 0 var(--spacing-2);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--border-radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  outline: none;
+  transition: all var(--transition-fast);
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+.nexus-pagination__select:focus {
+  border-color: var(--primary-500);
+  box-shadow: var(--focus-ring);
+}
+
+.nexus-pagination__select:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   INFO
+   ========================================== */
+
+.nexus-pagination__info {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: var(--spacing-1);
+  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-secondary);
+}
+
+/* ==========================================
+   SIZES
+   ========================================== */
+
+.nexus-pagination--sm .nexus-pagination__button {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 var(--spacing-2);
+  font-size: var(--font-size-xs);
+}
+
+.nexus-pagination--sm .nexus-pagination__button--page {
+  min-width: 1.75rem;
+  height: 1.75rem;
+}
+
+.nexus-pagination--sm .nexus-pagination__ellipsis {
+  min-width: 1.5rem;
+  height: 2rem;
+  font-size: var(--font-size-xs);
+}
+
+.nexus-pagination--sm .nexus-pagination__jump input,
+.nexus-pagination--sm .nexus-pagination__select {
+  height: 1.75rem;
+  font-size: var(--font-size-xs);
+}
+
+.nexus-pagination--sm .nexus-pagination__info {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-1) var(--spacing-3);
+}
+
+.nexus-pagination--lg .nexus-pagination__button {
+  min-width: 3rem;
+  height: 3rem;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-base);
+}
+
+.nexus-pagination--lg .nexus-pagination__button--page {
+  min-width: 2.75rem;
+  height: 2.75rem;
+  font-size: var(--font-size-sm);
+}
+
+.nexus-pagination--lg .nexus-pagination__ellipsis {
+  min-width: 2.5rem;
+  height: 3rem;
+  font-size: var(--font-size-base);
+}
+
+.nexus-pagination--lg .nexus-pagination__jump input,
+.nexus-pagination--lg .nexus-pagination__select {
+  height: 2.5rem;
+  font-size: var(--font-size-base);
+  padding: 0 var(--spacing-3);
+}
+
+.nexus-pagination--lg .nexus-pagination__info {
+  font-size: var(--font-size-base);
+  padding: var(--spacing-3) var(--spacing-5);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 768px) {
+  .nexus-pagination__container {
+    flex-wrap: wrap;
+    gap: var(--spacing-1);
+  }
+
+  .nexus-pagination__controls {
+    order: -1;
+    margin: 0;
+  }
+
+  .nexus-pagination__controls--start,
+  .nexus-pagination__controls--end {
+    margin: 0;
+  }
+
+  .nexus-pagination__pages {
+    order: 1;
+    margin: var(--spacing-2) 0;
+  }
+
+  .nexus-pagination__jump,
+  .nexus-pagination__items-per-page,
+  .nexus-pagination__info {
+    order: 2;
+    margin-top: var(--spacing-3);
+  }
+
+  .nexus-pagination__info {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .nexus-pagination {
+    gap: var(--spacing-3);
+  }
+
+  .nexus-pagination__button--first,
+  .nexus-pagination__button--last {
+    display: none;
+  }
+
+  .nexus-pagination__pages {
+    overflow-x: auto;
+    padding: var(--spacing-1) 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nexus-pagination__pages .nexus-pagination__button {
+    flex-shrink: 0;
+  }
+
+  .nexus-pagination__jump {
+    flex-direction: column;
+    gap: var(--spacing-1);
+  }
+
+  .nexus-pagination__jump input {
+    width: 100%;
+    max-width: 8rem;
+  }
+
+  .nexus-pagination__items-per-page {
+    flex-direction: column;
+    gap: var(--spacing-1);
+    align-items: flex-start;
+  }
+
+  .nexus-pagination__info {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-1) var(--spacing-2);
+  }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+
+@media print {
+  .nexus-pagination__button,
+  .nexus-pagination__jump,
+  .nexus-pagination__items-per-page {
+    display: none;
+  }
+
+  .nexus-pagination__info {
+    background: transparent;
+    border: none;
+    color: black;
+    font-weight: bold;
+  }
+}
+
+/* ==========================================
+   HIGH CONTRAST MODE
+   ========================================== */
+
+@media (prefers-contrast: high) {
+  .nexus-pagination__button {
+    border-width: 2px;
+  }
+
+  .nexus-pagination__button--active {
+    background: black;
+    color: white;
+    border-color: black;
+  }
+
+  .nexus-pagination__button:focus-visible {
+    outline: 3px solid currentColor;
+  }
+}
+
+/* ==========================================
+   REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .nexus-pagination,
+  .nexus-pagination__button,
+  .nexus-pagination__jump input,
+  .nexus-pagination__jump-button,
+  .nexus-pagination__select {
+    transition: none;
+  }
+
+  .nexus-pagination__button:hover:not(:disabled) {
+    transform: none;
+  }
+
+  .nexus-pagination__button:active:not(:disabled) {
+    transform: none;
+  }
+}
+
+/* ==========================================
+   DARK MODE
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+  .nexus-pagination {
+    color: var(--text-primary-dark);
+  }
+
+  .nexus-pagination__button {
+    background: var(--bg-primary-dark);
+    border-color: var(--border-primary-dark);
+    color: var(--text-primary-dark);
+  }
+
+  .nexus-pagination__button:hover:not(:disabled) {
+    background: var(--bg-secondary-dark);
+    border-color: var(--border-secondary-dark);
+  }
+
+  .nexus-pagination__button--page:hover:not(:disabled) {
+    background: var(--primary-900);
+    color: var(--primary-300);
+    border-color: var(--primary-700);
+  }
+
+  .nexus-pagination__button--active {
+    background: var(--primary-400);
+    color: white;
+    border-color: var(--primary-400);
+  }
+
+  .nexus-pagination__button--active:hover {
+    background: var(--primary-300);
+    border-color: var(--primary-300);
+  }
+
+  .nexus-pagination--minimal .nexus-pagination__button {
+    background: transparent;
+    color: var(--text-secondary-dark);
+  }
+
+  .nexus-pagination--minimal .nexus-pagination__button:hover:not(:disabled) {
+    background: var(--gray-800);
+    color: var(--text-primary-dark);
+  }
+
+  .nexus-pagination--minimal .nexus-pagination__button--active {
+    background: var(--primary-900);
+    color: var(--primary-200);
+  }
+
+  .nexus-pagination__ellipsis {
+    color: var(--text-secondary-dark);
+  }
+
+  .nexus-pagination__jump input {
+    background: var(--bg-primary-dark);
+    border-color: var(--border-primary-dark);
+    color: var(--text-primary-dark);
+  }
+
+  .nexus-pagination__select {
+    background: var(--bg-primary-dark);
+    border-color: var(--border-primary-dark);
+    color: var(--text-primary-dark);
+  }
+
+  .nexus-pagination__info {
+    background: var(--bg-secondary-dark);
+    border-color: var(--border-secondary-dark);
+    color: var(--text-secondary-dark);
+  }
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes nexus-pagination-slide {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes nexus-pagination-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.nexus-pagination__button--active {
+  animation: nexus-pagination-fade-in var(--transition-base);
+}
+
+.nexus-pagination__pages .nexus-pagination__button {
+  animation: nexus-pagination-slide var(--transition-fast);
+}
+
+.nexus-pagination__info {
+  animation: nexus-pagination-fade-in var(--transition-base);
+}
+
+/* ==========================================
+   CUSTOM PROPERTIES FALLBACK
+   ========================================== */
+
+.nexus-pagination {
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+  --focus-ring: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,536 @@
+/**
+ * Styles CSS pour le composant Modal
+ * Utilise le système de variables CSS globales pour cohérence et theming
+ */
+
+/* === VARIABLES CSS === */
+:root {
+  /* Couleurs */
+  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  --modal-overlay-bg-dark: rgba(0, 0, 0, 0.8);
+  --modal-bg: var(--white);
+  --modal-border: var(--gray-200);
+  --modal-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --modal-shadow-lg: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+  --modal-border-radius: 8px;
+  --modal-header-bg: var(--gray-50);
+  --modal-footer-bg: var(--gray-50);
+  
+  /* Tailles */
+  --modal-padding: 24px;
+  --modal-gap: 16px;
+  --modal-header-height: auto;
+  --modal-footer-height: auto;
+  --modal-close-size: 32px;
+  --modal-close-offset: 16px;
+  
+  /* Tailles prédéfinies */
+  --modal-size-xs-width: 320px;
+  --modal-size-sm-width: 480px;
+  --modal-size-md-width: 640px;
+  --modal-size-lg-width: 768px;
+  --modal-size-xl-width: 1024px;
+  --modal-size-full-width: 95vw;
+  --modal-size-full-height: 95vh;
+  
+  /* Positions */
+  --modal-header-padding: var(--modal-padding);
+  --modal-body-padding: var(--modal-padding);
+  --modal-footer-padding: var(--modal-padding);
+  
+  /* Animations */
+  --modal-transition: all 0.3s ease-in-out;
+  --modal-overlay-transition: opacity 0.3s ease-in-out;
+  --modal-panel-transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  
+  /* Z-index */
+  --modal-z-index: 9999;
+}
+
+/* === COMPOSANT MODAL === */
+.modal {
+  /* Position et layout */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--modal-z-index);
+  
+  /* Centrage */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Accessibilité */
+  outline: none;
+  
+  /* Transitions */
+  transition: var(--modal-transition);
+}
+
+/* Overlay de fond */
+.modal__overlay {
+  /* Position et layout */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Style */
+  background-color: var(--modal-overlay-bg);
+  backdrop-filter: blur(2px);
+  
+  /* Transition */
+  transition: var(--modal-overlay-transition);
+}
+
+.modal__overlay--visible {
+  opacity: 1;
+}
+
+/* Panel principal */
+.modal__panel {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  
+  /* Style */
+  background-color: var(--modal-bg);
+  border: 1px solid var(--modal-border);
+  border-radius: var(--modal-border-radius);
+  box-shadow: var(--modal-shadow);
+  
+  /* Position et sizing */
+  position: relative;
+  max-width: var(--modal-size-md-width);
+  max-height: 90vh;
+  width: auto;
+  
+  /* Overflow */
+  overflow: hidden;
+  
+  /* Animation */
+  transform: scale(0.95) translateY(-10px);
+  opacity: 0;
+  
+  /* Accessibilité */
+  outline: none;
+  
+  /* Transition */
+  transition: var(--modal-panel-transition);
+}
+
+/* États d'ouverture */
+.modal--visible .modal__overlay {
+  opacity: 1;
+}
+
+.modal--visible .modal__panel {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+/* Animation en cours */
+.modal--animating .modal__overlay {
+  opacity: 0;
+}
+
+.modal--animating .modal__panel {
+  transform: scale(0.9) translateY(-20px);
+  opacity: 0;
+}
+
+/* === TAILLES PRÉDÉFINIES === */
+
+/* Extra Small */
+.modal--xs .modal__panel {
+  width: var(--modal-size-xs-width);
+}
+
+/* Small */
+.modal--sm .modal__panel {
+  width: var(--modal-size-sm-width);
+}
+
+/* Large */
+.modal--lg .modal__panel {
+  width: var(--modal-size-lg-width);
+  box-shadow: var(--modal-shadow-lg);
+}
+
+/* Extra Large */
+.modal--xl .modal__panel {
+  width: var(--modal-size-xl-width);
+  box-shadow: var(--modal-shadow-lg);
+}
+
+/* Full Screen */
+.modal--full .modal__panel {
+  width: var(--modal-size-full-width);
+  height: var(--modal-size-full-height);
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* === POSITIONS === */
+
+/* Centré (par défaut) */
+.modal--center .modal__panel {
+  margin: 0 auto;
+}
+
+/* En haut */
+.modal--top .modal__panel {
+  margin-top: 10vh;
+}
+
+/* En bas */
+.modal--bottom .modal__panel {
+  margin-bottom: 10vh;
+}
+
+/* === RESPONSIVE === */
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --modal-padding: 16px;
+    --modal-header-padding: 16px;
+    --modal-body-padding: 16px;
+    --modal-footer-padding: 16px;
+  }
+  
+  /* Mode plein écran automatique sur mobile */
+  .modal--full-screen-mobile .modal__panel {
+    width: var(--modal-size-full-width);
+    height: var(--modal-size-full-height);
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .modal--lg .modal__panel,
+  .modal--xl .modal__panel {
+    width: var(--modal-size-full-width);
+    margin: 0;
+    border-radius: var(--modal-border-radius);
+    max-height: 90vh;
+  }
+  
+  .modal__header {
+    padding: 16px;
+  }
+  
+  .modal__body {
+    padding: 16px;
+  }
+  
+  .modal__footer {
+    padding: 16px;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .modal__footer button {
+    width: 100%;
+  }
+}
+
+/* === ÉLÉMENTS DU MODAL === */
+
+/* Header */
+.modal__header {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+  /* Sizing */
+  padding: var(--modal-header-padding);
+  min-height: var(--modal-header-height);
+  
+  /* Style */
+  background-color: var(--modal-header-bg);
+  border-bottom: 1px solid var(--modal-border);
+  
+  /* Spacing */
+  gap: var(--modal-gap);
+}
+
+/* Titre */
+.modal__title {
+  /* Typography */
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--gray-900);
+  
+  /* Layout */
+  flex: 1;
+  
+  /* Limite le texte */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Bouton de fermeture */
+.modal__close {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Sizing */
+  width: var(--modal-close-size);
+  height: var(--modal-close-size);
+  
+  /* Style */
+  background: transparent;
+  border: none;
+  border-radius: var(--modal-border-radius);
+  
+  /* Typography */
+  font-size: 16px;
+  color: var(--gray-500);
+  
+  /* Interactions */
+  cursor: pointer;
+  transition: var(--modal-transition);
+  
+  /* Positionnement */
+  position: relative;
+  flex-shrink: 0;
+  
+  /* Focus */
+  outline: none;
+  
+  &:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+  }
+  
+  &:active {
+    background-color: var(--gray-200);
+  }
+}
+
+/* Corps du modal */
+.modal__body {
+  /* Layout */
+  padding: var(--modal-body-padding);
+  
+  /* Overflow */
+  overflow-y: auto;
+  flex: 1;
+  
+  /* Typography */
+  color: var(--gray-700);
+  font-family: var(--font-family-base);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Footer */
+.modal__footer {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  
+  /* Sizing */
+  padding: var(--modal-footer-padding);
+  min-height: var(--modal-footer-height);
+  
+  /* Style */
+  background-color: var(--modal-footer-bg);
+  border-top: 1px solid var(--modal-border);
+  
+  /* Spacing */
+  gap: var(--modal-gap);
+}
+
+/* === ÉTATS === */
+
+/* Modal plein écran */
+.modal--full .modal__panel {
+  max-width: none;
+  max-height: none;
+  width: 95vw;
+  height: 95vh;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.modal--full .modal__body {
+  max-height: calc(95vh - var(--modal-header-height) - var(--modal-footer-height));
+}
+
+/* === ACCESSIBILITÉ === */
+
+/* Focus management */
+.modal:focus {
+  outline: none;
+}
+
+.modal__panel:focus {
+  outline: none;
+}
+
+/* Réduction des animations pour utilisateurs sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .modal {
+    transition: none;
+  }
+  
+  .modal__overlay {
+    transition: none;
+  }
+  
+  .modal__panel {
+    transition: none;
+  }
+  
+  .modal--visible .modal__panel,
+  .modal--animating .modal__panel {
+    transform: none;
+    opacity: 1;
+  }
+  
+  .modal__close {
+    transition: none;
+  }
+}
+
+/* Préférence pour utilisateur avec contraste élevé */
+@media (prefers-contrast: high) {
+  .modal__panel {
+    border: 2px solid var(--gray-600);
+    box-shadow: none;
+  }
+  
+  .modal__header,
+  .modal__footer {
+    border-color: var(--gray-600);
+  }
+}
+
+/* === THÈME SOMBRE === */
+[data-theme="dark"] {
+  :root {
+    --modal-bg: var(--gray-800);
+    --modal-border: var(--gray-700);
+    --modal-header-bg: var(--gray-700);
+    --modal-footer-bg: var(--gray-700);
+    --modal-overlay-bg: rgba(0, 0, 0, 0.8);
+  }
+  
+  .modal__title {
+    color: var(--gray-100);
+  }
+  
+  .modal__body {
+    color: var(--gray-300);
+  }
+  
+  .modal__close:hover {
+    background-color: var(--gray-600);
+  }
+  
+  .modal__close:active {
+    background-color: var(--gray-500);
+  }
+}
+
+/* === PRINT === */
+@media print {
+  .modal {
+    display: none !important;
+  }
+}
+
+/* === UTILITAIRES === */
+
+/* Modal sans overlay */
+.modal--no-overlay .modal__overlay {
+  display: none;
+}
+
+/* Modal avec bordures arrondies */
+.modal--rounded .modal__panel {
+  border-radius: 12px;
+}
+
+/* Modal avec ombre forte */
+.modal--shadow-strong .modal__panel {
+  box-shadow: var(--modal-shadow-lg);
+}
+
+/* Modal compact */
+.modal--compact {
+  --modal-padding: 16px;
+}
+
+.modal--compact .modal__header {
+  padding: 16px;
+}
+
+.modal--compact .modal__body {
+  padding: 16px;
+  font-size: 13px;
+}
+
+.modal--compact .modal__footer {
+  padding: 16px;
+}
+
+/* === ANIMATIONS AVANCÉES === */
+
+/* Animation de slide depuis la droite */
+.modal--slide-right .modal__panel {
+  transform: translateX(100%);
+}
+
+.modal--slide-right.modal--visible .modal__panel {
+  transform: translateX(0);
+}
+
+/* Animation de slide depuis la gauche */
+.modal--slide-left .modal__panel {
+  transform: translateX(-100%);
+}
+
+.modal--slide-left.modal--visible .modal__panel {
+  transform: translateX(0);
+}
+
+/* Animation de slide depuis le bas */
+.modal--slide-up .modal__panel {
+  transform: translateY(100%);
+}
+
+.modal--slide-up.modal--visible .modal__panel {
+  transform: translateY(0);
+}
+
+/* Animation de zoom */
+.modal--zoom .modal__panel {
+  transform: scale(0.5);
+}
+
+.modal--zoom.modal--visible .modal__panel {
+  transform: scale(1);
+}

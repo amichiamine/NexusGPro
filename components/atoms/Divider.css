@@ -1,0 +1,561 @@
+/* ==========================================================================
+   Divider Component Styles
+   ========================================================================== */
+
+.ng-divider {
+  @apply ng-relative ng-flex ng-items-center;
+}
+
+.ng-divider--horizontal {
+  @apply ng-w-full ng-flex-row;
+}
+
+.ng-divider--vertical {
+  @apply ng-h-full ng-flex-col;
+}
+
+/* Ligne de séparation principale */
+.ng-divider__line {
+  @apply ng-bg-current ng-border-current;
+}
+
+/* Tailles (épaisseur) */
+.ng-divider--thin .ng-divider__line {
+  @apply ng-h-px ng-w-full;
+}
+
+.ng-divider--hairline .ng-divider__line {
+  @apply ng-h-0.5 ng-w-full;
+}
+
+.ng-divider--medium .ng-divider__line {
+  @apply ng-h-0.5 ng-w-full;
+}
+
+.ng-divider--thick .ng-divider__line {
+  @apply ng-h-1 ng-w-full;
+}
+
+/* Épaisseurs pour vertical */
+.ng-divider--thin.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-px ng-h-full;
+}
+
+.ng-divider--hairline.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-0.5 ng-h-full;
+}
+
+.ng-divider--medium.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-0.5 ng-h-full;
+}
+
+.ng-divider--thick.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-1 ng-h-full;
+}
+
+/* Variantes de style */
+.ng-divider--solid .ng-divider__line {
+  @apply ng-border-solid;
+}
+
+.ng-divider--dashed .ng-divider__line {
+  @apply ng-border-dashed;
+}
+
+.ng-divider--dotted .ng-divider__line {
+  border-style: dotted;
+}
+
+.ng-divider--double .ng-divider__line {
+  border-style: double;
+  border-width: 3px;
+}
+
+.ng-divider--none .ng-divider__line {
+  @apply ng-border-0;
+}
+
+/* Couleurs */
+.ng-divider--default .ng-divider__line {
+  @apply ng-border-neutral-300;
+}
+
+.ng-divider--primary .ng-divider__line {
+  @apply ng-border-primary-300;
+}
+
+.ng-divider--secondary .ng-divider__line {
+  @apply ng-border-secondary-300;
+}
+
+.ng-divider--success .ng-divider__line {
+  @apply ng-border-success-300;
+}
+
+.ng-divider--warning .ng-divider__line {
+  @apply ng-border-warning-300;
+}
+
+.ng-divider--error .ng-divider__line {
+  @apply ng-border-error-300;
+}
+
+.ng-divider--neutral .ng-divider__line {
+  @apply ng-border-neutral-400;
+}
+
+/* Couleurs pour mode none */
+.ng-divider--none.ng-divider--default .ng-divider__line {
+  @apply ng-bg-neutral-300;
+}
+
+.ng-divider--none.ng-divider--primary .ng-divider__line {
+  @apply ng-bg-primary-300;
+}
+
+.ng-divider--none.ng-divider--secondary .ng-divider__line {
+  @apply ng-bg-secondary-300;
+}
+
+.ng-divider--none.ng-divider--success .ng-divider__line {
+  @apply ng-bg-success-300;
+}
+
+.ng-divider--none.ng-divider--warning .ng-divider__line {
+  @apply ng-bg-warning-300;
+}
+
+.ng-divider--none.ng-divider--error .ng-divider__line {
+  @apply ng-bg-error-300;
+}
+
+.ng-divider--none.ng-divider--neutral .ng-divider__line {
+  @apply ng-bg-neutral-400;
+}
+
+/* Divider avec label/icon */
+.ng-divider__labeled {
+  @apply ng-relative ng-flex ng-items-center;
+}
+
+.ng-divider--horizontal.ng-divider__labeled {
+  @apply ng-w-full;
+}
+
+.ng-divider--vertical.ng-divider__labeled {
+  @apply ng-h-full;
+}
+
+/* Wrapper de label */
+.ng-divider__label-wrapper {
+  @apply ng-flex ng-items-center ng-gap-2 ng-px-3;
+  @apply ng-bg-white ng-text-neutral-700;
+}
+
+.ng-divider__label-wrapper--text-pill {
+  @apply ng-bg-neutral-100 ng-text-neutral-800 ng-rounded-full ng-px-4 ng-py-1;
+}
+
+.ng-divider__label-wrapper--text-box {
+  @apply ng-bg-white ng-border ng-border-neutral-200 ng-rounded-md;
+  @apply ng-shadow-sm ng-px-4 ng-py-2;
+}
+
+.ng-divider__label-wrapper--text-plain {
+  @apply ng-bg-transparent;
+}
+
+/* Position du label wrapper */
+.ng-divider__label-wrapper--start {
+  @apply ng-justify-start;
+}
+
+.ng-divider__label-wrapper--center {
+  @apply ng-justify-center ng-absolute ng-left-1/2 ng-transform ng--translate-x-1/2;
+  @apply ng-z-10 ng-bg-white ng-px-4;
+}
+
+.ng-divider__label-wrapper--end {
+  @apply ng-justify-end ng-absolute ng-right-0;
+  @apply ng-z-10 ng-bg-white ng-px-4;
+}
+
+/* Position pour vertical */
+.ng-divider--vertical .ng-divider__label-wrapper--center {
+  @apply ng-absolute ng-top-1/2 ng-left-1/2;
+  @apply ng-transform ng--translate-x-1/2 ng--translate-y-1/2;
+  @apply ng-flex-col ng-absolute ng-top-1/2 ng-left-1/2;
+  @apply ng-absolute ng-top-1/2 ng-left-1/2;
+}
+
+.ng-divider--vertical .ng-divider__label-wrapper--center {
+  @apply ng-absolute;
+}
+
+.ng-divider--vertical .ng-divider__label-wrapper--center {
+  @apply ng-absolute;
+}
+
+/* Label */
+.ng-divider__label {
+  @apply ng-text-sm ng-font-medium;
+}
+
+.ng-divider__label--default {
+  @apply ng-text-neutral-700;
+}
+
+.ng-divider__label--muted {
+  @apply ng-text-neutral-500;
+}
+
+.ng-divider__label--primary {
+  @apply ng-text-primary-600;
+}
+
+.ng-divider__label--secondary {
+  @apply ng-text-secondary-600;
+}
+
+/* Icônes */
+.ng-divider__icon {
+  @apply ng-text-current ng-flex-shrink-0;
+}
+
+.ng-divider__icon--left,
+.ng-divider__icon--right {
+  @apply ng-w-4 ng-h-4;
+}
+
+.ng-divider__icon--center {
+  @apply ng-w-5 ng-h-5;
+}
+
+.ng-divider__icon-wrapper--center {
+  @apply ng-absolute ng-inset-0 ng-flex ng-items-center ng-justify-center;
+  @apply ng-z-10 ng-bg-white ng-w-8 ng-h-8 ng-rounded-full;
+  @apply ng-shadow-sm;
+}
+
+/* Liste de labels */
+.ng-divider__list-icon {
+  @apply ng-inline-flex ng-mr-1;
+}
+
+.ng-divider__list-item {
+  @apply ng-text-sm ng-font-medium;
+}
+
+.ng-divider__list-item--default {
+  @apply ng-text-neutral-700;
+}
+
+.ng-divider__list-item--primary {
+  @apply ng-text-primary-600;
+}
+
+.ng-divider__list-item--secondary {
+  @apply ng-text-secondary-600;
+}
+
+.ng-divider__list-item--muted {
+  @apply ng-text-neutral-500;
+}
+
+.ng-divider__separator {
+  @apply ng-text-neutral-400 ng-mx-1;
+}
+
+.ng-divider__list-remaining {
+  @apply ng-text-xs ng-text-neutral-500 ng-font-normal;
+}
+
+/* Coins arrondis */
+.ng-divider--rounded .ng-divider__line {
+  @apply ng-rounded-full;
+}
+
+.ng-divider--rounded.ng-divider--text-pill .ng-divider__label-wrapper {
+  @apply ng-rounded-full;
+}
+
+.ng-divider--rounded.ng-divider--text-box .ng-divider__label-wrapper {
+  @apply ng-rounded-lg;
+}
+
+/* Ombre */
+.ng-divider--elevated .ng-divider__line {
+  @apply ng-shadow-sm;
+}
+
+.ng-divider--elevated.ng-divider--text-box .ng-divider__label-wrapper {
+  @apply ng-shadow-md;
+}
+
+.ng-divider--elevated.ng-divider__icon-wrapper--center {
+  @apply ng-shadow-md;
+}
+
+/* Animations */
+.ng-divider__line {
+  @apply ng-transition-all ng-duration-200;
+}
+
+.ng-divider:hover .ng-divider__line {
+  @apply ng-shadow-sm;
+}
+
+.ng-divider:hover.ng-divider--default .ng-divider__line {
+  @apply ng-border-neutral-400;
+}
+
+.ng-divider:hover.ng-divider--primary .ng-divider__line {
+  @apply ng-border-primary-400;
+}
+
+.ng-divider:hover.ng-divider--secondary .ng-divider__line {
+  @apply ng-border-secondary-400;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .ng-divider--default .ng-divider__line {
+  @apply ng-border-neutral-600;
+}
+
+[data-theme="dark"] .ng-divider--primary .ng-divider__line {
+  @apply ng-border-primary-600;
+}
+
+[data-theme="dark"] .ng-divider--secondary .ng-divider__line {
+  @apply ng-border-secondary-600;
+}
+
+[data-theme="dark"] .ng-divider--success .ng-divider__line {
+  @apply ng-border-success-600;
+}
+
+[data-theme="dark"] .ng-divider--warning .ng-divider__line {
+  @apply ng-border-warning-600;
+}
+
+[data-theme="dark"] .ng-divider--error .ng-divider__line {
+  @apply ng-border-error-600;
+}
+
+[data-theme="dark"] .ng-divider--neutral .ng-divider__line {
+  @apply ng-border-neutral-500;
+}
+
+/* Dark theme pour mode none */
+[data-theme="dark"] .ng-divider--none.ng-divider--default .ng-divider__line {
+  @apply ng-bg-neutral-600;
+}
+
+[data-theme="dark"] .ng-divider--none.ng-divider--primary .ng-divider__line {
+  @apply ng-bg-primary-600;
+}
+
+[data-theme="dark"] .ng-divider--none.ng-divider--secondary .ng-divider__line {
+  @apply ng-bg-secondary-600;
+}
+
+[data-theme="dark"] .ng-divider--none.ng-divider--success .ng-divider__line {
+  @apply ng-bg-success-600;
+}
+
+[data-theme="dark"] .ng-divider--none.ng-divider--warning .ng-divider__line {
+  @apply ng-bg-warning-600;
+}
+
+[data-theme="dark"] .ng-divider--none.ng-divider--error .ng-divider__line {
+  @apply ng-bg-error-600;
+}
+
+[data-theme="dark"] .ng-divider--none.ng-divider--neutral .ng-divider__line {
+  @apply ng-bg-neutral-500;
+}
+
+/* Dark theme pour labels */
+[data-theme="dark"] .ng-divider__label {
+  @apply ng-text-neutral-200;
+}
+
+[data-theme="dark"] .ng-divider__label--default {
+  @apply ng-text-neutral-200;
+}
+
+[data-theme="dark"] .ng-divider__label--muted {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-divider__label--primary {
+  @apply ng-text-primary-400;
+}
+
+[data-theme="dark"] .ng-divider__label--secondary {
+  @apply ng-text-secondary-400;
+}
+
+[data-theme="dark"] .ng-divider__label-wrapper {
+  @apply ng-bg-neutral-900 ng-text-neutral-200;
+}
+
+[data-theme="dark"] .ng-divider__label-wrapper--text-pill {
+  @apply ng-bg-neutral-800 ng-text-neutral-100;
+}
+
+[data-theme="dark"] .ng-divider__label-wrapper--text-box {
+  @apply ng-bg-neutral-800 ng-border-neutral-700;
+}
+
+[data-theme="dark"] .ng-divider__icon-wrapper--center {
+  @apply ng-bg-neutral-900;
+}
+
+[data-theme="dark"] .ng-divider__list-item--default {
+  @apply ng-text-neutral-200;
+}
+
+[data-theme="dark"] .ng-divider__list-item--muted {
+  @apply ng-text-neutral-400;
+}
+
+[data-theme="dark"] .ng-divider__separator {
+  @apply ng-text-neutral-500;
+}
+
+[data-theme="dark"] .ng-divider__list-remaining {
+  @apply ng-text-neutral-400;
+}
+
+/* Hover states en dark mode */
+[data-theme="dark"] .ng-divider:hover.ng-divider--default .ng-divider__line {
+  @apply ng-border-neutral-500;
+}
+
+[data-theme="dark"] .ng-divider:hover.ng-divider--primary .ng-divider__line {
+  @apply ng-border-primary-500;
+}
+
+/* RTL support */
+[dir="rtl"] .ng-divider__label-wrapper--start {
+  @apply ng-justify-end;
+}
+
+[dir="rtl"] .ng-divider__label-wrapper--end {
+  @apply ng-justify-start ng-left-0 ng-right-auto;
+}
+
+[dir="rtl"] .ng-divider__icon--left {
+  @apply ng-order-2;
+}
+
+[dir="rtl"] .ng-divider__icon--right {
+  @apply ng-order-0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .ng-divider__label {
+    @apply ng-text-xs;
+  }
+
+  .ng-divider__list-item {
+    @apply ng-text-xs;
+  }
+
+  .ng-divider__list-remaining {
+    @apply ng-text-xs;
+  }
+
+  .ng-divider__label-wrapper {
+    @apply ng-px-2 ng-py-1;
+  }
+
+  .ng-divider__label-wrapper--text-pill {
+    @apply ng-px-3 ng-py-0.5;
+  }
+
+  .ng-divider__label-wrapper--text-box {
+    @apply ng-px-3 ng-py-1.5;
+  }
+
+  .ng-divider__icon {
+    @apply ng-w-3 ng-h-3;
+  }
+
+  .ng-divider__icon--center {
+    @apply ng-w-4 ng-h-4;
+  }
+
+  .ng-divider__icon-wrapper--center {
+    @apply ng-w-6 ng-h-6;
+  }
+}
+
+/* Tailles personnalisées */
+.ng-divider--xs .ng-divider__line {
+  @apply ng-h-px ng-w-full;
+}
+
+.ng-divider--xl .ng-divider__line {
+  @apply ng-h-2 ng-w-full;
+}
+
+.ng-divider--xxl .ng-divider__line {
+  @apply ng-h-3 ng-w-full;
+}
+
+.ng-divider--xs.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-px ng-h-full;
+}
+
+.ng-divider--xl.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-2 ng-h-full;
+}
+
+.ng-divider--xxl.ng-divider--vertical .ng-divider__line {
+  @apply ng-w-3 ng-h-full;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ng-divider__line {
+    @apply ng-transition-none;
+  }
+}
+
+/* Accessibility */
+.ng-divider__line:focus {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2 ng-ring-offset-white;
+}
+
+/* Performance optimizations */
+.ng-divider__line {
+  will-change: opacity;
+}
+
+/* États de focus pour les labels interactifs */
+.ng-divider__label-wrapper[role="button"]:focus {
+  @apply ng-ring-2 ng-ring-primary-500 ng-ring-offset-2 ng-ring-offset-white;
+  @apply ng-outline-none;
+}
+
+/* Gradient backgrounds pour certaines variantes */
+.ng-divider--gradient .ng-divider__line {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--divider-color, currentColor),
+    transparent
+  );
+}
+
+.ng-divider--gradient.ng-divider--vertical .ng-divider__line {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--divider-color, currentColor),
+    transparent
+  );
+}
