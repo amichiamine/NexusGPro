@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ComponentMetadata, ComponentCategory } from '../types';
-import { getAllComponents } from '../core/componentRegistry';
+import { getAllComponents } from '../core/autoComponentRegistry';
 
 interface ComponentCatalogProps {
   onSelectComponent: (component: ComponentMetadata) => void;

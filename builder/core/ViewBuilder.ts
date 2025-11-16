@@ -51,7 +51,7 @@ export class ViewBuilder {
   }
 
   getCurrentView(): ViewConfig | null {
-    return this.state.currentView;
+    return this.state.currentView as ViewConfig | null;
   }
 
   selectNode(node: ComponentNode | null) {
@@ -60,15 +60,16 @@ export class ViewBuilder {
   }
 
   getSelectedNode(): ComponentNode | null {
-    return this.state.selectedNode;
+    return this.state.selectedNode as ComponentNode | null;
   }
 
   addComponent(component: ComponentNode, parentId?: string): boolean {
-    if (!this.state.currentView) return false;
+    const view = this.getCurrentView();
+    if (!view) return false;
 
     const parent = parentId
-      ? this.findNodeById(this.state.currentView.root, parentId)
-      : this.state.currentView.root;
+      ? this.findNodeById(view.root, parentId)
+      : view.root;
 
     if (!parent) return false;
 
@@ -86,12 +87,14 @@ export class ViewBuilder {
   }
 
   removeComponent(nodeId: string): boolean {
-    if (!this.state.currentView) return false;
+    const view = this.getCurrentView();
+    if (!view) return false;
 
-    const removed = this.removeNodeById(this.state.currentView.root, nodeId);
+    const removed = this.removeNodeById(view.root, nodeId);
 
     if (removed) {
-      if (this.state.selectedNode?.id === nodeId) {
+      const selected = this.getSelectedNode();
+      if (selected?.id === nodeId) {
         this.state.selectedNode = null;
       }
 
@@ -104,9 +107,10 @@ export class ViewBuilder {
   }
 
   updateComponent(nodeId: string, updates: Partial<ComponentNode>): boolean {
-    if (!this.state.currentView) return false;
+    const view = this.getCurrentView();
+    if (!view) return false;
 
-    const node = this.findNodeById(this.state.currentView.root, nodeId);
+    const node = this.findNodeById(view.root, nodeId);
     if (!node) return false;
 
     Object.assign(node, updates);
@@ -119,15 +123,16 @@ export class ViewBuilder {
   }
 
   moveComponent(nodeId: string, newParentId: string, index?: number): boolean {
-    if (!this.state.currentView) return false;
+    const view = this.getCurrentView();
+    if (!view) return false;
 
-    const node = this.findNodeById(this.state.currentView.root, nodeId);
+    const node = this.findNodeById(view.root, nodeId);
     if (!node) return false;
 
-    const removed = this.removeNodeById(this.state.currentView.root, nodeId);
+    const removed = this.removeNodeById(view.root, nodeId);
     if (!removed) return false;
 
-    const newParent = this.findNodeById(this.state.currentView.root, newParentId);
+    const newParent = this.findNodeById(view.root, newParentId);
     if (!newParent) return false;
 
     if (!newParent.children) {
@@ -148,35 +153,44 @@ export class ViewBuilder {
   }
 
   undo(): boolean {
-    if (this.state.historyIndex <= 0) return false;
+    const historyIndex = this.state.historyIndex ?? -1;
+    const history = this.state.history ?? [];
 
-    this.state.historyIndex--;
-    this.state.currentView = this.cloneView(this.state.history[this.state.historyIndex]);
+    if (historyIndex <= 0) return false;
+
+    this.state.historyIndex = historyIndex - 1;
+    this.state.currentView = this.cloneView(history[this.state.historyIndex]);
     this.notifyListeners();
 
     return true;
   }
 
   redo(): boolean {
-    if (this.state.historyIndex >= this.state.history.length - 1) return false;
+    const historyIndex = this.state.historyIndex ?? -1;
+    const history = this.state.history ?? [];
 
-    this.state.historyIndex++;
-    this.state.currentView = this.cloneView(this.state.history[this.state.historyIndex]);
+    if (historyIndex >= history.length - 1) return false;
+
+    this.state.historyIndex = historyIndex + 1;
+    this.state.currentView = this.cloneView(history[this.state.historyIndex]);
     this.notifyListeners();
 
     return true;
   }
 
   canUndo(): boolean {
-    return this.state.historyIndex > 0;
+    const historyIndex = this.state.historyIndex ?? -1;
+    return historyIndex > 0;
   }
 
   canRedo(): boolean {
-    return this.state.historyIndex < this.state.history.length - 1;
+    const historyIndex = this.state.historyIndex ?? -1;
+    const history = this.state.history ?? [];
+    return historyIndex < history.length - 1;
   }
 
   isDirty(): boolean {
-    return this.state.isDirty;
+    return this.state.isDirty ?? false;
   }
 
   subscribe(listener: (state: BuilderState) => void): () => void {
@@ -219,19 +233,25 @@ export class ViewBuilder {
 
   private markDirty() {
     this.state.isDirty = true;
-    if (this.state.currentView) {
-      this.state.currentView.metadata.updated = new Date().toISOString();
+    const view = this.getCurrentView();
+    if (view) {
+      view.metadata.updated = new Date().toISOString();
     }
   }
 
   private pushToHistory() {
-    if (!this.state.currentView) return;
+    const view = this.getCurrentView();
+    if (!view) return;
 
-    if (this.state.historyIndex < this.state.history.length - 1) {
-      this.state.history = this.state.history.slice(0, this.state.historyIndex + 1);
+    const historyIndex = this.state.historyIndex ?? -1;
+    const history = this.state.history ?? [];
+
+    if (historyIndex < history.length - 1) {
+      this.state.history = history.slice(0, historyIndex + 1);
     }
 
-    this.state.history.push(this.cloneView(this.state.currentView));
+    if (!this.state.history) this.state.history = [];
+    this.state.history.push(this.cloneView(view));
     this.state.historyIndex = this.state.history.length - 1;
 
     if (this.state.history.length > 50) {

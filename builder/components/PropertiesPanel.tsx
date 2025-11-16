@@ -1,6 +1,6 @@
 import React from 'react';
 import type { ViewNode, ComponentMetadata } from '../types';
-import { getComponentById } from '../core/componentRegistry';
+import { getComponentById } from '../core/autoComponentRegistry';
 
 interface PropertiesPanelProps {
   selectedNode: ViewNode | null;

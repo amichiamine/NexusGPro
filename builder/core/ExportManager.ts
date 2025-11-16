@@ -1,4 +1,4 @@
-import { ViewConfig, ExportFormat } from '../types';
+import { ViewConfig, ExportFormat, GeneratedExport } from '../types';
 import { HTMLGenerator } from '../generators/HTMLGenerator';
 import { PHPGenerator } from '../generators/PHPGenerator';
 import { PathResolver } from '../utils/pathResolver';
@@ -18,15 +18,15 @@ export class ExportManager {
     return JSON.stringify(view, null, 2);
   }
 
-  exportAsHTML(view: ViewConfig): ExportFormat {
+  exportAsHTML(view: ViewConfig): GeneratedExport {
     return this.htmlGenerator.generate(view);
   }
 
-  exportAsPHP(view: ViewConfig): ExportFormat {
+  exportAsPHP(view: ViewConfig): GeneratedExport {
     return this.phpGenerator.generate(view);
   }
 
-  exportAsBoth(view: ViewConfig): { html: ExportFormat; php: ExportFormat } {
+  exportAsBoth(view: ViewConfig): { html: GeneratedExport; php: GeneratedExport } {
     return {
       html: this.exportAsHTML(view),
       php: this.exportAsPHP(view)

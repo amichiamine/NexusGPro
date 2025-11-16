@@ -64,12 +64,15 @@ export interface ViewDefinition {
 }
 
 export interface BuilderState {
-  currentView: ViewDefinition | null;
-  selectedNode: ViewNode | null;
-  componentRegistry: ComponentMetadata[];
-  templateRegistry: TemplateMetadata[];
-  appViewsLocation: AppViewsLocation;
-  exportFormat: ExportFormat;
+  currentView: ViewDefinition | ViewConfig | null;
+  selectedNode: ViewNode | ComponentNode | null;
+  componentRegistry?: ComponentMetadata[];
+  templateRegistry?: TemplateMetadata[];
+  appViewsLocation?: AppViewsLocation;
+  exportFormat?: ExportFormat;
+  isDirty?: boolean;
+  history?: ViewConfig[];
+  historyIndex?: number;
 }
 
 export interface CodeGenerationOptions {
@@ -90,6 +93,21 @@ export interface ExportResult {
   success: boolean;
   code?: string;
   filename?: string;
+  errors?: string[];
+}
+
+export interface GeneratedExport {
+  format: ExportFormat;
+  content: string;
+  styles?: string;
+  scripts?: string;
+  filename: string;
+}
+
+export interface ImportedView {
+  config: ViewConfig;
+  sourceFormat: 'json' | 'html' | 'php';
+  parsed: boolean;
   errors?: string[];
 }
 

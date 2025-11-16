@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ComponentNode, BuilderState } from '../types';
+import { ComponentNode, ViewNode, BuilderState, ViewConfig } from '../types';
 import { viewBuilder } from '../core/ViewBuilder';
 import { initializeComponentRegistry } from '../core/ComponentRegistry';
 import { Toolbar } from './Toolbar';
 import { ComponentCatalog } from './ComponentCatalog';
 import { Canvas } from './Canvas';
 import { PropertiesPanel } from './PropertiesPanel';
+import { viewNodeToComponentNode, componentNodeToViewNode } from '../utils/typeAdapters';
 import '../styles/Builder.css';
 
 export const Builder: React.FC = () => {
@@ -29,11 +30,23 @@ export const Builder: React.FC = () => {
     viewBuilder.selectNode(node);
   };
 
+  const handleUpdateNode = (nodeId: string, updates: Partial<ViewNode>) => {
+    const compNodeUpdates: Partial<ComponentNode> = {
+      props: updates.props,
+      styles: updates.styles as Record<string, string>,
+      className: updates.props?.className
+    };
+    viewBuilder.updateComponent(nodeId, compNodeUpdates);
+  };
+
+  const currentView = state.currentView as ViewConfig | null;
+  const selectedNode = state.selectedNode as ComponentNode | null;
+
   return (
     <div className="builder-container">
       <Toolbar
-        currentView={state.currentView}
-        isDirty={state.isDirty}
+        currentView={currentView}
+        isDirty={state.isDirty || false}
         onViewChange={handleViewChange}
       />
 
@@ -48,14 +61,17 @@ export const Builder: React.FC = () => {
 
         <div className="builder-main">
           <Canvas
-            root={state.currentView?.root || null}
-            selectedNode={state.selectedNode}
+            root={currentView?.root || null}
+            selectedNode={selectedNode}
             onSelectNode={handleSelectNode}
           />
         </div>
 
         <div className="builder-sidebar right">
-          <PropertiesPanel node={state.selectedNode} />
+          <PropertiesPanel
+            selectedNode={selectedNode ? componentNodeToViewNode(selectedNode) : null}
+            onUpdateNode={handleUpdateNode}
+          />
         </div>
       </div>
     </div>

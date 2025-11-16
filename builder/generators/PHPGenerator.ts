@@ -1,4 +1,4 @@
-import { ViewConfig, ComponentNode, ExportFormat } from '../types';
+import { ViewConfig, ComponentNode, GeneratedExport } from '../types';
 import { PathResolver } from '../utils/pathResolver';
 
 export class PHPGenerator {
@@ -8,7 +8,7 @@ export class PHPGenerator {
     this.pathResolver = pathResolver;
   }
 
-  generate(view: ViewConfig): ExportFormat {
+  generate(view: ViewConfig): GeneratedExport {
     const content = this.buildPHPDocument(view);
 
     return {

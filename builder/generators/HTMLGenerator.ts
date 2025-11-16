@@ -1,4 +1,4 @@
-import { ViewConfig, ComponentNode, ExportFormat } from '../types';
+import { ViewConfig, ComponentNode, GeneratedExport } from '../types';
 import { PathResolver } from '../utils/pathResolver';
 
 export class HTMLGenerator {
@@ -8,7 +8,7 @@ export class HTMLGenerator {
     this.pathResolver = pathResolver;
   }
 
-  generate(view: ViewConfig): ExportFormat {
+  generate(view: ViewConfig): GeneratedExport {
     const html = this.generateHTML(view);
     const css = this.generateCSS(view);
     const js = this.generateJS(view);
